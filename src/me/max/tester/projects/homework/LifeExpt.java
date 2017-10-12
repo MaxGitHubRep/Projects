@@ -5,8 +5,14 @@
  */
 package me.max.tester.projects.homework;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import static java.util.concurrent.TimeUnit.HOURS;
 import me.max.tester.managers.input.InputInt;
 
 /**
@@ -17,14 +23,26 @@ public class LifeExpt {
     
     protected final long lifeExpt = 81;
     
-    int ageYears;
-    int query = 0;
+    private int ageYears;
+    private int query = 0;
     
-    private void lifeStyleQ(int current) {
+    private Date dateOne = new Date(04,06,2001);
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    
+    private String getDate() { // "dd/MM/yyyy"
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+    
+    public long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
+    }
+    
+    private void lifeStyleQ() {
         
         HashMap<String, Integer> questions = new HashMap<>();
         InputInt in = new InputInt();
-        
         
         questions.put("Do you smoke", -20);
         questions.put("Do you do daily exercise", 15);
@@ -35,7 +53,6 @@ public class LifeExpt {
         System.out.println("(2) - No");
         
         for (Map.Entry<String, Integer> entry : questions.entrySet()) {
-            boolean check = false;
             int result = in.inputInt(" - "+entry.getKey()+"? ");
             if (result == 1) {
                 query = query + entry.getValue();
@@ -50,15 +67,22 @@ public class LifeExpt {
         
         InputInt in = new InputInt();
         ageYears = in.inputInt("How old are you?");
-        lifeStyleQ(ageYears);
+        lifeStyleQ();
         
         return ageYears;
     }
     
-    public void checkLifeExpt() {
+    public void checkLifeExpt() throws ParseException {
 
+        String test = getDate();
+        Date test1 = dateFormat.parse(test);
+        
+        Date test2 = dateFormat.parse("04/06/2001");
+        
+        long diff = getDateDiff(test1, test2, HOURS);
         long left = lifeExpt - mAliveFor() + query;
         System.out.println("Days left of your existance: "+left);
+        System.out.println("hours left: "+diff);
 
         
     }
