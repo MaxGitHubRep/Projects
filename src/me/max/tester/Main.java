@@ -5,6 +5,7 @@
  */
 package me.max.tester;
 
+import java.text.ParseException;
 import me.max.tester.managers.input.InputInt;
 import me.max.tester.managers.input.InputString;
 import me.max.tester.managers.random.RandomDouble;
@@ -20,7 +21,14 @@ import me.max.tester.projects.homework.LifeExpt;
  */
 public class Main {
     
-    public static void main(String[]args) {
+    public static final String LINE = " » ----------------------------------------------- « ";
+    
+    public static void sendLine() {
+        System.out.println(LINE);
+    }
+    
+    
+    public static void main(String[]args) throws ParseException {
         
         System.out.println("A Java Project by Max Carter.");
         
