@@ -11,9 +11,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import static java.util.concurrent.TimeUnit.HOURS;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static me.max.tester.Main.sendLine;
 import me.max.tester.managers.input.InputInt;
+import me.max.tester.managers.time.DateTime;
+import me.max.tester.managers.time.TimeBreakDown;
+import me.max.tester.managers.time.TimeDifference;
 
 /**
  *
@@ -21,33 +24,20 @@ import me.max.tester.managers.input.InputInt;
  */
 public class LifeExpt {
     
-    protected final long lifeExpt = 81;
-    
-    private int ageYears;
     private int query = 0;
-    
-    private Date dateOne = new Date(04,06,2001);
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    
-    private String getDate() { // "dd/MM/yyyy"
-        Date date = new Date();
-        return dateFormat.format(date);
-    }
-    
-    public long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
-        long diffInMillies = date2.getTime() - date1.getTime();
-        return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
-    }
+    private long diffDie = 0;
+    private DateFormat dateFormat = new SimpleDateFormat("HH/mm/ss dd/MM/yyyy");
+    private TimeBreakDown timeBD = new TimeBreakDown();
     
     private void lifeStyleQ() {
         
         HashMap<String, Integer> questions = new HashMap<>();
         InputInt in = new InputInt();
         
-        questions.put("Do you smoke", -20);
-        questions.put("Do you do daily exercise", 15);
-        questions.put("Are you mentally happy", 10);
-        questions.put("Are you disabled", -30);
+        questions.put("Do you smoke", -700000000);
+        questions.put("Do you do daily exercise", 600000000);
+        questions.put("Are you mentally happy", 200000000);
+        questions.put("Are you disabled", -900000000);
         
         System.out.println("(1) - Yes");
         System.out.println("(2) - No");
@@ -55,35 +45,42 @@ public class LifeExpt {
         for (Map.Entry<String, Integer> entry : questions.entrySet()) {
             int result = in.inputInt(" - "+entry.getKey()+"? ");
             if (result == 1) {
-                query = query + entry.getValue();
+                query += entry.getValue();
             }  
         }
-        System.out.println("This will affect your life by: "+query+" years.");
         
+        diffDie += query;
+        sendLine();
+        System.out.println(" You will now die in: ");
+        timeBD.breakDownTime(diffDie);
+        sendLine();
     }
-    
-    
-    public int mAliveFor() {
-        
-        InputInt in = new InputInt();
-        ageYears = in.inputInt("How old are you?");
-        lifeStyleQ();
-        
-        return ageYears;
-    }
-    
+
     public void checkLifeExpt() throws ParseException {
-
-        String test = getDate();
-        Date test1 = dateFormat.parse(test);
+        DateTime dateInstance = new DateTime();
+        TimeDifference timeDiff = new TimeDifference();
+        String dateTime = dateInstance.getDateTime();
+        Date dateTimeFormat = dateFormat.parse(dateTime);
         
-        Date test2 = dateFormat.parse("04/06/2001");
+        Date birthDate = dateFormat.parse("00/00/00 04/06/2001");
         
-        long diff = getDateDiff(test1, test2, HOURS);
-        long left = lifeExpt - mAliveFor() + query;
-        System.out.println("Days left of your existance: "+left);
-        System.out.println("hours left: "+diff);
+        long diff = timeDiff.getDateDiff(dateTimeFormat, birthDate, MILLISECONDS);
 
+        sendLine();
+        System.out.println(" Time Now: \t\t" + dateTimeFormat);
+        System.out.println(" Your Birthday: \t" + birthDate);
+        sendLine();
+        System.out.println(" Breakdown of your age:");
+        timeBD.breakDownTime(diff);
+        
+        sendLine();
+        Date dieDate = dateFormat.parse("00/00/00 04/06/2082");
+        System.out.println(" You will die in:");
+        diffDie = timeDiff.getDateDiff(dateTimeFormat, dieDate, MILLISECONDS);
+        timeBD.breakDownTime(diffDie);
+        sendLine();
+        
+        lifeStyleQ();
         
     }
     
