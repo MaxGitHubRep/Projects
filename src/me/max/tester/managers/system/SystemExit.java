@@ -12,7 +12,7 @@ package me.max.tester.managers.system;
 public class SystemExit {
     
     public void exitProgram() {
-        System.out.println(" ==== [Closing Program Upon Request!] ==== ");
+        System.out.println(" ==== [Exit] ==== ");
         System.exit(0);
     }
     
