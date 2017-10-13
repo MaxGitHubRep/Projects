@@ -27,7 +27,6 @@ public class Main {
         System.out.println(LINE);
     }
     
-    
     public static void main(String[]args) throws ParseException {
         
         System.out.println("A Java Project by Max Carter.");
@@ -36,7 +35,6 @@ public class Main {
         
         LifeExpt life = new LifeExpt();
         life.checkLifeExpt();
-        
         
         //
         
