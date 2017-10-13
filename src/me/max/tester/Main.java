@@ -9,6 +9,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import me.max.tester.managers.system.SystemExit;
 import me.max.tester.managers.constructer.ArrayListString;
+import me.max.tester.projects.homework.LifeExpt;
+import me.max.tester.projects.misc.ArrayTesting;
 
 /**
  * @author Max
@@ -35,28 +37,10 @@ public class Main {
             System.out.println(item);
         });
        */
-      
-        int[] myArray = new int[10];
-        for (int i = 0;i<10;i++) {
-            myArray[i] = (i+1)*5;
-            System.out.println("myArray["+i+"] = "+myArray[i]);
-        }
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-       /*  LifeExpt life = new LifeExpt();
+           LifeExpt life = new LifeExpt();
            life.checkLifeExpt();
-           Homework ^ 
-       */
+       
        
        
         // end of main class.
