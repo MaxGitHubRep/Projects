@@ -7,8 +7,9 @@ package me.max.tester;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import me.max.tester.managers.lists.ArrayListSort;
 import me.max.tester.managers.system.SystemExit;
-import me.max.tester.managers.constructer.ArrayListString;
+import me.max.tester.managers.lists.ArrayListStringBuilder;
 import me.max.tester.projects.homework.LifeExpt;
 import me.max.tester.projects.misc.ArrayTesting;
 
@@ -25,23 +26,25 @@ public class Main {
     
     public static void main(String[]args) throws ParseException {
         
-        System.out.println(" === [Start] === ");
+        System.out.println(" ==== [Start] ==== ");
         
         // start of main class.
         
         
-        // array constructer tester for strings
-      /*  ArrayListString als = new ArrayListString();
-        ArrayList<String> arrayList = als.buildArrayListStr("hi!-there!-hello", "!-");
-        arrayList.stream().forEach((item) -> {
-            System.out.println(item);
-        });
+         //  LifeExpt life = new LifeExpt();
+         //  life.checkLifeExpt();
+       
+         ArrayTesting n = new ArrayTesting();
+         n.testingArrays();
+         
+     /*    ArrayListSort sort = new ArrayListSort();
+         ArrayList<Integer> newArray = new ArrayList<>();
+         newArray.add(6);
+         newArray.add(8);
+         newArray.add(2);
+         newArray.add(56);
+         sort.arrayListSortDes(newArray);
        */
-        
-           LifeExpt life = new LifeExpt();
-           life.checkLifeExpt();
-       
-       
        
         // end of main class.
         
