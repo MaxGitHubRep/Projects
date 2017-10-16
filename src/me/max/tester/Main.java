@@ -7,6 +7,7 @@ package me.max.tester;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import me.max.tester.gui.hangman.FirstMenu;
 import me.max.tester.gui.menus.First;
 import me.max.tester.managers.lists.ArrayListSort;
 import me.max.tester.managers.system.SystemExit;
@@ -32,7 +33,7 @@ public class Main {
         // start of main class.
         
         
-        new First().setVisible(true);
+        new FirstMenu().setVisible(true);
         
         
         
