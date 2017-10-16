@@ -7,6 +7,7 @@ package me.max.tester;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import me.max.tester.gui.menus.First;
 import me.max.tester.managers.lists.ArrayListSort;
 import me.max.tester.managers.system.SystemExit;
 import me.max.tester.managers.lists.ArrayListStringBuilder;
@@ -31,11 +32,21 @@ public class Main {
         // start of main class.
         
         
+        new First().setVisible(true);
+        
+        
+        
+        
+        
+        
+        
+        
+        
          //  LifeExpt life = new LifeExpt();
          //  life.checkLifeExpt();
        
-         ArrayTesting n = new ArrayTesting();
-         n.testingArrays();
+       //  ArrayTesting n = new ArrayTesting();
+       //  n.testingArrays();
          
      /*    ArrayListSort sort = new ArrayListSort();
          ArrayList<Integer> newArray = new ArrayList<>();
