@@ -207,11 +207,12 @@ public class PlayGame extends javax.swing.JFrame {
         }
         word = ri.randomElement(randomWords);
         String[] wordSplit = word.split("");
-        char[] unScores = new char[word.length()-1];
+        ArrayList<Character> unScores = new ArrayList<Character>();
         for (int i = 0; i<word.length(); i++) {
-            unScores[i] = '_';
+            unScores.add('_');
         }
-        letterDisplay.setText(String.join(" + ", unScores.toString()));
+        System.out.println(unScores);
+        letterDisplay.setText("HELLO");
         
     }
     

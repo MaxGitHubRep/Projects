@@ -45,7 +45,7 @@ public class Main {
         
         
          //  LifeExpt life = new LifeExpt();
-         //  life.checkLifeExpt();
+          // life.checkLifeExpt();
        
        //  ArrayTesting n = new ArrayTesting();
        //  n.testingArrays();
