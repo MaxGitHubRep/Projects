@@ -16,7 +16,7 @@ public class ArrayListStringBuilder {
     
     public ArrayList<String> buildArrayListStr(String content, String splitter) {
         
-        ArrayList<String> tempArray = new ArrayList<>();
+        ArrayList tempArray = new ArrayList();
         tempArray.addAll(Arrays.asList(content.split(splitter)));
 
         return tempArray;

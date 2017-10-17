@@ -13,7 +13,7 @@ import me.max.tester.managers.system.SystemExit;
  */
 public class FirstMenu extends javax.swing.JFrame {
 
-    protected boolean difficulty = true; // true = easy, false = hard
+    public boolean difficulty = true; // true = easy, false = hard
     
     /**
      * Creates new form FirstMenu
@@ -52,7 +52,7 @@ public class FirstMenu extends javax.swing.JFrame {
             }
         });
 
-        imageGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/images/hangman.PNG.png"))); // NOI18N
+        imageGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/images/hangman/titlescreen/hangman.png"))); // NOI18N
 
         creditLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         creditLabel.setForeground(new java.awt.Color(0, 204, 255));
@@ -151,19 +151,16 @@ public class FirstMenu extends javax.swing.JFrame {
 
     private void playNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playNowButtonActionPerformed
         new PlayGame().setVisible(true);
-        
-        if (difficulty == true) {
-            
-            
-            
-        }
-        
+        PlayGame pl = new PlayGame();
+        pl.setRandomWord();
         this.dispose();
     }//GEN-LAST:event_playNowButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
