@@ -13,6 +13,8 @@ import me.max.tester.managers.system.SystemExit;
  */
 public class FirstMenu extends javax.swing.JFrame {
 
+    protected boolean difficulty = true; // true = easy, false = hard
+    
     /**
      * Creates new form FirstMenu
      */
@@ -149,6 +151,13 @@ public class FirstMenu extends javax.swing.JFrame {
 
     private void playNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playNowButtonActionPerformed
         new PlayGame().setVisible(true);
+        
+        if (difficulty == true) {
+            
+            
+            
+        }
+        
         this.dispose();
     }//GEN-LAST:event_playNowButtonActionPerformed
 
