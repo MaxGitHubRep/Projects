@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import me.max.tester.gui.hangman.FirstMenu;
 import me.max.tester.gui.menus.First;
+import me.max.tester.managers.input.InputInt;
 import me.max.tester.managers.lists.ArrayListSort;
 import me.max.tester.managers.system.SystemExit;
 import me.max.tester.managers.lists.ArrayListStringBuilder;
@@ -32,12 +33,8 @@ public class Main {
         System.out.println(" ==== [Start] ==== ");
         
         // start of main class.
-        
-        
-        CheckDigit c = new CheckDigit();
-        c.startCheckDigit();
-        
-     //   new FirstMenu().setVisible(true);
+
+        new FirstMenu().setVisible(true);
         
         
         
