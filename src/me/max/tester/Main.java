@@ -14,6 +14,7 @@ import me.max.tester.managers.system.SystemExit;
 import me.max.tester.managers.lists.ArrayListStringBuilder;
 import me.max.tester.projects.homework.LifeExpt;
 import me.max.tester.projects.misc.ArrayTesting;
+import me.max.tester.projects.misc.CheckDigit;
 
 /**
  * @author Max
@@ -33,7 +34,10 @@ public class Main {
         // start of main class.
         
         
-        new FirstMenu().setVisible(true);
+        CheckDigit c = new CheckDigit();
+        c.startCheckDigit();
+        
+     //   new FirstMenu().setVisible(true);
         
         
         
