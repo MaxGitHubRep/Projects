@@ -27,21 +27,79 @@ public class PlayGame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        hangmanTitle = new javax.swing.JLabel();
+        rulesTitle = new javax.swing.JLabel();
+        ruleOne = new javax.swing.JLabel();
+        submitLetterButton = new javax.swing.JButton();
+        selectLetterList = new java.awt.Choice();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        hangmanTitle.setBackground(new java.awt.Color(153, 153, 153));
+        hangmanTitle.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
+        hangmanTitle.setForeground(new java.awt.Color(0, 102, 204));
+        hangmanTitle.setText("Hangman");
+        hangmanTitle.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                hangmanTitleMouseDragged(evt);
+            }
+        });
+
+        rulesTitle.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        rulesTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rulesTitle.setText("Rules:");
+
+        ruleOne.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        ruleOne.setText("1) Select a letter from the dropdown");
+
+        submitLetterButton.setBackground(new java.awt.Color(0, 0, 0));
+        submitLetterButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        submitLetterButton.setForeground(new java.awt.Color(255, 0, 51));
+        submitLetterButton.setText("Submit Letter");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hangmanTitle)
+                            .addComponent(ruleOne, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(rulesTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(submitLetterButton, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                            .addComponent(selectLetterList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(433, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(hangmanTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rulesTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ruleOne)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addComponent(selectLetterList, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(submitLetterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void hangmanTitleMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hangmanTitleMouseDragged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hangmanTitleMouseDragged
 
     /**
      * @param args the command line arguments
@@ -79,5 +137,10 @@ public class PlayGame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel hangmanTitle;
+    private javax.swing.JLabel ruleOne;
+    private javax.swing.JLabel rulesTitle;
+    private java.awt.Choice selectLetterList;
+    private javax.swing.JButton submitLetterButton;
     // End of variables declaration//GEN-END:variables
 }

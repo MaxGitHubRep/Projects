@@ -148,7 +148,8 @@ public class FirstMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void playNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playNowButtonActionPerformed
-        // TODO add your handling code here:
+        new PlayGame().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_playNowButtonActionPerformed
 
     /**
