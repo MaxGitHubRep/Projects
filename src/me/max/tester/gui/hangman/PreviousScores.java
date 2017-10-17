@@ -7,14 +7,14 @@ package me.max.tester.gui.hangman;
 
 /**
  *
- * @author mc170171
+ * @author MC170171
  */
-public class ExitGame extends javax.swing.JFrame {
+public class PreviousScores extends javax.swing.JFrame {
 
     /**
-     * Creates new form ExitGame
+     * Creates new form PreviousScores
      */
-    public ExitGame() {
+    public PreviousScores() {
         initComponents();
     }
 
@@ -60,20 +60,20 @@ public class ExitGame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ExitGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PreviousScores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ExitGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PreviousScores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ExitGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PreviousScores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ExitGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PreviousScores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ExitGame().setVisible(true);
+                new PreviousScores().setVisible(true);
             }
         });
     }

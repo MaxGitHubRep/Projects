@@ -5,6 +5,8 @@
  */
 package me.max.tester.gui.hangman;
 
+import me.max.tester.managers.system.SystemExit;
+
 /**
  *
  * @author mc170171
@@ -28,12 +30,18 @@ public class FirstMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         welcomeMessage = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        imageGame = new javax.swing.JLabel();
+        creditLabel = new javax.swing.JLabel();
+        playNowButton = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        exitGameButton = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 255, 255));
 
         welcomeMessage.setBackground(new java.awt.Color(153, 153, 153));
-        welcomeMessage.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        welcomeMessage.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
         welcomeMessage.setForeground(new java.awt.Color(0, 102, 204));
         welcomeMessage.setText("Welcome to Hangman!");
         welcomeMessage.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -42,31 +50,84 @@ public class FirstMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/images/hangman.PNG"))); // NOI18N
-        jLabel1.setText("Created by Max");
+        imageGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/images/hangman.PNG.png"))); // NOI18N
+
+        creditLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        creditLabel.setForeground(new java.awt.Color(0, 204, 255));
+        creditLabel.setText("- Game created by Max");
+
+        playNowButton.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        playNowButton.setForeground(new java.awt.Color(255, 0, 51));
+        playNowButton.setText("Play Now!");
+        playNowButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playNowButtonActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 0, 51));
+        jButton2.setText("Difficulty (Easy)");
+
+        exitGameButton.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        exitGameButton.setForeground(new java.awt.Color(255, 0, 51));
+        exitGameButton.setText("Exit Game");
+        exitGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitGameButtonActionPerformed(evt);
+            }
+        });
+
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 0, 51));
+        jButton4.setText("Previous Scores");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(welcomeMessage)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(playNowButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(exitGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(creditLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(imageGame, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(158, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 127, Short.MAX_VALUE)
+                .addComponent(welcomeMessage)
+                .addGap(122, 122, 122))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(24, 24, 24)
                 .addComponent(welcomeMessage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(imageGame)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(creditLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(playNowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(exitGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -75,6 +136,20 @@ public class FirstMenu extends javax.swing.JFrame {
     private void welcomeMessageMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_welcomeMessageMouseDragged
         // TODO add your handling code here:
     }//GEN-LAST:event_welcomeMessageMouseDragged
+
+    private void exitGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitGameButtonActionPerformed
+        SystemExit n = new SystemExit();
+        this.dispose();
+        n.exitProgram();
+    }//GEN-LAST:event_exitGameButtonActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void playNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playNowButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_playNowButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,7 +187,12 @@ public class FirstMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel creditLabel;
+    private javax.swing.JButton exitGameButton;
+    private javax.swing.JLabel imageGame;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton playNowButton;
     private javax.swing.JLabel welcomeMessage;
     // End of variables declaration//GEN-END:variables
 }
