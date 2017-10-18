@@ -16,6 +16,8 @@ import me.max.tester.managers.system.SystemExit;
  */
 public class PlayGame extends javax.swing.JFrame {
 
+    private ArrayList<Character> usedLetters = new ArrayList<>();
+    
     /**
      * Creates new form PlayGame
      */
@@ -184,7 +186,17 @@ public class PlayGame extends javax.swing.JFrame {
 
     private void submitLetterButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitLetterButton1ActionPerformed
         
-         String letter = (String)selextLetterBox.getSelectedItem();
+        String letter = (String)selextLetterBox.getSelectedItem();
+        
+        if (!usedLetters.contains(letter.charAt(0))) {
+            usedLetters.add(letter.charAt(0));
+            System.out.println(letter.charAt(0) + " added");
+        } else {
+            
+            System.out.println("error");
+            
+        }
+        
         
         
     }//GEN-LAST:event_submitLetterButton1ActionPerformed
