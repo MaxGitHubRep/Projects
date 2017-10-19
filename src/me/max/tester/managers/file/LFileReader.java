@@ -16,9 +16,9 @@ import me.max.tester.managers.error.ErrorOutput;
 public class LFileReader {
     private final ErrorOutput output = new ErrorOutput();
  
-    public void printFile(String dir) {
+    public void printFile(String filename) {
         String input_line;
-        String my_dir = "X:\\My Documents\\NetBeansProjects\\" + dir;
+        String my_dir = "X:\\My Documents\\NetBeansProjects\\Projects\\build\\classes\\me\\max\\tester\\textfiles\\" + filename + ".txt";
         try {
             BufferedReader re = new BufferedReader(new FileReader(my_dir));
             while ((input_line = re.readLine()) != null) {
