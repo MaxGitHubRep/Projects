@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import me.max.tester.managers.lists.ArrayListStringBuilder;
 import me.max.tester.managers.random.RandomElement;
 import me.max.tester.managers.system.SystemExit;
+import me.max.tester.managers.system.SystemSleep;
 
 /**
  *
@@ -44,6 +45,7 @@ public class PlayGame extends javax.swing.JFrame {
         hangmanPictureChange = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         letterDisplay = new javax.swing.JLabel();
+        debugWordName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +107,8 @@ public class PlayGame extends javax.swing.JFrame {
         letterDisplay.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         letterDisplay.setText("_ _ _ _ _ _ _ _ _ _");
 
+        debugWordName.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,10 +121,12 @@ public class PlayGame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(submitLetterButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(submitLetterButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(debugWordName)
+                                .addGap(13, 13, 13)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(submitLetterButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
@@ -155,7 +161,8 @@ public class PlayGame extends javax.swing.JFrame {
                         .addComponent(ruleOne))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(hangmanPictureChange, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1)
+                        .addComponent(debugWordName)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(selextLetterBox, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -192,9 +199,7 @@ public class PlayGame extends javax.swing.JFrame {
             usedLetters.add(letter.charAt(0));
             System.out.println(letter.charAt(0) + " added");
         } else {
-            
             System.out.println("error");
-            
         }
         
         
@@ -224,6 +229,8 @@ public class PlayGame extends javax.swing.JFrame {
             unScores.add('_');
         }
         System.out.println(unScores);
+        debugWordName.setText(word);
+        System.out.println(debugWordName.getText());
         letterDisplay.setText("HELLO");
         
     }
@@ -262,6 +269,7 @@ public class PlayGame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel debugWordName;
     private javax.swing.JLabel hangmanPictureChange;
     private javax.swing.JLabel hangmanTitle;
     private javax.swing.JLabel howToPlayTitle;
