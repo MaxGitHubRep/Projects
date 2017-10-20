@@ -19,6 +19,8 @@ import me.max.tester.managers.lists.ArrayListStringBuilder;
 import me.max.tester.projects.homework.LifeExpt;
 import me.max.tester.projects.misc.ArrayTesting;
 import me.max.tester.projects.misc.CheckDigit;
+import me.max.tester.projects.misc.StarterTask;
+import me.max.tester.projects.misc.TreasureHunt;
 
 /**
  * @author Max
@@ -36,8 +38,11 @@ public class Main {
         System.out.println(" ==== [Start] ==== ");
         
         // start of main class.
-
-        new FirstMenu().setVisible(true);
+       
+        TreasureHunt h = new TreasureHunt();
+        h.hunt();
+        
+     //   new FirstMenu().setVisible(true);
         
 
         
