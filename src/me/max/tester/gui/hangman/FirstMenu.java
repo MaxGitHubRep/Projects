@@ -13,7 +13,7 @@ import me.max.tester.managers.system.SystemExit;
  */
 public class FirstMenu extends javax.swing.JFrame {
 
-    public boolean difficulty = true; // true = easy, false = hard
+    public boolean difficulty; // true = easy, false = hard
     
     /**
      * Creates new form FirstMenu
@@ -35,9 +35,9 @@ public class FirstMenu extends javax.swing.JFrame {
         imageGame = new javax.swing.JLabel();
         creditLabel = new javax.swing.JLabel();
         playNowButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        difficultyToggle = new javax.swing.JButton();
         exitGameButton = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        previousScores = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 255));
@@ -67,9 +67,14 @@ public class FirstMenu extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 0, 51));
-        jButton2.setText("Difficulty (Easy)");
+        difficultyToggle.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        difficultyToggle.setForeground(new java.awt.Color(255, 0, 51));
+        difficultyToggle.setText("Difficulty (Hard)");
+        difficultyToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                difficultyToggleActionPerformed(evt);
+            }
+        });
 
         exitGameButton.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         exitGameButton.setForeground(new java.awt.Color(255, 0, 51));
@@ -80,12 +85,12 @@ public class FirstMenu extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 0, 51));
-        jButton4.setText("Previous Scores");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        previousScores.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        previousScores.setForeground(new java.awt.Color(255, 0, 51));
+        previousScores.setText("Previous Scores");
+        previousScores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                previousScoresActionPerformed(evt);
             }
         });
 
@@ -97,9 +102,9 @@ public class FirstMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(playNowButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(difficultyToggle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(exitGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(previousScores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(creditLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -124,9 +129,9 @@ public class FirstMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(playNowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(difficultyToggle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(previousScores, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(exitGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -145,9 +150,9 @@ public class FirstMenu extends javax.swing.JFrame {
         n.exitProgram();
     }//GEN-LAST:event_exitGameButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void previousScoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousScoresActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_previousScoresActionPerformed
 
     private void playNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playNowButtonActionPerformed
         new PlayGame().setVisible(true);
@@ -156,10 +161,28 @@ public class FirstMenu extends javax.swing.JFrame {
         pl.setRandomWord();
     }//GEN-LAST:event_playNowButtonActionPerformed
 
+    private void difficultyToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_difficultyToggleActionPerformed
+        setDifficulty();
+    }//GEN-LAST:event_difficultyToggleActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
+    public void setDifficulty() {
+        
+        if (difficulty == true) {
+            difficulty = false;
+            difficultyToggle.setText("Difficulty (Hard)");
+        } else  if (difficulty == false) {
+            difficulty = true;
+            difficultyToggle.setText("Difficulty (Easy)");
+        } else {
+            difficulty = true;
+            setDifficulty();
+        }
+        
+    }
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -195,11 +218,11 @@ public class FirstMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel creditLabel;
+    private javax.swing.JButton difficultyToggle;
     private javax.swing.JButton exitGameButton;
     private javax.swing.JLabel imageGame;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton playNowButton;
+    private javax.swing.JButton previousScores;
     private javax.swing.JLabel welcomeMessage;
     // End of variables declaration//GEN-END:variables
 }

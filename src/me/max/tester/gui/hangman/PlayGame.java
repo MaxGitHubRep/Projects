@@ -43,7 +43,7 @@ public class PlayGame extends javax.swing.JFrame {
         submitLetterButton2 = new javax.swing.JButton();
         selextLetterBox = new javax.swing.JComboBox<>();
         hangmanPictureChange = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        randomDebugThing = new javax.swing.JLabel();
         letterDisplay = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -100,8 +100,8 @@ public class PlayGame extends javax.swing.JFrame {
         hangmanPictureChange.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/images/hangman/stages/1.fw.png"))); // NOI18N
         hangmanPictureChange.setText("[hangman pics]");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
-        jLabel1.setText("Word to Guess: ");
+        randomDebugThing.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        randomDebugThing.setText("Word to Guess: ");
 
         letterDisplay.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         letterDisplay.setText("[hold]");
@@ -120,7 +120,7 @@ public class PlayGame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(submitLetterButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(randomDebugThing)
                                 .addGap(13, 84, Short.MAX_VALUE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(submitLetterButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,7 +156,7 @@ public class PlayGame extends javax.swing.JFrame {
                         .addComponent(ruleOne))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(hangmanPictureChange, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)))
+                        .addComponent(randomDebugThing)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(selextLetterBox, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -176,6 +176,8 @@ public class PlayGame extends javax.swing.JFrame {
 
     private void submitLetterButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitLetterButton2ActionPerformed
         new FirstMenu().setVisible(true);
+        FirstMenu fm = new FirstMenu();
+        fm.setDifficulty();
         this.dispose();
     }//GEN-LAST:event_submitLetterButton2ActionPerformed
 
@@ -195,9 +197,7 @@ public class PlayGame extends javax.swing.JFrame {
         } else {
             System.out.println("error");
         }
-        
-        
-        
+
     }//GEN-LAST:event_submitLetterButton1ActionPerformed
 
     /**
@@ -264,8 +264,8 @@ public class PlayGame extends javax.swing.JFrame {
     private javax.swing.JLabel hangmanPictureChange;
     private javax.swing.JLabel hangmanTitle;
     private javax.swing.JLabel howToPlayTitle;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel letterDisplay;
+    private javax.swing.JLabel randomDebugThing;
     private javax.swing.JLabel ruleOne;
     private javax.swing.JComboBox<String> selextLetterBox;
     private javax.swing.JButton submitLetterButton;
