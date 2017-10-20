@@ -35,9 +35,7 @@
                           <Component id="submitLetterButton1" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="debugWordName" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                              <EmptySpace min="13" pref="84" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -84,7 +82,6 @@
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="hangmanPictureChange" alignment="3" min="-2" pref="265" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="debugWordName" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="30" max="32767" attributes="0"/>
@@ -244,12 +241,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="_ _ _ _ _ _ _ _ _ _"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="debugWordName">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel2"/>
+        <Property name="text" type="java.lang.String" value="[hold]"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -7,9 +7,9 @@ package me.max.tester.gui.hangman;
 
 import java.util.ArrayList;
 import me.max.tester.managers.lists.ArrayListStringBuilder;
+import me.max.tester.managers.lists.JoinChar;
 import me.max.tester.managers.random.RandomElement;
 import me.max.tester.managers.system.SystemExit;
-import me.max.tester.managers.system.SystemSleep;
 
 /**
  *
@@ -45,7 +45,6 @@ public class PlayGame extends javax.swing.JFrame {
         hangmanPictureChange = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         letterDisplay = new javax.swing.JLabel();
-        debugWordName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,9 +104,7 @@ public class PlayGame extends javax.swing.JFrame {
         jLabel1.setText("Word to Guess: ");
 
         letterDisplay.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        letterDisplay.setText("_ _ _ _ _ _ _ _ _ _");
-
-        debugWordName.setText("jLabel2");
+        letterDisplay.setText("[hold]");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,9 +121,7 @@ public class PlayGame extends javax.swing.JFrame {
                             .addComponent(submitLetterButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(debugWordName)
-                                .addGap(13, 13, 13)))))
+                                .addGap(13, 84, Short.MAX_VALUE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(submitLetterButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
@@ -161,8 +156,7 @@ public class PlayGame extends javax.swing.JFrame {
                         .addComponent(ruleOne))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(hangmanPictureChange, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addComponent(debugWordName)))
+                        .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(selextLetterBox, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -224,14 +218,12 @@ public class PlayGame extends javax.swing.JFrame {
         }
         word = ri.randomElement(randomWords);
         String[] wordSplit = word.split("");
-        ArrayList<Character> unScores = new ArrayList<Character>();
+        ArrayList<Character> unScores = new ArrayList<>();
         for (int i = 0; i<word.length(); i++) {
             unScores.add('_');
         }
-        System.out.println(unScores);
-        debugWordName.setText(word);
-        System.out.println(debugWordName.getText());
-        letterDisplay.setText("HELLO");
+        JoinChar j = new JoinChar();
+        letterDisplay.setText(j.join(unScores, "  "));
         
     }
     
@@ -269,7 +261,6 @@ public class PlayGame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel debugWordName;
     private javax.swing.JLabel hangmanPictureChange;
     private javax.swing.JLabel hangmanTitle;
     private javax.swing.JLabel howToPlayTitle;
