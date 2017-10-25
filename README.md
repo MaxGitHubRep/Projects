@@ -1,7 +1,6 @@
 # Projects
 This repository contains all the files for my java projects. 
 
-======
 
 ## Main Sections
 
@@ -17,17 +16,16 @@ This folder is split into misc & homework. misc is a package for miscellaneous p
 ### » [textfiles](https://github.com/MaxGitHubRep/Projects/tree/master/src/me/max/tester/textfiles)
 All the text files are saved in this folder.
 
-======
 
 ## Projects in progress
 
-### - Hangman
+### » [Hangman](https://github.com/MaxGitHubRep/Projects/tree/master/src/me/max/tester/gui/hangman)
 
  - [x] Save scores to Text File
  - [ ] Retreive previous scores and output in jPanel
  - [ ] Fix difficulty toggle in main menu
  - [ ] Final code clean up
- 
-======
- 
- Repository made: Tuesday 10th October.
+
+###
+
+Repository made: Tuesday 10th October.
