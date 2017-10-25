@@ -32,12 +32,12 @@ public class FirstMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         welcomeMessage = new javax.swing.JLabel();
-        imageGame = new javax.swing.JLabel();
-        creditLabel = new javax.swing.JLabel();
         playNowButton = new javax.swing.JButton();
         difficultyToggle = new javax.swing.JButton();
         exitGameButton = new javax.swing.JButton();
         previousScores = new javax.swing.JButton();
+        creditLabel = new javax.swing.JLabel();
+        hangmanTitlePic = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 255));
@@ -51,12 +51,6 @@ public class FirstMenu extends javax.swing.JFrame {
                 welcomeMessageMouseDragged(evt);
             }
         });
-
-        imageGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/images/hangman/titlescreen/hangman.png"))); // NOI18N
-
-        creditLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        creditLabel.setForeground(new java.awt.Color(0, 204, 255));
-        creditLabel.setText("- Game created by Max");
 
         playNowButton.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         playNowButton.setForeground(new java.awt.Color(255, 0, 51));
@@ -94,6 +88,12 @@ public class FirstMenu extends javax.swing.JFrame {
             }
         });
 
+        creditLabel.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        creditLabel.setText("Creation: Max Carter   -   Source: GitHub");
+
+        hangmanTitlePic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/gui/hangman/resources/titlescreen/hangman.png"))); // NOI18N
+        hangmanTitlePic.setText(".");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,40 +101,39 @@ public class FirstMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(playNowButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(difficultyToggle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(exitGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(previousScores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(creditLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(imageGame, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(playNowButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(difficultyToggle, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
+                        .addComponent(previousScores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(exitGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(creditLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(hangmanTitlePic, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 127, Short.MAX_VALUE)
+                .addGap(0, 146, Short.MAX_VALUE)
                 .addComponent(welcomeMessage)
                 .addGap(122, 122, 122))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(welcomeMessage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(imageGame)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hangmanTitlePic)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(creditLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(playNowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(difficultyToggle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(previousScores, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(exitGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(exitGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(creditLabel)))
+                .addGap(10, 10, 10))
         );
 
         pack();
@@ -156,9 +155,7 @@ public class FirstMenu extends javax.swing.JFrame {
 
     private void playNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playNowButtonActionPerformed
         new PlayGame().setVisible(true);
-        PlayGame pl = new PlayGame();
         this.dispose();
-        pl.setRandomWord();
     }//GEN-LAST:event_playNowButtonActionPerformed
 
     private void difficultyToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_difficultyToggleActionPerformed
@@ -174,14 +171,15 @@ public class FirstMenu extends javax.swing.JFrame {
         if (difficulty == true) {
             difficulty = false;
             difficultyToggle.setText("Difficulty (Hard)");
-        } else  if (difficulty == false) {
-            difficulty = true;
-            difficultyToggle.setText("Difficulty (Easy)");
         } else {
             difficulty = true;
-            setDifficulty();
+            difficultyToggle.setText("Difficulty (Easy)");
         }
         
+    }
+    
+    public boolean getDifficulty() {
+        return difficulty;
     }
     
     public static void main(String args[]) {
@@ -220,7 +218,7 @@ public class FirstMenu extends javax.swing.JFrame {
     private javax.swing.JLabel creditLabel;
     private javax.swing.JButton difficultyToggle;
     private javax.swing.JButton exitGameButton;
-    private javax.swing.JLabel imageGame;
+    private javax.swing.JLabel hangmanTitlePic;
     private javax.swing.JButton playNowButton;
     private javax.swing.JButton previousScores;
     private javax.swing.JLabel welcomeMessage;

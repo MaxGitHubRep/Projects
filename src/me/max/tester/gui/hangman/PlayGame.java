@@ -6,10 +6,13 @@
 package me.max.tester.gui.hangman;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import me.max.tester.managers.lists.ArrayListStringBuilder;
 import me.max.tester.managers.lists.JoinChar;
+import me.max.tester.managers.lists.JoinString;
 import me.max.tester.managers.random.RandomElement;
 import me.max.tester.managers.system.SystemExit;
+import me.max.tester.managers.system.SystemSleep;
 
 /**
  *
@@ -17,8 +20,16 @@ import me.max.tester.managers.system.SystemExit;
  */
 public class PlayGame extends javax.swing.JFrame {
 
-    private ArrayList<Character> usedLetters = new ArrayList<>();
-    
+    protected ArrayList<Character> usedLetters = new ArrayList<>();
+    protected int maxLives = 7;         // any value greater than 7 will break
+    protected boolean gameStarted = false;
+    protected ArrayList goodLetters;
+    protected String[] words;
+    protected JoinChar j = new JoinChar();
+    protected ArrayList<Character> unScores = new ArrayList<>();
+    protected int lostLives = 1;
+    private String word;
+
     /**
      * Creates new form PlayGame
      */
@@ -38,14 +49,14 @@ public class PlayGame extends javax.swing.JFrame {
         hangmanTitle = new javax.swing.JLabel();
         howToPlayTitle = new javax.swing.JLabel();
         ruleOne = new javax.swing.JLabel();
-        submitLetterButton = new javax.swing.JButton();
+        goButton = new javax.swing.JButton();
         submitLetterButton1 = new javax.swing.JButton();
         submitLetterButton2 = new javax.swing.JButton();
         selextLetterBox = new javax.swing.JComboBox<>();
         hangmanPictureChange = new javax.swing.JLabel();
-        randomDebugThing = new javax.swing.JLabel();
         letterDisplay = new javax.swing.JLabel();
-        updateButton = new javax.swing.JButton();
+        ruleOne1 = new javax.swing.JLabel();
+        exitProgram = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,13 +77,13 @@ public class PlayGame extends javax.swing.JFrame {
         ruleOne.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         ruleOne.setText("1) Select a letter from the dropdown");
 
-        submitLetterButton.setBackground(new java.awt.Color(204, 204, 204));
-        submitLetterButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        submitLetterButton.setForeground(new java.awt.Color(255, 0, 51));
-        submitLetterButton.setText("Exit Game");
-        submitLetterButton.addActionListener(new java.awt.event.ActionListener() {
+        goButton.setBackground(new java.awt.Color(204, 204, 204));
+        goButton.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        goButton.setForeground(new java.awt.Color(255, 0, 51));
+        goButton.setText("GO!");
+        goButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitLetterButtonActionPerformed(evt);
+                goButtonActionPerformed(evt);
             }
         });
 
@@ -98,19 +109,22 @@ public class PlayGame extends javax.swing.JFrame {
 
         selextLetterBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }));
 
-        hangmanPictureChange.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/images/hangman/stages/1.fw.png"))); // NOI18N
+        hangmanPictureChange.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/gui/hangman/resources/stages/1.fw.png"))); // NOI18N
         hangmanPictureChange.setText("[hangman pics]");
 
-        randomDebugThing.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
-        randomDebugThing.setText("Word to Guess: ");
-
         letterDisplay.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        letterDisplay.setText("[hold]");
+        letterDisplay.setText("_");
 
-        updateButton.setText("jButton1");
-        updateButton.addActionListener(new java.awt.event.ActionListener() {
+        ruleOne1.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        ruleOne1.setText("2) When you're ready, press GO!");
+
+        exitProgram.setBackground(new java.awt.Color(204, 204, 204));
+        exitProgram.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        exitProgram.setForeground(new java.awt.Color(255, 0, 51));
+        exitProgram.setText("Exit Game");
+        exitProgram.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateButtonActionPerformed(evt);
+                exitProgramActionPerformed(evt);
             }
         });
 
@@ -118,41 +132,37 @@ public class PlayGame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(36, Short.MAX_VALUE)
-                        .addComponent(selextLetterBox, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(submitLetterButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(randomDebugThing)
-                                .addGap(13, 84, Short.MAX_VALUE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(submitLetterButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(submitLetterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hangmanTitle)
-                            .addComponent(ruleOne, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(goButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(311, 311, 311))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(hangmanTitle)
+                                    .addComponent(ruleOne, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ruleOne1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
                                 .addComponent(howToPlayTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(99, 99, 99)
-                                .addComponent(letterDisplay))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addComponent(updateButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(hangmanPictureChange, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(letterDisplay)
+                                .addGap(76, 76, 76)))
+                        .addComponent(hangmanPictureChange, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(selextLetterBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(submitLetterButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(submitLetterButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(exitProgram, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,25 +170,27 @@ public class PlayGame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(hangmanPictureChange, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(hangmanTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(howToPlayTitle)
                             .addComponent(letterDisplay))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ruleOne)
-                        .addGap(108, 108, 108)
-                        .addComponent(updateButton))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(hangmanPictureChange, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(randomDebugThing)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ruleOne1)
+                        .addGap(18, 18, 18)
+                        .addComponent(goButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(24, 24, 24)))
                 .addComponent(selextLetterBox, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submitLetterButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(submitLetterButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(submitLetterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(exitProgram, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
 
@@ -196,59 +208,128 @@ public class PlayGame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_submitLetterButton2ActionPerformed
 
-    private void submitLetterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitLetterButtonActionPerformed
+    private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButtonActionPerformed
+        setRandomWord();
+        gameStarted = true;
+        goButton.setVisible(false);
+    }//GEN-LAST:event_goButtonActionPerformed
+    
+    private void submitLetterButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitLetterButton1ActionPerformed
+
+        if (gameStarted == false) {
+            System.out.println("The game has not started.");
+        } else {
+            String letterStr = (String)selextLetterBox.getSelectedItem();
+            char letter = letterStr.charAt(0);
+            
+            if (!usedLetters.contains(letter)) {
+                
+                usedLetters.add(letter);
+                System.out.println(letter + " added");
+                if (getWord().contains(letterStr)) { 
+                    for (int i = 0; i<word.length(); i++) {
+                        if (word.charAt(i) == letter) {
+                            words[i] = letterStr;
+                        }
+                    }
+                    JoinString js = new JoinString();
+                    ArrayList arrayList = new ArrayList(Arrays.asList(words));
+                    String the = js.join(arrayList, " ");
+                    setUnScores(the);
+                    System.out.println(the);
+                    
+                    if (the.contains("_")) {
+                        
+                        System.out.println(getWord());
+                        
+                    } else {
+                        new WinnerPage().setVisible(true);
+                        this.dispose();
+                        
+                    }
+
+                } else {
+                    System.out.println("NOPE");
+                 
+                    lostLives++;
+                    String direc = "/me/max/tester/gui/hangman/resources/stages/" + lostLives +".fw.png";
+                    hangmanPictureChange.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
+                    
+                    if (lostLives == maxLives) {
+                        System.out.println("YOU DIED! The word was: " + getWord());
+                        
+                        new java.util.Timer().schedule( 
+                            new java.util.TimerTask() {
+                                @Override
+                                public void run() {
+                                    goToMainMenu();
+                                }
+                            }, 
+                            500
+                        );
+
+                        
+                    }
+
+                }
+                
+            } else {
+                System.out.println(letter + " is already added!");
+            }
+        }
+        
+    }//GEN-LAST:event_submitLetterButton1ActionPerformed
+
+    private void exitProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitProgramActionPerformed
         SystemExit n = new SystemExit();
         this.dispose();
         n.exitProgram();
-    }//GEN-LAST:event_submitLetterButtonActionPerformed
-
-    private void submitLetterButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitLetterButton1ActionPerformed
-        
-        String letter = (String)selextLetterBox.getSelectedItem();
-        
-        if (!usedLetters.contains(letter.charAt(0))) {
-            usedLetters.add(letter.charAt(0));
-            System.out.println(letter.charAt(0) + " added");
-        } else {
-            System.out.println("error");
-        }
-
-    }//GEN-LAST:event_submitLetterButton1ActionPerformed
-
-    ArrayList<Character> unScores = new ArrayList<>();
-    
-    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        JoinChar j = new JoinChar();
-        letterDisplay.setText(j.join(unScores, "  "));
-        
-    }//GEN-LAST:event_updateButtonActionPerformed
+    }//GEN-LAST:event_exitProgramActionPerformed
 
     /**
      * @param args the command line arguments
      */
     
-    public ArrayList randomWords;
-    public String word;
+    public void goToMainMenu() {
+        new FirstMenu().setVisible(true);
+        this.dispose();
+    }
+    
+    public void setUnScores(String set) {
+        letterDisplay.setText(set);
+    }
+    
+    public String getWord() {
+        return this.word;
+    }
+    
+    public void setWord(String enter) {
+        word = enter;
+       // this.word = enter;
+    }
     
     public void setRandomWord() {
         FirstMenu m = new FirstMenu();
         ArrayListStringBuilder list = new ArrayListStringBuilder();
         RandomElement ri = new RandomElement();
+        ArrayList randomWords = new ArrayList();
         if (m.difficulty == true) {
                 randomWords = list.buildArrayListStr("hello-cheese-world-smile-crime-fruit-mouse", "-");
         } else {
             randomWords = list.buildArrayListStr("chocolate-diabolical-oxymoron-critical-analysis", "-");
         }
-        word = ri.randomElement(randomWords);
-        String[] wordSplit = word.split("");
-        
+        String word = ri.randomElement(randomWords).toUpperCase();
+
+        words = new String[word.length()];
         for (int i = 0; i<word.length(); i++) {
+            words[i] = "_";
             unScores.add('_');
         }
-        JoinChar j = new JoinChar();
-        letterDisplay.setText(j.join(unScores, "  "));
-        System.out.println(j.join(unScores, "  "));
         
+        setUnScores(j.join(unScores, " "));
+        setWord(word);
+        System.out.println(getWord());
+
     }
     
     public static void main(String args[]) {
@@ -285,16 +366,16 @@ public class PlayGame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton exitProgram;
+    private javax.swing.JButton goButton;
     private javax.swing.JLabel hangmanPictureChange;
     private javax.swing.JLabel hangmanTitle;
     private javax.swing.JLabel howToPlayTitle;
     private javax.swing.JLabel letterDisplay;
-    private javax.swing.JLabel randomDebugThing;
     private javax.swing.JLabel ruleOne;
+    private javax.swing.JLabel ruleOne1;
     private javax.swing.JComboBox<String> selextLetterBox;
-    private javax.swing.JButton submitLetterButton;
     private javax.swing.JButton submitLetterButton1;
     private javax.swing.JButton submitLetterButton2;
-    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }

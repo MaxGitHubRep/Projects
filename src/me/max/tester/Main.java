@@ -39,10 +39,10 @@ public class Main {
         
         // start of main class.
        
-        TreasureHunt h = new TreasureHunt();
-        h.hunt();
+      //  TreasureHunt h = new TreasureHunt();
+        //h.hunt();
         
-     //   new FirstMenu().setVisible(true);
+        new FirstMenu().setVisible(true);
         
 
         

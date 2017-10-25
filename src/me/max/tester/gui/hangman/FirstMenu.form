@@ -29,21 +29,20 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="playNowButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="difficultyToggle" alignment="0" max="32767" attributes="0"/>
-                  <Component id="exitGameButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="previousScores" alignment="1" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="creditLabel" min="-2" pref="225" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="playNowButton" max="32767" attributes="0"/>
+                      <Component id="difficultyToggle" alignment="0" pref="392" max="32767" attributes="0"/>
+                      <Component id="previousScores" alignment="0" max="32767" attributes="0"/>
+                      <Component id="exitGameButton" alignment="0" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="creditLabel" alignment="0" min="-2" pref="245" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="imageGame" min="-2" pref="217" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="hangmanTitlePic" min="-2" pref="220" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="127" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="146" max="32767" attributes="0"/>
               <Component id="welcomeMessage" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
           </Group>
@@ -52,14 +51,12 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="welcomeMessage" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="imageGame" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="creditLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="hangmanTitlePic" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="playNowButton" min="-2" pref="41" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="difficultyToggle" min="-2" pref="41" max="-2" attributes="0"/>
@@ -67,9 +64,11 @@
                       <Component id="previousScores" min="-2" pref="41" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="exitGameButton" min="-2" pref="41" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="creditLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -91,24 +90,6 @@
       <Events>
         <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="welcomeMessageMouseDragged"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="imageGame">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/me/max/tester/images/hangman/titlescreen/hangman.png"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="creditLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="3"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="cc" red="0" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="- Game created by Max"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="playNowButton">
       <Properties>
@@ -165,6 +146,22 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="previousScoresActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="creditLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="13" style="2"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Creation: Max Carter   -   Source: GitHub"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="hangmanTitlePic">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/me/max/tester/gui/hangman/resources/titlescreen/hangman.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="."/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

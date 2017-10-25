@@ -21,7 +21,7 @@ public class JoinChar {
                 start = false;
                 str = item.toString();
             } else {
-                str = str + join + item;
+                str = str + join + item.toString();
             }
         }
         return str;
