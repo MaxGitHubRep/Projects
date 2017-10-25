@@ -26,6 +26,6 @@ All the text files are saved in this folder.
  - [ ] Fix difficulty toggle in main menu
  - [ ] Final code clean up
 
-###  
+###  ---
 
 Repository made: Tuesday 10th October.
