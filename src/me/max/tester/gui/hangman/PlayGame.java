@@ -7,12 +7,14 @@ package me.max.tester.gui.hangman;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import me.max.tester.managers.file.LFileWriter;
 import me.max.tester.managers.lists.ArrayListStringBuilder;
 import me.max.tester.managers.lists.JoinChar;
 import me.max.tester.managers.lists.JoinString;
 import me.max.tester.managers.random.RandomElement;
 import me.max.tester.managers.system.SystemExit;
 import me.max.tester.managers.system.SystemSleep;
+import me.max.tester.managers.time.DateTime;
 
 /**
  *
@@ -28,7 +30,9 @@ public class PlayGame extends javax.swing.JFrame {
     protected JoinChar j = new JoinChar();
     protected ArrayList<Character> unScores = new ArrayList<>();
     protected int lostLives = 1;
+    protected String fileName = "hangmanScores";
     private String word;
+    JoinString js = new JoinString();
 
     /**
      * Creates new form PlayGame
@@ -214,6 +218,22 @@ public class PlayGame extends javax.swing.JFrame {
         goButton.setVisible(false);
     }//GEN-LAST:event_goButtonActionPerformed
     
+    private void saveScoreToFile() {
+        
+        LFileWriter f = new LFileWriter();
+        
+        DateTime dt = new DateTime();
+        String date = dt.getDateTime();
+        
+        ArrayList arrayList = new ArrayList(Arrays.asList(words));
+        String joint = js.join(arrayList, " ");
+        
+        String result = "[" + date + "] Word: '" + getWord() + "' --> '" + joint + "'  (Lost Lives: " + (lostLives-1) + "/6)";
+        
+        f.writeToFile(result, fileName, true);
+        
+    }
+    
     private void submitLetterButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitLetterButton1ActionPerformed
 
         if (gameStarted == false) {
@@ -232,43 +252,33 @@ public class PlayGame extends javax.swing.JFrame {
                             words[i] = letterStr;
                         }
                     }
-                    JoinString js = new JoinString();
                     ArrayList arrayList = new ArrayList(Arrays.asList(words));
-                    String the = js.join(arrayList, " ");
-                    setUnScores(the);
-                    System.out.println(the);
+                    String joint = js.join(arrayList, " ");
+                    setUnScores(joint);
                     
-                    if (the.contains("_")) {
+                    if (joint.contains("_")) {
                         
                         System.out.println(getWord());
                         
                     } else {
+                        saveScoreToFile();
                         new WinnerPage().setVisible(true);
                         this.dispose();
                         
                     }
 
                 } else {
-                    System.out.println("NOPE");
-                 
                     lostLives++;
                     String direc = "/me/max/tester/gui/hangman/resources/stages/" + lostLives +".fw.png";
                     hangmanPictureChange.setIcon(new javax.swing.ImageIcon(getClass().getResource(direc)));
                     
                     if (lostLives == maxLives) {
                         System.out.println("YOU DIED! The word was: " + getWord());
+                        saveScoreToFile();
                         
-                        new java.util.Timer().schedule( 
-                            new java.util.TimerTask() {
-                                @Override
-                                public void run() {
-                                    goToMainMenu();
-                                }
-                            }, 
-                            500
-                        );
+                        new LoserPage().setVisible(true);
+                        this.dispose();
 
-                        
                     }
 
                 }
@@ -289,11 +299,6 @@ public class PlayGame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
-    public void goToMainMenu() {
-        new FirstMenu().setVisible(true);
-        this.dispose();
-    }
     
     public void setUnScores(String set) {
         letterDisplay.setText(set);

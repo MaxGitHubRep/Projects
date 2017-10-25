@@ -150,7 +150,8 @@ public class FirstMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_exitGameButtonActionPerformed
 
     private void previousScoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousScoresActionPerformed
-        // TODO add your handling code here:
+        new PreviousScores().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_previousScoresActionPerformed
 
     private void playNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playNowButtonActionPerformed

@@ -18,7 +18,7 @@ public class LFileReader {
  
     public void printFile(String filename) {
         String input_line;
-        String my_dir = "X:\\My Documents\\NetBeansProjects\\Projects\\build\\classes\\me\\max\\tester\\textfiles\\" + filename + ".txt";
+        String my_dir = System.getProperty("user.dir") + "\\build\\classes\\me\\max\\tester\\textfiles\\" + filename + ".txt";
         try {
             BufferedReader re = new BufferedReader(new FileReader(my_dir));
             while ((input_line = re.readLine()) != null) {

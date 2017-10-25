@@ -18,7 +18,7 @@ public class LFileWriter  {
     public void writeToFile(String text, String filename, boolean append) { // false will clear file
         FileWriter writeObject;
         PrintWriter printObject;
-        String my_dir = "X:\\My Documents\\NetBeansProjects\\Projects\\build\\classes\\me\\max\\tester\\textfiles\\" + filename + ".txt";
+        String my_dir = System.getProperty("user.dir") + "\\build\\classes\\me\\max\\tester\\textfiles\\" + filename + ".txt";
         try {
             writeObject = new FileWriter(my_dir, append);
             printObject = new PrintWriter(writeObject);

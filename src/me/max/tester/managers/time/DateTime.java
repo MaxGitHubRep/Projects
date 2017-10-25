@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 public class DateTime {
     
     public String getDateTime() { // "HH/mm/ss dd/MM/yyyy"
-        DateFormat dateFormat = new SimpleDateFormat("HH/mm/ss dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         java.util.Date date = new java.util.Date();
         return dateFormat.format(date);
     }

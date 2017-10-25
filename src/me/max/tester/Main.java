@@ -5,22 +5,15 @@
  */
 package me.max.tester;
 
+import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
 import me.max.tester.gui.hangman.FirstMenu;
-import me.max.tester.gui.menus.First;
 import me.max.tester.managers.file.LFileClear;
 import me.max.tester.managers.file.LFileReader;
 import me.max.tester.managers.file.LFileWriter;
 import me.max.tester.managers.input.InputInt;
-import me.max.tester.managers.lists.ArrayListSort;
 import me.max.tester.managers.system.SystemExit;
-import me.max.tester.managers.lists.ArrayListStringBuilder;
-import me.max.tester.projects.homework.LifeExpt;
-import me.max.tester.projects.misc.ArrayTesting;
-import me.max.tester.projects.misc.CheckDigit;
-import me.max.tester.projects.misc.StarterTask;
-import me.max.tester.projects.misc.TreasureHunt;
 
 /**
  * @author Max
@@ -42,26 +35,12 @@ public class Main {
       //  TreasureHunt h = new TreasureHunt();
         //h.hunt();
         
-        new FirstMenu().setVisible(true);
-        
-
-        
+       // new FirstMenu().setVisible(true);
         
         
          //  LifeExpt life = new LifeExpt();
           // life.checkLifeExpt();
        
-       //  ArrayTesting n = new ArrayTesting();
-       //  n.testingArrays();
-         
-     /*    ArrayListSort sort = new ArrayListSort();
-         ArrayList<Integer> newArray = new ArrayList<>();
-         newArray.add(6);
-         newArray.add(8);
-         newArray.add(2);
-         newArray.add(56);
-         sort.arrayListSortDes(newArray);
-       */
        
         // end of main class.
         
