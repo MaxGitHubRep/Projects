@@ -28,4 +28,4 @@ This repository contains all the files for my java projects.
 
 ###  ---
 
-Repository made: Tuesday 10th October.
+ - Repository made: Tuesday 10th October.
