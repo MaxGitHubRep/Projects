@@ -14,7 +14,6 @@ import me.max.tester.managers.lists.JoinChar;
 import me.max.tester.managers.lists.JoinString;
 import me.max.tester.managers.random.RandomElement;
 import me.max.tester.managers.system.SystemExit;
-import me.max.tester.managers.system.SystemSleep;
 import me.max.tester.managers.time.DateTime;
 
 /**
@@ -279,7 +278,6 @@ public class PlayGame extends javax.swing.JFrame {
                         
                         new LoserPage().setVisible(true);
                         this.dispose();
-
                     }
 
                 }
@@ -311,7 +309,6 @@ public class PlayGame extends javax.swing.JFrame {
     
     public void setWord(String enter) {
         word = enter;
-       // this.word = enter;
     }
     
     public void setRandomWord() {
@@ -320,14 +317,16 @@ public class PlayGame extends javax.swing.JFrame {
         RandomElement ri = new RandomElement();
         LFileReader fr = new LFileReader();
         ArrayList randomWords = new ArrayList();
+        
         if (fr.getFileContent("difficulty").toString().contains("Easy")) {
                 randomWords = list.buildArrayListStr("hello-cheese-world-smile-crime-fruit-mouse-truch-lorry-table-napkin-greet", "-");
         } else {
             randomWords = list.buildArrayListStr("chocolate-diabolical-oxymoron-critical-analysis-opposition-defensiveness-notifications-challenge", "-");
         }
+        
         String word = ri.randomElement(randomWords).toUpperCase();
-
         words = new String[word.length()];
+        
         for (int i = 0; i<word.length(); i++) {
             words[i] = "_";
             unScores.add('_');
@@ -335,8 +334,6 @@ public class PlayGame extends javax.swing.JFrame {
         
         setUnScores(j.join(unScores, " "));
         setWord(word);
-        System.out.println(getWord());
-
     }
     
     public static void main(String args[]) {

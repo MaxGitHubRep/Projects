@@ -173,23 +173,18 @@ public class FirstMenu extends javax.swing.JFrame {
         
         
         if (difficulty == true) {
-            this.difficulty = false;
             difficultyToggle.setText("Difficulty (Hard)");
             fw.writeToFile("Hard", "difficulty", false);
         } else {
-            this.difficulty = true;
             difficultyToggle.setText("Difficulty (Easy)");
             fw.writeToFile("Easy", "difficulty", false);
         }
         
     }
-    
-    public boolean getDifficulty() {
-        return this.difficulty;
-    }
+
     
     public String getDiffStr() {
-        if (getDifficulty() == true) {
+        if (this.difficulty == true) {
             return "Easy";
         } else {
             return "Hard";
