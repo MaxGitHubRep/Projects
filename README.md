@@ -22,8 +22,8 @@ This repository contains all the files for my java projects.
 ### » [Hangman](https://github.com/MaxGitHubRep/Projects/tree/master/src/me/max/tester/gui/hangman)
 
  - [x] Save scores to Text File
- - [ ] Retreive previous scores and output in jPanel
- - [ ] Fix difficulty toggle in main menu
+ - [x] Retreive previous scores and output in jPanel
+ - [x] Fix difficulty toggle in main menu
  - [ ] Final code clean up
 
 ###  ---
