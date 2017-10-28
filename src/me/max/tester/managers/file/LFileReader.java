@@ -7,6 +7,7 @@ package me.max.tester.managers.file;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 import me.max.tester.managers.error.ErrorOutput;
 
 /**
@@ -16,17 +17,26 @@ import me.max.tester.managers.error.ErrorOutput;
 public class LFileReader {
     private final ErrorOutput output = new ErrorOutput();
  
-    public void printFile(String filename) {
+    public ArrayList getFileContent(String filename) {
+        ArrayList list = new ArrayList();
         String input_line;
         String my_dir = System.getProperty("user.dir") + "\\build\\classes\\me\\max\\tester\\textfiles\\" + filename + ".txt";
         try {
             BufferedReader re = new BufferedReader(new FileReader(my_dir));
             while ((input_line = re.readLine()) != null) {
-                System.out.println(input_line);
+                list.add(input_line);
             }
         } catch (Exception ex) {
             output.error(ex);
         }
+        
+        return list;
+    }
+    
+    public void printFile(String filename) {
+        getFileContent(filename).forEach((item) -> {
+            System.out.println(item);
+        });
     }
     
 }
