@@ -5,6 +5,11 @@
  */
 package me.max.tester.gui.hangman;
 
+import javax.swing.DefaultListModel;
+import me.max.tester.managers.file.LFileClear;
+import me.max.tester.managers.file.LFileReader;
+import me.max.tester.managers.system.SystemExit;
+
 /**
  *
  * @author MC170171
@@ -27,21 +32,159 @@ public class PreviousScores extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        buttonEasy = new javax.swing.JButton();
+        quitGame = new javax.swing.JButton();
+        buttonHard = new javax.swing.JButton();
+        submitLetterButton4 = new javax.swing.JButton();
+        clearScores = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listScores = new javax.swing.JList<>();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 27)); // NOI18N
+        jLabel1.setText("PREVIOUS SCORES!");
+
+        buttonEasy.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        buttonEasy.setForeground(new java.awt.Color(255, 0, 51));
+        buttonEasy.setText("Easy");
+        buttonEasy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEasyActionPerformed(evt);
+            }
+        });
+
+        quitGame.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        quitGame.setForeground(new java.awt.Color(255, 0, 51));
+        quitGame.setText("Exit Game");
+        quitGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitGameActionPerformed(evt);
+            }
+        });
+
+        buttonHard.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        buttonHard.setForeground(new java.awt.Color(255, 0, 51));
+        buttonHard.setText("Hard");
+        buttonHard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHardActionPerformed(evt);
+            }
+        });
+
+        submitLetterButton4.setBackground(new java.awt.Color(204, 204, 204));
+        submitLetterButton4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        submitLetterButton4.setForeground(new java.awt.Color(255, 0, 51));
+        submitLetterButton4.setText("Main Menu");
+        submitLetterButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitLetterButton4ActionPerformed(evt);
+            }
+        });
+
+        clearScores.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        clearScores.setForeground(new java.awt.Color(255, 0, 51));
+        clearScores.setText("Clear");
+        clearScores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearScoresActionPerformed(evt);
+            }
+        });
+
+        listScores.setBackground(new java.awt.Color(153, 204, 255));
+        listScores.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        listScores.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jScrollPane1.setViewportView(listScores);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonHard, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buttonEasy, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clearScores, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(submitLetterButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(quitGame))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonHard, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonEasy, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(quitGame, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(submitLetterButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clearScores, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void printData(String mode) {
+        DefaultListModel listModel = new DefaultListModel();
+        fr.getFileContent(pg.fileName).stream().filter(item -> item.toString().contains(mode)).forEachOrdered((Object item) -> {
+            listModel.addElement(item.toString().replace("Difficulty: " + mode + " - ", ""));
+        });
+        listScores.setModel(listModel);
+    }
+    
+    PlayGame pg = new PlayGame();
+    LFileReader fr = new LFileReader();
+    
+    private void buttonEasyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEasyActionPerformed
+        // easy
+        printData("Easy");
+
+
+    }//GEN-LAST:event_buttonEasyActionPerformed
+
+    private void quitGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitGameActionPerformed
+        SystemExit n = new SystemExit();
+        this.dispose();
+        n.exitProgram();
+    }//GEN-LAST:event_quitGameActionPerformed
+
+    private void buttonHardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHardActionPerformed
+        // hard
+        printData("Hard");
+  
+    }//GEN-LAST:event_buttonHardActionPerformed
+
+    private void submitLetterButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitLetterButton4ActionPerformed
+        new FirstMenu().setVisible(true);
+        FirstMenu fm = new FirstMenu();
+        fm.setDifficulty();
+        this.dispose();
+    }//GEN-LAST:event_submitLetterButton4ActionPerformed
+
+    private void clearScoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearScoresActionPerformed
+        // clear
+        
+        LFileClear fc = new LFileClear();
+        fc.clearFile(pg.fileName);
+        
+        
+    }//GEN-LAST:event_clearScoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +222,15 @@ public class PreviousScores extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonEasy;
+    private javax.swing.JButton buttonHard;
+    private javax.swing.JButton clearScores;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> listScores;
+    private javax.swing.JButton quitGame;
+    private javax.swing.JButton submitLetterButton2;
+    private javax.swing.JButton submitLetterButton3;
+    private javax.swing.JButton submitLetterButton4;
     // End of variables declaration//GEN-END:variables
 }

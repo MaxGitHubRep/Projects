@@ -221,14 +221,14 @@ public class PlayGame extends javax.swing.JFrame {
     private void saveScoreToFile() {
         
         LFileWriter f = new LFileWriter();
-        
+        FirstMenu m = new FirstMenu();
         DateTime dt = new DateTime();
-        String date = dt.getDateTime();
         
+        String date = dt.getDateTime();
         ArrayList arrayList = new ArrayList(Arrays.asList(words));
         String joint = js.join(arrayList, " ");
         
-        String result = "[" + date + "] Word: '" + getWord() + "' --> '" + joint + "'  (Lost Lives: " + (lostLives-1) + "/6)";
+        String result = date + " - Lost Lives: " + (lostLives-1) + "/6 - Difficulty: " + m.getDiffStr() + " - Word: '" + getWord() + "' --> '" + joint + "'";
         
         f.writeToFile(result, fileName, true);
         
@@ -319,9 +319,9 @@ public class PlayGame extends javax.swing.JFrame {
         RandomElement ri = new RandomElement();
         ArrayList randomWords = new ArrayList();
         if (m.difficulty == true) {
-                randomWords = list.buildArrayListStr("hello-cheese-world-smile-crime-fruit-mouse", "-");
+                randomWords = list.buildArrayListStr("hello-cheese-world-smile-crime-fruit-mouse-truch-lorry-table-napkin-greet", "-");
         } else {
-            randomWords = list.buildArrayListStr("chocolate-diabolical-oxymoron-critical-analysis", "-");
+            randomWords = list.buildArrayListStr("chocolate-diabolical-oxymoron-critical-analysis-opposition-defensiveness-notifications-challenge", "-");
         }
         String word = ri.randomElement(randomWords).toUpperCase();
 

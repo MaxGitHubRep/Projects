@@ -180,7 +180,15 @@ public class FirstMenu extends javax.swing.JFrame {
     }
     
     public boolean getDifficulty() {
-        return difficulty;
+        return this.difficulty;
+    }
+    
+    public String getDiffStr() {
+        if (getDifficulty() == true) {
+            return "Easy";
+        } else {
+            return "Hard";
+        }
     }
     
     public static void main(String args[]) {
