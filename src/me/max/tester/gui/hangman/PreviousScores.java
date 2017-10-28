@@ -93,7 +93,7 @@ public class PreviousScores extends javax.swing.JFrame {
             }
         });
 
-        listPrevScores.setBorder(javax.swing.BorderFactory.createTitledBorder("Easy"));
+        listPrevScores.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 4, true));
         listPrevScores.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         listPrevScores.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "" };

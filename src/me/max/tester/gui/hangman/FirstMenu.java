@@ -5,6 +5,7 @@
  */
 package me.max.tester.gui.hangman;
 
+import me.max.tester.managers.file.LFileWriter;
 import me.max.tester.managers.system.SystemExit;
 
 /**
@@ -168,13 +169,17 @@ public class FirstMenu extends javax.swing.JFrame {
      */
     
     public void setDifficulty() {
+        LFileWriter fw = new LFileWriter();
+        
         
         if (difficulty == true) {
-            difficulty = false;
+            this.difficulty = false;
             difficultyToggle.setText("Difficulty (Hard)");
+            fw.writeToFile("Hard", "difficulty", false);
         } else {
-            difficulty = true;
+            this.difficulty = true;
             difficultyToggle.setText("Difficulty (Easy)");
+            fw.writeToFile("Easy", "difficulty", false);
         }
         
     }

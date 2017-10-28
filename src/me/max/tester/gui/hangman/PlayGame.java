@@ -7,6 +7,7 @@ package me.max.tester.gui.hangman;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import me.max.tester.managers.file.LFileReader;
 import me.max.tester.managers.file.LFileWriter;
 import me.max.tester.managers.lists.ArrayListStringBuilder;
 import me.max.tester.managers.lists.JoinChar;
@@ -317,8 +318,9 @@ public class PlayGame extends javax.swing.JFrame {
         FirstMenu m = new FirstMenu();
         ArrayListStringBuilder list = new ArrayListStringBuilder();
         RandomElement ri = new RandomElement();
+        LFileReader fr = new LFileReader();
         ArrayList randomWords = new ArrayList();
-        if (m.difficulty == true) {
+        if (fr.getFileContent("difficulty").toString().contains("Easy")) {
                 randomWords = list.buildArrayListStr("hello-cheese-world-smile-crime-fruit-mouse-truch-lorry-table-napkin-greet", "-");
         } else {
             randomWords = list.buildArrayListStr("chocolate-diabolical-oxymoron-critical-analysis-opposition-defensiveness-notifications-challenge", "-");
