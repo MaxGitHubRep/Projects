@@ -39,11 +39,12 @@ public class PreviousScores extends javax.swing.JFrame {
         submitLetterButton4 = new javax.swing.JButton();
         clearScores = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listScores = new javax.swing.JList<>();
+        listPrevScores = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 27)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 51, 255));
         jLabel1.setText("PREVIOUS SCORES!");
 
         buttonEasy.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
@@ -92,19 +93,24 @@ public class PreviousScores extends javax.swing.JFrame {
             }
         });
 
-        listScores.setBackground(new java.awt.Color(153, 204, 255));
-        listScores.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        listScores.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jScrollPane1.setViewportView(listScores);
+        listPrevScores.setBorder(javax.swing.BorderFactory.createTitledBorder("Easy"));
+        listPrevScores.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        listPrevScores.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(listPrevScores);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonHard, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -116,9 +122,7 @@ public class PreviousScores extends javax.swing.JFrame {
                         .addComponent(submitLetterButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(quitGame))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane1)))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -132,9 +136,9 @@ public class PreviousScores extends javax.swing.JFrame {
                     .addComponent(submitLetterButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(clearScores, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -145,7 +149,7 @@ public class PreviousScores extends javax.swing.JFrame {
         fr.getFileContent(pg.fileName).stream().filter(item -> item.toString().contains(mode)).forEachOrdered((Object item) -> {
             listModel.addElement(item.toString().replace("Difficulty: " + mode + " - ", ""));
         });
-        listScores.setModel(listModel);
+        listPrevScores.setModel(listModel);
     }
     
     PlayGame pg = new PlayGame();
@@ -227,7 +231,7 @@ public class PreviousScores extends javax.swing.JFrame {
     private javax.swing.JButton clearScores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> listScores;
+    private javax.swing.JList<String> listPrevScores;
     private javax.swing.JButton quitGame;
     private javax.swing.JButton submitLetterButton2;
     private javax.swing.JButton submitLetterButton3;
