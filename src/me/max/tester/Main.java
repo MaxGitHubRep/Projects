@@ -32,15 +32,12 @@ public class Main {
         
         // start of main class.
        
-      //  TreasureHunt h = new TreasureHunt();
-        //h.hunt();
         
-       // new FirstMenu().setVisible(true);
+        new FirstMenu().setVisible(true);
         
         
          //  LifeExpt life = new LifeExpt();
           // life.checkLifeExpt();
-       
        
         // end of main class.
         
