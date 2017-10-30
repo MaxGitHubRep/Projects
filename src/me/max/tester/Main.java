@@ -14,6 +14,7 @@ import me.max.tester.managers.file.LFileReader;
 import me.max.tester.managers.file.LFileWriter;
 import me.max.tester.managers.input.InputInt;
 import me.max.tester.managers.system.SystemExit;
+import me.max.tester.projects.homework.PascalTriangle;
 
 /**
  * @author Max
@@ -32,8 +33,10 @@ public class Main {
         
         // start of main class.
        
+        PascalTriangle p = new PascalTriangle();
+        p.drawTriangle();
         
-        new FirstMenu().setVisible(true);
+      //  new FirstMenu().setVisible(true);
         
         
          //  LifeExpt life = new LifeExpt();
