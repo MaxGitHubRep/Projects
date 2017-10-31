@@ -30,9 +30,7 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonHard" min="-2" pref="94" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="buttonEasy" min="-2" pref="94" max="-2" attributes="0"/>
+                      <Component id="buttonHard" min="-2" pref="200" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="clearScores" min="-2" pref="96" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -52,7 +50,6 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="buttonHard" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                  <Component id="buttonEasy" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="quitGame" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="submitLetterButton4" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   <Component id="clearScores" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
@@ -77,20 +74,6 @@
         <Property name="text" type="java.lang.String" value="PREVIOUS SCORES!"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonEasy">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="20" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="0" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Easy"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEasyActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="quitGame">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -113,7 +96,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="0" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Hard"/>
+        <Property name="text" type="java.lang.String" value="Click to See!"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonHardActionPerformed"/>

@@ -258,7 +258,7 @@ public class PlayGame extends javax.swing.JFrame {
                     
                     if (joint.contains("_")) {
                         
-                        System.out.println(getWord());
+                       // System.out.println(getWord());
                         
                     } else {
                         saveScoreToFile();

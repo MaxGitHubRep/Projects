@@ -15,6 +15,7 @@ import me.max.tester.managers.file.LFileReader;
 import me.max.tester.managers.file.LFileWriter;
 import me.max.tester.managers.input.InputInt;
 import me.max.tester.managers.system.SystemExit;
+import me.max.tester.projects.homework.LifeExpt;
 import me.max.tester.projects.homework.PascalTriangle;
 
 /**
@@ -37,15 +38,15 @@ public class Main {
        // PascalTriangle p = new PascalTriangle();
        // p.drawTriangle();
         
-        //new FirstMenu().setVisible(true);
-        new Fronter().setVisible(true);
+        new FirstMenu().setVisible(true);
+       // new Fronter().setVisible(true);
        
        
        // LFileWriter f = new LFileWriter();
        // f.writeToFile("how are you doing", "name", true);
 
-         //  LifeExpt life = new LifeExpt();
-          // life.checkLifeExpt();
+        //   LifeExpt life = new LifeExpt();
+        //   life.checkLifeExpt();
        
         // end of main class.
         
