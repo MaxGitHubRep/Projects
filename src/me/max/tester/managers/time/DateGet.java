@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
  *
  * @author Max
  */
-public class Date {
+public class DateGet {
     
     public String getDate() { // "dd/MM/yyyy"
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
