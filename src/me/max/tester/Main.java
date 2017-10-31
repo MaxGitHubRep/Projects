@@ -33,12 +33,15 @@ public class Main {
         
         // start of main class.
        
-        PascalTriangle p = new PascalTriangle();
-        p.drawTriangle();
+       // PascalTriangle p = new PascalTriangle();
+       // p.drawTriangle();
         
-      //  new FirstMenu().setVisible(true);
-        
-        
+       // new FirstMenu().setVisible(true);
+       
+       
+       // LFileWriter f = new LFileWriter();
+       // f.writeToFile("how are you doing", "name", true);
+
          //  LifeExpt life = new LifeExpt();
           // life.checkLifeExpt();
        
