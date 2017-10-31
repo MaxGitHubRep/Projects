@@ -5,12 +5,38 @@
  */
 package me.max.tester.gui.timetable;
 
+import java.util.HashMap;
+import java.util.Map;
+import me.max.tester.managers.system.SystemExit;
+
 /**
  *
  * @author Mc170171
  */
 public class Fronter extends javax.swing.JFrame {
 
+    // constants
+    
+    //
+    
+    
+    // methods
+    
+    protected HashMap<Integer, String> getTimeTableMap() {
+        
+        HashMap<Integer, String> map = new HashMap<>();
+        
+        map.put(1, "Computer Science;11:40+Maths;15:10"); //mon
+        map.put(2, "Computer Science;09:00+Computer Science;10:10+Economics;11:40+Tutor;12:45"); //tue
+        map.put(3, "Computer Science;11:40+Maths;15:10"); //wed
+        map.put(4, "Computer Science;11:40+Maths;15:10"); //thu
+        map.put(5, "Computer Science;11:40+Maths;15:10"); //fri
+     
+        return map;
+    }
+    
+    
+    
     /**
      * Creates new form Fronter
      */
@@ -27,23 +53,58 @@ public class Fronter extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
+
+        jLabel1.setFont(new java.awt.Font("Agency FB", 1, 56)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 153, 0));
+        jLabel1.setText("timetable");
+
+        jButton1.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 51, 0));
+        jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 812, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 379, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        SystemExit exit = new SystemExit();
+        exit.exitProgram();
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -81,5 +142,7 @@ public class Fronter extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
