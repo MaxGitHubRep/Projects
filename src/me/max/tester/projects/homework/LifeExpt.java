@@ -28,7 +28,7 @@ public class LifeExpt {
     private final int lifeExptAge = 81;
     private int query = 100;    //percentage
     private long diffDie = 0;
-    private final DateFormat dateFormat = new SimpleDateFormat("HH/mm/ss dd/MM/yyyy");
+    private final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
     private final TimeBreakDown timeBD = new TimeBreakDown();
     
     private void lifeStyleQ() {
@@ -67,7 +67,7 @@ public class LifeExpt {
         Date birthDate = null;
         
         try {
-            birthDate = dateFormat.parse("00/00/00 "+date);
+            birthDate = dateFormat.parse("00:00:00 "+date);
         } catch (ParseException ex) {
             e.error(ex);
         }
@@ -83,7 +83,7 @@ public class LifeExpt {
         sendLine();
         int deathYear = Integer.parseInt(date.substring(date.length()-4,date.length()));
         deathYear += lifeExptAge;
-        Date dieDate = dateFormat.parse("00/00/00 04/06/"+deathYear);
+        Date dieDate = dateFormat.parse("00:00:00 04/06/"+deathYear);
         System.out.println(" You will die in:");
         diffDie = timeDiff.getDateDiff(dateTimeFormat, dieDate, MILLISECONDS);
         timeBD.breakDownTime(diffDie);
