@@ -38,8 +38,8 @@ public class Main {
        // PascalTriangle p = new PascalTriangle();
        // p.drawTriangle();
         
-        new FirstMenu().setVisible(true);
-       // new Fronter().setVisible(true);
+        //new FirstMenu().setVisible(true);
+        new Fronter().setVisible(true);
        
        
        // LFileWriter f = new LFileWriter();

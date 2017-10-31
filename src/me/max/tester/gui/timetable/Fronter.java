@@ -5,6 +5,8 @@
  */
 package me.max.tester.gui.timetable;
 
+import java.awt.Color;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import me.max.tester.managers.system.SystemExit;
@@ -53,58 +55,153 @@ public class Fronter extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        titleLabel = new javax.swing.JLabel();
+        exitButton = new javax.swing.JButton();
+        pBar = new javax.swing.JProgressBar();
+        pBarFriday = new javax.swing.JLabel();
+        pBarMonday = new javax.swing.JLabel();
+        updateButton = new javax.swing.JButton();
+        pWordField = new javax.swing.JPasswordField();
+        banner = new javax.swing.JLabel();
+        pWordPrompt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Agency FB", 1, 56)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 153, 0));
-        jLabel1.setText("timetable");
+        titleLabel.setFont(new java.awt.Font("Agency FB", 1, 56)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(0, 153, 0));
+        titleLabel.setText("Timetable - Max Carter [MC170171]");
 
-        jButton1.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 51, 0));
-        jButton1.setText("Exit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        exitButton.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        exitButton.setForeground(new java.awt.Color(255, 51, 0));
+        exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                exitButtonActionPerformed(evt);
             }
         });
+
+        pBarFriday.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        pBarFriday.setForeground(new java.awt.Color(255, 51, 0));
+        pBarFriday.setText("Friday!");
+
+        pBarMonday.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        pBarMonday.setForeground(new java.awt.Color(255, 51, 0));
+        pBarMonday.setText("Monday!");
+
+        updateButton.setFont(new java.awt.Font("Agency FB", 3, 36)); // NOI18N
+        updateButton.setForeground(new java.awt.Color(255, 51, 51));
+        updateButton.setText("Update!");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
+
+        pWordField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        pWordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pWordFieldActionPerformed(evt);
+            }
+        });
+
+        banner.setFont(new java.awt.Font("Tahoma", 0, 3)); // NOI18N
+        banner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/gui/timetable/resources/background/rcbanner.PNG"))); // NOI18N
+        banner.setText("picHold");
+
+        pWordPrompt.setFont(new java.awt.Font("Agency FB", 2, 18)); // NOI18N
+        pWordPrompt.setText("Enter password to continue!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(banner, javax.swing.GroupLayout.PREFERRED_SIZE, 1419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 812, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(titleLabel)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(pBarMonday)
+                        .addGap(18, 18, 18)
+                        .addComponent(pBar, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pBarFriday, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pWordPrompt, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                            .addComponent(pWordField))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 379, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(banner)
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pBarMonday, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pBar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pBarFriday, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pWordField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pWordPrompt))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
+                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         SystemExit exit = new SystemExit();
         exit.exitProgram();
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void pWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pWordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pWordFieldActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        // Update Button
+        
+        char[] pw = pWordField.getPassword();
+        char[] correct = new char[] {'y', 'e', 's'};
+        
+        if (Arrays.equals(pw, correct)) {
+            pWordField.setVisible(false);
+            pWordPrompt.setVisible(false);
+            updateButton.setVisible(false);
+        } else {
+            pWordPrompt.setText("Wrong password!");
+            pWordPrompt.setForeground(Color.red);
+            pWordField.requestFocusInWindow();
+        }
+        
+        
+        
+    }//GEN-LAST:event_updateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,7 +239,14 @@ public class Fronter extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel banner;
+    private javax.swing.JButton exitButton;
+    private javax.swing.JProgressBar pBar;
+    private javax.swing.JLabel pBarFriday;
+    private javax.swing.JLabel pBarMonday;
+    private javax.swing.JPasswordField pWordField;
+    private javax.swing.JLabel pWordPrompt;
+    private javax.swing.JLabel titleLabel;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }
