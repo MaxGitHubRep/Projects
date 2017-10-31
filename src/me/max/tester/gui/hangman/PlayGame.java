@@ -223,8 +223,8 @@ public class PlayGame extends javax.swing.JFrame {
         LFileWriter f = new LFileWriter();
         FirstMenu m = new FirstMenu();
         DateTime dt = new DateTime();
-        
         String date = dt.getDateTime();
+        
         ArrayList arrayList = new ArrayList(Arrays.asList(words));
         String joint = js.join(arrayList, " ");
         

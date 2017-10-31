@@ -15,7 +15,7 @@ import me.max.tester.managers.system.SystemExit;
  */
 public class FirstMenu extends javax.swing.JFrame {
 
-    public boolean difficulty; // true = easy, false = hard
+    public boolean difficulty = true; // true = easy, false = hard
     
     /**
      * Creates new form FirstMenu
@@ -171,8 +171,8 @@ public class FirstMenu extends javax.swing.JFrame {
     
     public void setDifficulty() {
         LFileWriter fw = new LFileWriter();
-        
         LFileReader fr = new LFileReader();
+        
         if (fr.getFileContent("difficulty").toString().contains("Easy")) {
             difficultyToggle.setText("Difficulty (Hard)");
             fw.writeToFile("Hard", "difficulty", false);
@@ -182,7 +182,6 @@ public class FirstMenu extends javax.swing.JFrame {
         }
         
     }
-
     
     public String getDiffStr() {
         if (this.difficulty == true) {
