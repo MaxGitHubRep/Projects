@@ -9,6 +9,7 @@ import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
 import me.max.tester.gui.hangman.FirstMenu;
+import me.max.tester.gui.timetable.Fronter;
 import me.max.tester.managers.file.LFileClear;
 import me.max.tester.managers.file.LFileReader;
 import me.max.tester.managers.file.LFileWriter;
@@ -37,6 +38,7 @@ public class Main {
        // p.drawTriangle();
         
        // new FirstMenu().setVisible(true);
+        new Fronter().setVisible(true);
        
        
        // LFileWriter f = new LFileWriter();
