@@ -53,7 +53,7 @@ public class Fronter extends javax.swing.JFrame {
         String[] temp = dateTime.split(" ");
         dateLabel.setText("Date: " + temp[1]);
         timeLabel.setText("Time: " + temp[0]);
-        dayLabel.setText(dayStr);
+        dayLabel.setText("Day: "+dayStr);
         
         if (dayNum == 1 || dayNum == 7) {
             pBarSet(100);
@@ -63,14 +63,20 @@ public class Fronter extends javax.swing.JFrame {
             
             String[] hourStr = temp[0].split(":");
             int hour = Integer.parseInt(hourStr[0]);
-            pBarSet(hour*(dayNum-1));
+            
+            hour = 20;
+            dayNum = 6;
+            
+            int use = (dayNum-1)*20 + (20/24)*hour;
+            System.out.println(use);
+            pBarSet(use);
             
         }
         
     }
     
     protected void pBarDefine() {
-        pBar.setMaximum(120);
+        pBar.setMaximum(100);
         pBar.setMinimum(0);
     }
     
@@ -108,6 +114,7 @@ public class Fronter extends javax.swing.JFrame {
         dateLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Reigate College - Timetable");
         setResizable(false);
 
         titleLabel.setFont(new java.awt.Font("Agency FB", 1, 56)); // NOI18N
