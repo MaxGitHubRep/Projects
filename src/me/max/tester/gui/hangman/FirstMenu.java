@@ -5,6 +5,7 @@
  */
 package me.max.tester.gui.hangman;
 
+import javax.swing.ImageIcon;
 import me.max.tester.managers.file.LFileReader;
 import me.max.tester.managers.file.LFileWriter;
 import me.max.tester.managers.system.SystemExit;
@@ -22,6 +23,7 @@ public class FirstMenu extends javax.swing.JFrame {
      */
     public FirstMenu() {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/me/max/tester/gui/hangman/resources/titlescreen/hangman.png")).getImage());
     }
 
     /**
@@ -42,6 +44,7 @@ public class FirstMenu extends javax.swing.JFrame {
         hangmanTitlePic = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Hangman");
         setBackground(new java.awt.Color(204, 255, 255));
 
         welcomeMessage.setBackground(new java.awt.Color(153, 153, 153));
