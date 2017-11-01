@@ -5,7 +5,7 @@ This repository contains all the files for my java projects.
 ## Main Sections
 
 ### » [gui](https://github.com/MaxGitHubRep/Projects/tree/master/src/me/max/tester/gui/)
- - Contains GUI projects including: Hangman. _(Includes images which is why the size is so large)_
+ - Contains GUI projects including: Hangman & Timetable. _(Includes images which is why the size is so large)_
 
 ### » [managers](https://github.com/MaxGitHubRep/Projects/tree/master/src/me/max/tester/managers)
  - Contains organised packages for java classes that execute specific methods.
@@ -19,12 +19,15 @@ This repository contains all the files for my java projects.
 
 ## Projects in progress
 
-### » [Hangman](https://github.com/MaxGitHubRep/Projects/tree/master/src/me/max/tester/gui/hangman)
+### » [Timetable](https://github.com/MaxGitHubRep/Projects/tree/master/src/me/max/tester/gui/timetable)
 
- - [x] Save scores to Text File
- - [x] Retreive previous scores and output in jPanel
- - [x] Fix difficulty toggle in main menu
- - [ ] Final code clean up
+ - [x] Password validation
+ - [x] Reigate College banner
+ - [ ] Create front page
+ - [ ] Week tracker with progress bar
+ - [ ] Timetable display
+ - [ ] Menu Bar at top
+ 
 
 ###  ---
 
