@@ -125,12 +125,12 @@
                     </MenuItem>
                   </SubComponents>
                 </Menu>
-                <MenuItem class="javax.swing.JMenuItem" name="mBarOptionsSettingsPWSave">
+                <MenuItem class="javax.swing.JMenuItem" name="mBarOptionsSettingsSavePW">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="   Remember Password"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mBarOptionsSettingsPWSaveActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mBarOptionsSettingsSavePWActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>

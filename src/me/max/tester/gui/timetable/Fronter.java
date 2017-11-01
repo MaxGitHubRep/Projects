@@ -30,9 +30,11 @@ public class Fronter extends javax.swing.JFrame {
     // variables
     
     protected boolean signedIn;
+    protected final static String fileNameSettingsSavePW = "ttSavePW";
+    protected final static String fileNameSettingsUpdateClock = "ttUpdateClock";
     
-    LFileWriter fw = new LFileWriter();
-    LFileReader fr = new LFileReader();
+    protected final static LFileWriter fw = new LFileWriter();
+    protected final static LFileReader fr = new LFileReader();
     
     private DateTime dt = new DateTime();
     private DayOfWeek dow = new DayOfWeek();
@@ -40,7 +42,7 @@ public class Fronter extends javax.swing.JFrame {
     
     // methods
     
-    protected HashMap<Integer, String> getTimeTableMap() {
+  /*  protected HashMap<Integer, String> getTimeTableMap() {
         
         HashMap<Integer, String> map = new HashMap<>();
         
@@ -51,6 +53,29 @@ public class Fronter extends javax.swing.JFrame {
         map.put(5, "Computer Science;11:40+Maths;15:10"); //fri
      
         return map;
+    }*/
+    
+    protected void removePasswordFields() {
+        
+        pWordField.setVisible(false);
+        pWordPrompt.setVisible(false);
+        updateButton.setVisible(false);
+        signedIn = true;
+        scheduleRunTask();
+        startPath();
+        
+    }
+    
+    protected void setSavePWFalse() {
+        fw.writeToFile("false", fileNameSettingsSavePW, false);
+        mBarOptionsSettingsSavePW.setForeground(Color.red);
+
+    }
+    
+    protected void setSavePWTrue() {
+        fw.writeToFile("true", fileNameSettingsSavePW, false);
+        mBarOptionsSettingsSavePW.setForeground(Color.green);
+
     }
     
     protected void setBackgroundColour(String col) {
@@ -184,7 +209,7 @@ public class Fronter extends javax.swing.JFrame {
         mBarOptionsSettingColourGreen = new javax.swing.JMenuItem();
         mBarOptionsSettingsColourWhite = new javax.swing.JMenuItem();
         mBarOptionsSettingsColourRed = new javax.swing.JMenuItem();
-        mBarOptionsSettingsPWSave = new javax.swing.JMenuItem();
+        mBarOptionsSettingsSavePW = new javax.swing.JMenuItem();
         mBarOptionsAbout = new javax.swing.JMenuItem();
         mBarOptionsExit = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -412,13 +437,13 @@ public class Fronter extends javax.swing.JFrame {
 
         pBarOptionsSettings.add(mBarOptionsSettingsColour);
 
-        mBarOptionsSettingsPWSave.setText("   Remember Password");
-        mBarOptionsSettingsPWSave.addActionListener(new java.awt.event.ActionListener() {
+        mBarOptionsSettingsSavePW.setText("   Remember Password");
+        mBarOptionsSettingsSavePW.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mBarOptionsSettingsPWSaveActionPerformed(evt);
+                mBarOptionsSettingsSavePWActionPerformed(evt);
             }
         });
-        pBarOptionsSettings.add(mBarOptionsSettingsPWSave);
+        pBarOptionsSettings.add(mBarOptionsSettingsSavePW);
 
         jMenu1.add(pBarOptionsSettings);
 
@@ -470,12 +495,7 @@ public class Fronter extends javax.swing.JFrame {
         char[] correct = new char[] {'y', 'e', 's'};
         
         if (Arrays.equals(pw, correct)) {
-            pWordField.setVisible(false);
-            pWordPrompt.setVisible(false);
-            updateButton.setVisible(false);
-            signedIn = true;
-            scheduleRunTask();
-            startPath();
+            removePasswordFields();
             
         } else {
             pWordPrompt.setText("Wrong password!");
@@ -521,9 +541,13 @@ public class Fronter extends javax.swing.JFrame {
         setBackgroundColour("red");
     }//GEN-LAST:event_mBarOptionsSettingsColourRedActionPerformed
 
-    private void mBarOptionsSettingsPWSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mBarOptionsSettingsPWSaveActionPerformed
-        //
-    }//GEN-LAST:event_mBarOptionsSettingsPWSaveActionPerformed
+    private void mBarOptionsSettingsSavePWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mBarOptionsSettingsSavePWActionPerformed
+        if (fr.getFileContent(fileNameSettingsSavePW).toString().contains("true")) {
+            setSavePWFalse();
+        } else {
+            setSavePWTrue();
+        }
+    }//GEN-LAST:event_mBarOptionsSettingsSavePWActionPerformed
 
     /**
      * @param args the command line arguments
@@ -554,8 +578,17 @@ public class Fronter extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Fronter().setVisible(true);
+                
+                if (fr.getFileContent(fileNameSettingsSavePW).toString().contains("true")) {
+                    new Fronter().setSavePWTrue();
+                    new Fronter().removePasswordFields();
+                    System.out.println("access yes");
+                } else {
+                    new Fronter().setSavePWFalse();
+                }
             }
         });
     }
@@ -579,7 +612,7 @@ public class Fronter extends javax.swing.JFrame {
     private javax.swing.JMenu mBarOptionsSettingsColour;
     private javax.swing.JMenuItem mBarOptionsSettingsColourRed;
     private javax.swing.JMenuItem mBarOptionsSettingsColourWhite;
-    private javax.swing.JMenuItem mBarOptionsSettingsPWSave;
+    private javax.swing.JMenuItem mBarOptionsSettingsSavePW;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar pBar;
     private javax.swing.JLabel pBarFriday;
