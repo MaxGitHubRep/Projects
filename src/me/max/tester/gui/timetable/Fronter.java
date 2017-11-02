@@ -199,7 +199,7 @@ public class Fronter extends javax.swing.JFrame {
         bottom = new javax.swing.JPanel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        mBearOptions = new javax.swing.JMenu();
         mBarFileUpdate = new javax.swing.JMenuItem();
         pBarOptionsSettings = new javax.swing.JMenu();
         mBarOptionsSettingsClockUpdate = new javax.swing.JMenuItem();
@@ -219,6 +219,7 @@ public class Fronter extends javax.swing.JFrame {
         setResizable(false);
 
         background.setBackground(new java.awt.Color(204, 204, 255));
+        background.setToolTipText("");
 
         pBarFriday.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         pBarFriday.setForeground(new java.awt.Color(255, 51, 0));
@@ -364,10 +365,10 @@ public class Fronter extends javax.swing.JFrame {
 
         menuBar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        jMenu1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu1.setForeground(new java.awt.Color(255, 51, 51));
-        jMenu1.setText("Options");
-        jMenu1.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        mBearOptions.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        mBearOptions.setForeground(new java.awt.Color(255, 51, 51));
+        mBearOptions.setText("Options");
+        mBearOptions.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
 
         mBarFileUpdate.setText("   Update   ");
         mBarFileUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -375,7 +376,7 @@ public class Fronter extends javax.swing.JFrame {
                 mBarFileUpdateActionPerformed(evt);
             }
         });
-        jMenu1.add(mBarFileUpdate);
+        mBearOptions.add(mBarFileUpdate);
 
         pBarOptionsSettings.setText("   Settings   ");
 
@@ -445,7 +446,7 @@ public class Fronter extends javax.swing.JFrame {
         });
         pBarOptionsSettings.add(mBarOptionsSettingsSavePW);
 
-        jMenu1.add(pBarOptionsSettings);
+        mBearOptions.add(pBarOptionsSettings);
 
         mBarOptionsAbout.setText("   About   ");
         mBarOptionsAbout.addActionListener(new java.awt.event.ActionListener() {
@@ -453,7 +454,7 @@ public class Fronter extends javax.swing.JFrame {
                 mBarOptionsAboutActionPerformed(evt);
             }
         });
-        jMenu1.add(mBarOptionsAbout);
+        mBearOptions.add(mBarOptionsAbout);
 
         mBarOptionsExit.setText("   Exit   ");
         mBarOptionsExit.addActionListener(new java.awt.event.ActionListener() {
@@ -461,10 +462,10 @@ public class Fronter extends javax.swing.JFrame {
                 mBarOptionsExitActionPerformed(evt);
             }
         });
-        jMenu1.add(mBarOptionsExit);
-        jMenu1.add(jSeparator1);
+        mBearOptions.add(mBarOptionsExit);
+        mBearOptions.add(jSeparator1);
 
-        menuBar.add(jMenu1);
+        menuBar.add(mBearOptions);
 
         setJMenuBar(menuBar);
 
@@ -600,7 +601,6 @@ public class Fronter extends javax.swing.JFrame {
     private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel dayLabel;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuItem mBarFileUpdate;
     private javax.swing.JMenuItem mBarOptionsAbout;
@@ -613,6 +613,7 @@ public class Fronter extends javax.swing.JFrame {
     private javax.swing.JMenuItem mBarOptionsSettingsColourRed;
     private javax.swing.JMenuItem mBarOptionsSettingsColourWhite;
     private javax.swing.JMenuItem mBarOptionsSettingsSavePW;
+    private javax.swing.JMenu mBearOptions;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar pBar;
     private javax.swing.JLabel pBarFriday;
