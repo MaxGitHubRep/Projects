@@ -20,7 +20,11 @@ public class StartFrame extends javax.swing.JFrame {
 
     protected void startTask() { // starts everything
         
-        
+        LogPage lp = new LogPage();
+        desktop.add(lp);
+        lp.setVisible(true);
+        lp.setBackground(Color.red);
+       
         
     }
     
@@ -76,10 +80,15 @@ public class StartFrame extends javax.swing.JFrame {
         credits = new javax.swing.JLabel();
         desktop = new javax.swing.JDesktopPane();
         mBar = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
         mBarOptions = new javax.swing.JMenu();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         mBarGetStarted = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mBarAbout = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         mBarExit = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
         mBarSettings = new javax.swing.JMenu();
         mBarColourChoser = new javax.swing.JMenu();
         mBarOptionsSettingsColourRed = new javax.swing.JMenuItem();
@@ -88,6 +97,11 @@ public class StartFrame extends javax.swing.JFrame {
         mBarOptionsSettingColourPurple = new javax.swing.JMenuItem();
         mBarOptionsSettingColourBlue = new javax.swing.JMenuItem();
         mBarCustomColour = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Reigate College • Timetable");
@@ -120,11 +134,13 @@ public class StartFrame extends javax.swing.JFrame {
                 .addComponent(credits))
         );
 
+        desktop.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
         desktop.setLayout(desktopLayout);
         desktopLayout.setHorizontalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1093, Short.MAX_VALUE)
+            .addGap(0, 1096, Short.MAX_VALUE)
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,7 +158,7 @@ public class StartFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(158, 158, 158))
+                .addGap(155, 155, 155))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,12 +171,18 @@ public class StartFrame extends javax.swing.JFrame {
         );
 
         mBar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        mBar.setMargin(new java.awt.Insets(30, 10, 10, 30));
         mBar.setName(""); // NOI18N
+
+        jMenu2.setText("  ");
+        mBar.add(jMenu2);
 
         mBarOptions.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mBarOptions.setForeground(new java.awt.Color(255, 51, 51));
         mBarOptions.setText("Options");
         mBarOptions.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        mBarOptions.setMargin(new java.awt.Insets(10, 0, 0, 10));
+        mBarOptions.add(jSeparator3);
 
         mBarGetStarted.setText("   Get Started!   ");
         mBarGetStarted.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +191,7 @@ public class StartFrame extends javax.swing.JFrame {
             }
         });
         mBarOptions.add(mBarGetStarted);
+        mBarOptions.add(jSeparator1);
 
         mBarAbout.setText("   About   ");
         mBarAbout.addActionListener(new java.awt.event.ActionListener() {
@@ -177,6 +200,7 @@ public class StartFrame extends javax.swing.JFrame {
             }
         });
         mBarOptions.add(mBarAbout);
+        mBarOptions.add(jSeparator2);
 
         mBarExit.setText("   Exit   ");
         mBarExit.addActionListener(new java.awt.event.ActionListener() {
@@ -187,6 +211,9 @@ public class StartFrame extends javax.swing.JFrame {
         mBarOptions.add(mBarExit);
 
         mBar.add(mBarOptions);
+
+        jMenu4.setText("  ");
+        mBar.add(jMenu4);
 
         mBarSettings.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mBarSettings.setForeground(new java.awt.Color(255, 51, 51));
@@ -258,6 +285,25 @@ public class StartFrame extends javax.swing.JFrame {
         mBarSettings.add(mBarColourChoser);
 
         mBar.add(mBarSettings);
+
+        jMenu3.setText("  ");
+        mBar.add(jMenu3);
+
+        jMenu1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu1.setForeground(new java.awt.Color(255, 51, 51));
+        jMenu1.setText("Navigate");
+        jMenu1.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+
+        jMenuItem3.setText("  Log in");
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem1.setText("  Timetable");
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("  Week Progress");
+        jMenu1.add(jMenuItem2);
+
+        mBar.add(jMenu1);
 
         setJMenuBar(mBar);
 
@@ -358,6 +404,16 @@ public class StartFrame extends javax.swing.JFrame {
     private javax.swing.JPanel bottom;
     private javax.swing.JLabel credits;
     private javax.swing.JDesktopPane desktop;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JMenuBar mBar;
     private javax.swing.JMenuItem mBarAbout;
     private javax.swing.JMenu mBarColourChoser;
