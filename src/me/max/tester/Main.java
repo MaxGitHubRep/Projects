@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import me.max.tester.gui.hangman.FirstMenu;
 import me.max.tester.gui.timetable.Fronter;
+import me.max.tester.gui.timetable.StartFrame;
 import me.max.tester.managers.file.LFileClear;
 import me.max.tester.managers.file.LFileReader;
 import me.max.tester.managers.file.LFileWriter;
@@ -17,6 +18,7 @@ import me.max.tester.managers.input.InputInt;
 import me.max.tester.managers.system.SystemExit;
 import me.max.tester.projects.homework.LifeExpt;
 import me.max.tester.projects.homework.PascalTriangle;
+import me.max.tester.projects.misc.BlackJack;
 
 /**
  * @author Max
@@ -39,7 +41,9 @@ public class Main {
        // p.drawTriangle();
         
        // new FirstMenu().setVisible(true);
-        new Fronter().setVisible(true);
+       // new StartFrame().setVisible(true);
+       
+       new BlackJack().playGame();
        
        
        // LFileWriter f = new LFileWriter();

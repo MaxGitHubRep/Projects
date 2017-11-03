@@ -58,7 +58,7 @@ public class StartFrame extends javax.swing.JFrame {
      */
     public StartFrame() {
         initComponents();
-        this.setIconImage(new ImageIcon(getClass().getResource("/me/max/tester/gui/timetable/resources/images/reigate_college_icon.png")).getImage());
+      //  this.setIconImage(new ImageIcon(getClass().getResource("/me/max/tester/gui/timetable/resources/images/reigate_college_icon.png")).getImage());
     }
 
     /**

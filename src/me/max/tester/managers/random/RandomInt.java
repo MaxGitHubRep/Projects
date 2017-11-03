@@ -5,7 +5,6 @@
  */
 package me.max.tester.managers.random;
 
-import java.text.DecimalFormat;
 import java.util.Random;
 
 /**
@@ -13,7 +12,7 @@ import java.util.Random;
  * @author Max
  */
 public class RandomInt {
-    
+
     public int randomInt(int min, int max) {
         
         Random random = new Random();
