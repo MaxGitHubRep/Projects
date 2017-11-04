@@ -36,21 +36,12 @@ public class Main {
         System.out.println(" ==== [Start] ==== ");
         
         // start of main class.
-       
-       // PascalTriangle p = new PascalTriangle();
-       // p.drawTriangle();
         
        // new FirstMenu().setVisible(true);
        // new StartFrame().setVisible(true);
        
-       new BlackJack().playGame();
+       new PascalTriangle().drawTriangle();
        
-       
-       // LFileWriter f = new LFileWriter();
-       // f.writeToFile("how are you doing", "name", true);
-
-        //   LifeExpt life = new LifeExpt();
-        //   life.checkLifeExpt();
        
         // end of main class.
         

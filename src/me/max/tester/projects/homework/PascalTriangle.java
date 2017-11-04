@@ -5,33 +5,29 @@
  */
 package me.max.tester.projects.homework;
 
+import me.max.tester.managers.input.InputInt;
+
 /**
  *
  * @author Max
  */
 public class PascalTriangle {
     
-    int maxRows = 6;
-    
     public void drawTriangle() {
-        int r, num;
-        
-        for (int i = 0; i <= maxRows; i++) {
-            num = 1;
-            r = i + 1;
-            
-            for (int j = maxRows - i; j > 0; j--) {
+        int amt = new InputInt().inputInt("How many things do you want?");
+        int use = amt;
+        for (int i = 0; i < amt; i++) {
+            for (int f = 0; f < use; f++) {
                 System.out.print(" ");
             }
-            
-            for (int col = 0; col <= i; col++) {
-                if (col > 0) {
-                    num = num * (r - col) / col;
-                }
-                System.out.print(num + " ");
+            int out = (int) Math.pow(11, i);
+            for (String item : (out + "").split("")) {
+                System.out.print(item + " ");
             }
-            System.out.println();
+            use--;
+            System.out.println("");
         }
+        
     }
     
 }
