@@ -16,16 +16,21 @@ public class PascalTriangle {
     public void drawTriangle() {
         int amt = new InputInt().inputInt("How many things do you want?");
         int use = amt;
+        
         for (int i = 0; i < amt; i++) {
             for (int f = 0; f < use; f++) {
                 System.out.print(" ");
             }
+            
             int out = (int) Math.pow(11, i);
+            
             for (String item : (out + "").split("")) {
                 System.out.print(item + " ");
             }
+            
             use--;
             System.out.println("");
+            
         }
         
     }
