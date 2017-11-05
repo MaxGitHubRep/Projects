@@ -33,8 +33,7 @@ public class Main {
         
         System.out.println(" ==== [Start] ==== ");
 
-        SystemExit exit = new SystemExit();
-        exit.exitProgram();
+        new SystemExit().exitProgram();;
         
     }
 }
