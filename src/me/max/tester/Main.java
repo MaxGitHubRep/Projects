@@ -17,6 +17,7 @@ import me.max.tester.managers.file.LFileWriter;
 import me.max.tester.managers.input.InputInt;
 import me.max.tester.managers.misc.Chance;
 import me.max.tester.managers.system.SystemExit;
+import me.max.tester.projects.homework.Fibonacci;
 
 /**
  * @author Max
@@ -33,6 +34,8 @@ public class Main {
         
         System.out.println(" ==== [Start] ==== ");
 
+        new Fibonacci().runFibonacci();
+        
         new SystemExit().exitProgram();;
         
     }
