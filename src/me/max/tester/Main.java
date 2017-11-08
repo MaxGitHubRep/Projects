@@ -38,7 +38,7 @@ public class Main {
 
         new Encrypter().encryptText("Hello Ryan how are you doing on this fine day?");
         
-        new Encrypter().decryptText(new InputString().inputString("What do you want to decrypt?"));
+        new Encrypter().decryptText(new InputString().inputString("What do you want to decrypt?"), new InputInt().inputInt("Key?"));
         
         new SystemExit().exitProgram();
         

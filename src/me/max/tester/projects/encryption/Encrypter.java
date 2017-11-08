@@ -3,6 +3,7 @@ package me.max.tester.projects.encryption;
 import me.max.tester.managers.random.RandomInt;
 
 /**
+ * This is some code that translates text into a sequence of random numbers and letters that can be translated with a key.
  *
  * @author MC170171
  */
@@ -11,12 +12,10 @@ public class Encrypter {
     public void encryptText(String text) {
         
         String key;
-        int shift = new RandomInt().randomInt(0, 128);
-        System.out.println(shift);
+        int shift = new RandomInt().randomInt(1, 128);
         
         key = Integer.toHexString(shift);
-        
-        // text > shifted ascii (+1)
+        System.out.println(key);
         
         int[] ascii = new int[text.length()];
         int index = 0;
@@ -25,25 +24,32 @@ public class Encrypter {
             ascii[index] = (int) item.charAt(0) + shift;
             index++;
         }
-        
+        char c;
         for(int num : ascii) {
-            System.out.print((char) num);
+            c = (char) (new RandomInt().randomInt(71, 90));
+            String ch = c + "";
+            System.out.print(Integer.toHexString(num).toUpperCase().replace("A", ch));
         }
+
         System.out.println("");
-        System.out.println(key);
+        
     }
     
-    public void decryptText(String text) {
+    public void decryptText(String text, int key) {
+      
+        int code = Integer.parseInt(key + "", 16);
         
-        for (int i = 0; i < 128; i++) {
-            System.out.println(i + " -> ");
-            for(String item : text.split("")) {
-                char ascii = (char) (item.charAt(0) - i);
-                System.out.print(ascii);
-                
-            }
+        char t;
+        for (int i = 71; i < 90; i++) {
+            t = (char) i;
+            text = text.replace(t + "", "A");
             
-            System.out.println("");
+        }
+        
+        for (int i = 0; i < text.length(); i+= 2) {
+            String translate = text.substring(i, (i + 2));
+            System.out.print((char) (Integer.parseInt(translate, 16) - code));
+            
         }
         
     }
