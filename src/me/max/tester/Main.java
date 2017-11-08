@@ -15,8 +15,10 @@ import me.max.tester.managers.file.LFileClear;
 import me.max.tester.managers.file.LFileReader;
 import me.max.tester.managers.file.LFileWriter;
 import me.max.tester.managers.input.InputInt;
+import me.max.tester.managers.input.InputString;
 import me.max.tester.managers.misc.Chance;
 import me.max.tester.managers.system.SystemExit;
+import me.max.tester.projects.encryption.Encrypter;
 import me.max.tester.projects.homework.Fibonacci;
 
 /**
@@ -34,9 +36,11 @@ public class Main {
         
         System.out.println(" ==== [Start] ==== ");
 
-        new Fibonacci().runFibonacci();
+        new Encrypter().encryptText("Hello Ryan how are you doing on this fine day?");
         
-        new SystemExit().exitProgram();;
+        new Encrypter().decryptText(new InputString().inputString("What do you want to decrypt?"));
+        
+        new SystemExit().exitProgram();
         
     }
 }
