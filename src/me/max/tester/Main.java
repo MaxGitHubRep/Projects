@@ -18,7 +18,8 @@ import me.max.tester.managers.input.InputInt;
 import me.max.tester.managers.input.InputString;
 import me.max.tester.managers.misc.Chance;
 import me.max.tester.managers.system.SystemExit;
-import me.max.tester.projects.encryption.Encrypter;
+import me.max.tester.projects.encryption.Decrypt;
+import me.max.tester.projects.encryption.Encrypt;
 import me.max.tester.projects.homework.Fibonacci;
 
 /**
@@ -36,9 +37,9 @@ public class Main {
         
         System.out.println(" ==== [Start] ==== ");
 
-        new Encrypter().encryptText("Hello Ryan how are you doing on this fine day?");
+        new Encrypt().encryptText("Hello Ryan how are you doing on this fine day?");
         
-        new Encrypter().decryptText(new InputString().inputString("What do you want to decrypt?"), new InputInt().inputInt("Key?"));
+        new Decrypt().decryptText(new InputString().inputString("What do you want to decrypt?"), new InputInt().inputInt("Key?"));
         
         new SystemExit().exitProgram();
         
