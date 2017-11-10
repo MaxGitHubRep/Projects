@@ -37,9 +37,9 @@ public class Main {
         
         System.out.println(" ==== [Start] ==== ");
 
-        new Encrypt().encryptText("Hello Ryan how are you doing on this fine day?");
+        new Encrypt().encryptText("123456789");
         
-        new Decrypt().decryptText(new InputString().inputString("What do you want to decrypt?"), new InputInt().inputInt("Key?"));
+        new Decrypt().decryptText(new InputString().inputString("What do you want to decrypt?"), new InputString().inputString("Key?"));
         
         new SystemExit().exitProgram();
         
