@@ -32,7 +32,6 @@ public class CardGame extends javax.swing.JFrame {
     }
     
     public void setPicByPosition() {
-        
         if (position == 10) {
             endGame();
         } else {
@@ -55,32 +54,26 @@ public class CardGame extends javax.swing.JFrame {
     }
     
     public void up() {
-        
-        
+
         if (cards.get(position) < cards.get(position+1)) {
             System.out.println("correct");
             score++;
-            
             
         } else {
             System.out.println("wrong");
             
         }
+        
         position++;
         setPicByPosition();
     }
     
     public void down() {
-        
-        
         if (cards.get(position) > cards.get(position+1)) {
-            System.out.println("correct");
             score++;
             
-        } else {
-            System.out.println("wrong");
-            
-        }
+        } 
+        
         position++;
         setPicByPosition();
     }
@@ -95,7 +88,6 @@ public class CardGame extends javax.swing.JFrame {
             if (!cards.contains(tempCard)) {
                 cards.add(tempCard);
             }
-            
         }
         
         System.out.println(new JoinString().join(cards, ", "));
@@ -103,8 +95,6 @@ public class CardGame extends javax.swing.JFrame {
         playing = true;
         
         setPicByPosition();
-        
-        
     }
     
     public CardGame() {
