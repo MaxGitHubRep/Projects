@@ -1,6 +1,8 @@
 package me.max.tester.projects.encryption;
 
+import java.util.ArrayList;
 import me.max.tester.managers.error.ErrorOutput;
+import me.max.tester.managers.lists.JoinString;
 
 /**
  *
@@ -8,21 +10,29 @@ import me.max.tester.managers.error.ErrorOutput;
  */
 public class Decrypt {
     
-    public void decryptText(String text, String key) {
+    public void printDecryptedText(String text, String key) {
+        
+        System.out.println(getDecryptedText(text, key));
+        
+    }
+    
+    public String getDecryptedText(String text, String key) {
       
+        ArrayList builder = new ArrayList();
+        
         try {
             int code = Integer.parseInt(key + "", 16);
 
             char t;
-            for (int i = 71; i < 90; i++) {
+            for (int i = 71; i < 91; i++) {
                 t = (char) i;
-                text = text.replace(t + "", "A");
+                text = text.replaceAll(t + "", "A");
 
             }
 
             for (int i = 0; i < text.length(); i+= 2) {
                 String translate = text.substring(i, (i + 2));
-                System.out.print((char) (Integer.parseInt(translate, 16) - code));
+                builder.add((char) (Integer.parseInt(translate, 16) - code));
 
             }
         
@@ -30,6 +40,8 @@ public class Decrypt {
             new ErrorOutput().error(e);
             
         }
+        
+        return new JoinString().join(builder, "");
         
     }
     

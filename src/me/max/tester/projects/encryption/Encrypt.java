@@ -1,5 +1,7 @@
 package me.max.tester.projects.encryption;
 
+import java.util.ArrayList;
+import me.max.tester.managers.lists.JoinString;
 import me.max.tester.managers.random.RandomInt;
 
 /**
@@ -9,7 +11,13 @@ import me.max.tester.managers.random.RandomInt;
  */
 public class Encrypt {
     
-    public void encryptText(String text) {
+    public void printEncryptedText(String text) {
+        
+        System.out.println(getEncryptedText(text));
+        
+    }
+    
+    public String getEncryptedText(String text) {
         
         String key;
         int shift = new RandomInt().randomInt(1, 128);
@@ -24,14 +32,17 @@ public class Encrypt {
             ascii[index] = (int) item.charAt(0) + shift;
             index++;
         }
+        
+        ArrayList builder = new ArrayList();
+        
         char c;
         for(int num : ascii) {
             c = (char) (new RandomInt().randomInt(71, 90));
             String ch = c + "";
-            System.out.print(Integer.toHexString(num).toUpperCase().replace("A", ch));
+            builder.add(Integer.toHexString(num).toUpperCase().replace("A", ch));
         }
 
-        System.out.println("");
+        return new JoinString().join(builder, "");
         
     }
     

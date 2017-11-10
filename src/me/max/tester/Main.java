@@ -16,7 +16,6 @@ import me.max.tester.managers.file.LFileReader;
 import me.max.tester.managers.file.LFileWriter;
 import me.max.tester.managers.input.InputInt;
 import me.max.tester.managers.input.InputString;
-import me.max.tester.managers.misc.Chance;
 import me.max.tester.managers.system.SystemExit;
 import me.max.tester.projects.encryption.Decrypt;
 import me.max.tester.projects.encryption.Encrypt;
@@ -37,9 +36,9 @@ public class Main {
         
         System.out.println(" ==== [Start] ==== ");
 
-        new Encrypt().encryptText("123456789");
+        new Encrypt().printEncryptedText("encrypt this text");
         
-        new Decrypt().decryptText(new InputString().inputString("What do you want to decrypt?"), new InputString().inputString("Key?"));
+        new Decrypt().printDecryptedText(new InputString().inputString("What do you want to decrypt?"), new InputString().inputString("Key?"));
         
         new SystemExit().exitProgram();
         
