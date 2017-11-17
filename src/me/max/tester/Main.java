@@ -20,6 +20,7 @@ import me.max.tester.managers.system.SystemExit;
 import me.max.tester.projects.encryption.Decrypt;
 import me.max.tester.projects.encryption.Encrypt;
 import me.max.tester.projects.homework.Fibonacci;
+import me.max.tester.projects.misc.TwoDArray;
 
 /**
  * @author Max
@@ -36,9 +37,11 @@ public class Main {
         
         System.out.println(" ==== [Start] ==== ");
 
-        new Encrypt().printEncryptedText("hello");
+        new TwoDArray().tester();
         
-        new Decrypt().printDecryptedText(new InputString().inputString("What do you want to decrypt?"), new InputString().inputString("Key?"));
+        /*new Encrypt().printEncryptedText("hello");
+        
+        new Decrypt().printDecryptedText(new InputString().inputString("What do you want to decrypt?"), new InputString().inputString("Key?")); */
         
         new SystemExit().exitProgram();
         
