@@ -11,12 +11,12 @@ import javax.swing.ImageIcon;
  *
  * @author mc170171
  */
-public class LibraySystem extends javax.swing.JFrame {
+public class LibrarySystem extends javax.swing.JFrame {
 
     /**
      * Creates new form LibraySystem
      */
-    public LibraySystem() {
+    public LibrarySystem() {
         initComponents();
         //this.setIconImage(new ImageIcon(getClass().getResource("/me/max/tester/gui/library/resources/bookicon.png")).getImage());
         this.setIconImage(new ImageIcon(getClass().getResource("/me/max/tester/gui/cardgame/resources/cards/BACK.fw.png")).getImage());
@@ -145,20 +145,21 @@ public class LibraySystem extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LibraySystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LibrarySystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LibraySystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LibrarySystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LibraySystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LibrarySystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LibraySystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LibrarySystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LibraySystem().setVisible(true);
+                new LibrarySystem().setVisible(true);
             }
         });
     }
