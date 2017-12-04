@@ -15,14 +15,15 @@ import me.max.tester.managers.error.ErrorOutput;
 public class LFileWriter  {
     private final ErrorOutput output = new ErrorOutput();
     
-    public void writeToFile(String text, String filename, boolean append) { // false will clear file
+    public void writeToFile(String text, String filename, boolean append) { // false will clear file, true will append
         FileWriter writeObject;
         PrintWriter printObject;
         String my_dir = System.getProperty("user.dir") + "\\build\\classes\\me\\max\\tester\\textfiles\\" + filename + ".txt";
         try {
             writeObject = new FileWriter(my_dir, append);
             printObject = new PrintWriter(writeObject);
-            printObject.println(text);
+            printObject.print(text);
+            printObject.println();
             printObject.close();
         } catch (Exception ex) {
             output.error(ex);

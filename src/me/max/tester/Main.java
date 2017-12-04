@@ -12,6 +12,7 @@ import me.max.tester.gui.hangman.FirstMenu;
 import me.max.tester.gui.timetable.Fronter;
 import me.max.tester.gui.timetable.StartFrame;
 import me.max.tester.managers.file.LFileClear;
+import me.max.tester.managers.file.LFileEdit;
 import me.max.tester.managers.file.LFileReader;
 import me.max.tester.managers.file.LFileWriter;
 import me.max.tester.managers.input.InputInt;
@@ -38,13 +39,16 @@ public class Main {
         
         System.out.println(" ==== [Start] ==== ");
 
-        new AnimalOrder().animalSort();
+        new LFileWriter().writeToFile("HELLO THERE LINE 1", "tester", true);
+        new LFileWriter().writeToFile("HELLO THERE LINE 2", "tester", true);
+        new LFileWriter().writeToFile("HELLO THERE LINE 3", "tester", true);
+        System.out.println("---------");
+        new LFileReader().printFile("tester");
         
-        //new TwoDArray().tester();
-        
-        /*new Encrypt().printEncryptedText("hello");
-        
-        new Decrypt().printDecryptedText(new InputString().inputString("What do you want to decrypt?"), new InputString().inputString("Key?")); */
+        new LFileEdit().editFileByLine("tester", 2, "I HAVE EDITED LINE 2");
+             
+        System.out.println("---------");
+        new LFileReader().printFile("tester");
         
         new SystemExit().exitProgram();
         

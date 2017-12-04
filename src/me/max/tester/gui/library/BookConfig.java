@@ -1,6 +1,7 @@
 package me.max.tester.gui.library;
 
 import java.util.ArrayList;
+import me.max.tester.managers.file.LFileEdit;
 import me.max.tester.managers.file.LFileReader;
 
 /**
@@ -16,30 +17,46 @@ public class BookConfig extends javax.swing.JFrame {
     }
     
     private void updateBook() {
+        new LFileEdit().editFileByLine("books", bookList.getSelectedIndex(), (tfTitle.getText() + "!-!" + tfAuthor.getText() + "!-!" + tfISB.getText()));
         
-        
-        resetTextFields();
+        displayBooksInList();
     }
     
     public String getValue(String context, String item) {
-        String[] items = context.split("!-!");
-        
-        switch (item) {
-            case "title":
-                return items[0];
-                
-            case "author":
-                return items[1];
-                
-            case "isb":
-                return items[2];
-                
-            default:
-                return "null";
+        try {
+            String[] items = context.split("!-!");
+
+            switch (item) {
+                case "title":
+                    return items[0];
+
+                case "author":
+                    return items[1];
+
+                case "isb":
+                    return items[2];
+
+                default:
+                    return "null";
+            }
+            
+        } catch (Exception ex) {
+            System.out.println(ex);
         }
+        
+        return "null";
+    }
+    
+    private void removeBook() {
+        int value = bookList.getSelectedIndex();
+        
+        
+        
     }
     
     private void displayBooksInList() {
+        bookList.removeAllItems();
+        resetTextFields();
         ArrayList books = new LFileReader().getFileContent("books");
         for (Object book : books) {
             bookList.addItem(getValue(book+"", "title"));
@@ -118,6 +135,11 @@ public class BookConfig extends javax.swing.JFrame {
         removeBook.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         removeBook.setForeground(new java.awt.Color(255, 51, 0));
         removeBook.setText("Remove");
+        removeBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeBookActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Agency FB", 3, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -168,26 +190,25 @@ public class BookConfig extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(removeBook1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
-                    .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(backLayout.createSequentialGroup()
-                            .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(bookList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(removeBook, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(18, 18, 18)
-                            .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(addAuthor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                                .addComponent(addTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(addISB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tfAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfISB, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(backLayout.createSequentialGroup()
-                            .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(92, 92, 92)
-                            .addComponent(goToMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))))
+                    .addGroup(backLayout.createSequentialGroup()
+                        .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bookList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(removeBook, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(addAuthor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                            .addComponent(addTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addISB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfISB, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(backLayout.createSequentialGroup()
+                        .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(92, 92, 92)
+                        .addComponent(goToMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         backLayout.setVerticalGroup(
@@ -241,7 +262,7 @@ public class BookConfig extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bookListItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_bookListItemStateChanged
-        // TODO add your handling code here:
+        displayBooksInList();
     }//GEN-LAST:event_bookListItemStateChanged
 
     private void removeBook1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBook1ActionPerformed
@@ -252,6 +273,10 @@ public class BookConfig extends javax.swing.JFrame {
         this.dispose();
         new LibrarySystem().setVisible(true);
     }//GEN-LAST:event_goToMenuActionPerformed
+
+    private void removeBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBookActionPerformed
+        removeBook();
+    }//GEN-LAST:event_removeBookActionPerformed
 
     /**
      * @param args the command line arguments

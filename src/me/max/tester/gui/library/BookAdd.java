@@ -15,7 +15,7 @@ public class BookAdd extends javax.swing.JFrame {
 
     public void addBook(String title, String author, String isb) {
         String format = title + "!-!" + author + "!-!" + isb;
-        new LFileWriter().writeToFile(format, "books", false);
+        new LFileWriter().writeToFile(format, "books", true);
         tfTitle.setText("");
         tfAuthor.setText("");
         tfISB.setText("");
@@ -77,6 +77,7 @@ public class BookAdd extends javax.swing.JFrame {
         tfISB.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         jButton1.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 51, 51));
         jButton1.setText("Add Book");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
