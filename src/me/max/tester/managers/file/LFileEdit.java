@@ -33,14 +33,17 @@ public class LFileEdit {
             new LFileClear().clearFile(filename);
             
             for (Object item : list) {
-                if (index+1 == lineNumber) {
-                    printObject.print(newContent);
-                    
+                index++;
+                if (index == lineNumber) {
+                    if (!newContent.equals("null")) {
+                        printObject.print(newContent);
+                    }
                 } else {
                     printObject.print(item);
                 }
-                index++;
-                printObject.println();
+                if (index-1 != list.size()) {
+                    printObject.println();
+                }
             }
             printObject.close();
             

@@ -10,6 +10,8 @@ import me.max.tester.managers.file.LFileReader;
  */
 public class BookConfig extends javax.swing.JFrame {
 
+    private LFileReader readFile = new LFileReader();
+    
     private void resetTextFields() {
         tfTitle.setText("");
         tfAuthor.setText("");
@@ -17,9 +19,9 @@ public class BookConfig extends javax.swing.JFrame {
     }
     
     private void updateBook() {
-        new LFileEdit().editFileByLine("books", bookList.getSelectedIndex(), (tfTitle.getText() + "!-!" + tfAuthor.getText() + "!-!" + tfISB.getText()));
+        new LFileEdit().editFileByLine("books", bookList.getSelectedIndex()+1, (tfTitle.getText() + "!-!" + tfAuthor.getText() + "!-!" + tfISB.getText()));
         
-        displayBooksInList();
+        resetBooksInList();
     }
     
     public String getValue(String context, String item) {
@@ -48,19 +50,24 @@ public class BookConfig extends javax.swing.JFrame {
     }
     
     private void removeBook() {
-        int value = bookList.getSelectedIndex();
-        
-        
-        
+        int bookIndexByLine = bookList.getSelectedIndex()+1;
+        new LFileEdit().editFileByLine("books", bookIndexByLine, "null");
+        resetBooksInList();
+
+    }
+    
+    private void resetBooksInList() {
+        bookList.removeAllItems();
+        resetTextFields();
+        displayBooksInList();
     }
     
     private void displayBooksInList() {
-        bookList.removeAllItems();
-        resetTextFields();
-        ArrayList books = new LFileReader().getFileContent("books");
+        ArrayList books = readFile.getFileContent("books");
         for (Object book : books) {
             bookList.addItem(getValue(book+"", "title"));
         }
+        formatTextFields();
         
     }
     
@@ -69,7 +76,6 @@ public class BookConfig extends javax.swing.JFrame {
         String book = bookList.getSelectedItem() + "";
         
         for (Object bookItem : books) {
-            
             if (getValue(bookItem+"", "title").equalsIgnoreCase(book)){
                 tfTitle.setText(getValue(bookItem+"", "title"));
                 tfAuthor.setText(getValue(bookItem+"", "author"));
@@ -86,7 +92,6 @@ public class BookConfig extends javax.swing.JFrame {
     public BookConfig() {
         initComponents();
         displayBooksInList();
-        formatTextFields();
     }
 
     /**
@@ -262,7 +267,7 @@ public class BookConfig extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bookListItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_bookListItemStateChanged
-        displayBooksInList();
+        formatTextFields();
     }//GEN-LAST:event_bookListItemStateChanged
 
     private void removeBook1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBook1ActionPerformed

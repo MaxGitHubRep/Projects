@@ -22,6 +22,10 @@ public class LFileWriter  {
         try {
             writeObject = new FileWriter(my_dir, append);
             printObject = new PrintWriter(writeObject);
+            /*if (text.contains("\n")) {
+                printObject.println();
+                text = text.replace("\n", "");
+            }*/
             printObject.print(text);
             printObject.println();
             printObject.close();
