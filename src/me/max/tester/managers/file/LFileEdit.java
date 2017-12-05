@@ -42,7 +42,9 @@ public class LFileEdit {
                     printObject.print(item);
                 }
                 if (index-1 != list.size()) {
-                    printObject.println();
+                    if (!newContent.equals("null")) {
+                        printObject.println();
+                    }
                 }
             }
             printObject.close();
