@@ -2,6 +2,7 @@ package me.max.tester.gui.library;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import me.max.tester.managers.error.ErrorOutput;
 import me.max.tester.managers.file.LFileEdit;
 import me.max.tester.managers.file.LFileReader;
 
@@ -28,7 +29,6 @@ public class BookConfig extends javax.swing.JFrame {
     public String getValue(String context, String item) {
         try {
             String[] items = context.split("!-!");
-
             switch (item) {
                 case "title":
                     return items[0];
@@ -44,7 +44,7 @@ public class BookConfig extends javax.swing.JFrame {
             }
             
         } catch (Exception ex) {
-            System.out.println(ex);
+            new ErrorOutput().error(ex);
         }
         
         return "null";
@@ -65,7 +65,7 @@ public class BookConfig extends javax.swing.JFrame {
     
     private ArrayList getBookList() {
         ArrayList books = readFile.getFileContent("books");
-        Collections.sort(books);
+        //Collections.sort(books);
         
         return books;
     }
@@ -76,11 +76,6 @@ public class BookConfig extends javax.swing.JFrame {
             bookList.addItem(getValue(book+"", "title"));
         }
         formatTextFields();
-        
-    }
-    
-    private void sortBookList() {
-        
         
     }
     

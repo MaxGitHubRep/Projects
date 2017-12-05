@@ -14,7 +14,7 @@ public class ErrorOutput extends me.max.tester.managers.error.ErrorFormatter {
     public void error(Exception error) {
         
         String e = formatError(error);
-        System.out.println("[Error] "+e);  
+        System.out.println("[Error] "+e);
     }
     
 }
