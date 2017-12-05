@@ -20,7 +20,7 @@ public class LFileClear {
     public void clearFile(String filename) {
         FileWriter writeObject;
         PrintWriter printObject;
-        String my_dir = System.getProperty("user.dir") + "\\build\\classes\\me\\max\\tester\\textfiles\\" + filename + ".txt";
+        String my_dir = System.getProperty("user.dir") + "\\src\\me\\max\\tester\\textfiles\\" + filename + ".txt";
         try {
             writeObject = new FileWriter(my_dir, false);
             printObject = new PrintWriter(writeObject);

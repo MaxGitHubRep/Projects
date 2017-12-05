@@ -20,7 +20,7 @@ public class LFileReader {
     public ArrayList getFileContent(String filename) {
         ArrayList list = new ArrayList();
         String input_line;
-        String my_dir = System.getProperty("user.dir") + "\\build\\classes\\me\\max\\tester\\textfiles\\" + filename + ".txt";
+        String my_dir = System.getProperty("user.dir") + "\\src\\me\\max\\tester\\textfiles\\" + filename + ".txt";
         try {
             BufferedReader re = new BufferedReader(new FileReader(my_dir));
             while ((input_line = re.readLine()) != null) {

@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package me.max.tester.managers.file;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -24,7 +17,7 @@ public class LFileEdit {
     PrintWriter printObject;
     
     public void editFileByLine(String filename, int lineNumber, String newContent) {
-        String my_dir = System.getProperty("user.dir") + "\\build\\classes\\me\\max\\tester\\textfiles\\" + filename + ".txt";
+        String my_dir = System.getProperty("user.dir") + "\\src\\me\\max\\tester\\textfiles\\" + filename + ".txt";
         
         try {
             writeObject = new FileWriter(my_dir, true);
@@ -35,17 +28,23 @@ public class LFileEdit {
             for (Object item : list) {
                 index++;
                 if (index == lineNumber) {
-                    if (!newContent.equals("null")) {
+                    if (newContent.equals("null")) {
+                        continue;
+                    } else {
                         printObject.print(newContent);
                     }
+                    
                 } else {
                     printObject.print(item);
                 }
-                if (index-1 != list.size()) {
-                    if (!newContent.equals("null")) {
+                /*if (index != list.size()) {
+                    if (noLine == false) {
                         printObject.println();
+                    } else {
+                        noLine = false;
                     }
-                }
+                }*/
+                printObject.println();
             }
             printObject.close();
             
