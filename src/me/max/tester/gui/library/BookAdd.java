@@ -5,6 +5,7 @@
  */
 package me.max.tester.gui.library;
 
+import javax.swing.ImageIcon;
 import me.max.tester.managers.file.LFileWriter;
 
 /**
@@ -26,6 +27,7 @@ public class BookAdd extends javax.swing.JFrame {
     
     public BookAdd() {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/me/max/tester/gui/library/resources/bookicon.png")).getImage());
     }
 
     /**
@@ -45,11 +47,12 @@ public class BookAdd extends javax.swing.JFrame {
         addISB = new javax.swing.JLabel();
         tfAuthor = new javax.swing.JTextField();
         tfISB = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        addBook = new javax.swing.JButton();
         errorHandler = new javax.swing.JLabel();
         goToMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Library • Add Book");
         setResizable(false);
 
         back.setBackground(new java.awt.Color(204, 255, 204));
@@ -77,12 +80,12 @@ public class BookAdd extends javax.swing.JFrame {
         tfISB.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         tfISB.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jButton1.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 51, 51));
-        jButton1.setText("Add Book");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addBook.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
+        addBook.setForeground(new java.awt.Color(255, 51, 51));
+        addBook.setText("Add Book");
+        addBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addBookActionPerformed(evt);
             }
         });
 
@@ -111,7 +114,7 @@ public class BookAdd extends javax.swing.JFrame {
                     .addGroup(backLayout.createSequentialGroup()
                         .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(backLayout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(addBook, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(errorHandler, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
                             .addGroup(backLayout.createSequentialGroup()
@@ -152,7 +155,7 @@ public class BookAdd extends javax.swing.JFrame {
                     .addComponent(tfISB, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addBook, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(errorHandler, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -173,9 +176,9 @@ public class BookAdd extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookActionPerformed
         addBook(tfTitle.getText(), tfAuthor.getText(), tfISB.getText());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addBookActionPerformed
 
     private void goToMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToMenuActionPerformed
         this.dispose();
@@ -219,12 +222,12 @@ public class BookAdd extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addAuthor;
+    private javax.swing.JButton addBook;
     private javax.swing.JLabel addISB;
     private javax.swing.JLabel addTitle;
     private javax.swing.JPanel back;
     private javax.swing.JLabel errorHandler;
     private javax.swing.JButton goToMenu;
-    private javax.swing.JButton jButton1;
     private javax.swing.JTextField tfAuthor;
     private javax.swing.JTextField tfISB;
     private javax.swing.JTextField tfTitle;

@@ -1,7 +1,7 @@
 package me.max.tester.gui.library;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import javax.swing.ImageIcon;
 import me.max.tester.managers.error.ErrorOutput;
 import me.max.tester.managers.file.LFileEdit;
 import me.max.tester.managers.file.LFileReader;
@@ -22,7 +22,6 @@ public class BookConfig extends javax.swing.JFrame {
     
     private void updateBook() {
         new LFileEdit().editFileByLine("books", bookList.getSelectedIndex()+1, (tfTitle.getText() + "!-!" + tfAuthor.getText() + "!-!" + tfISB.getText()));
-        
         resetBooksInList();
     }
     
@@ -46,7 +45,6 @@ public class BookConfig extends javax.swing.JFrame {
         } catch (Exception ex) {
             new ErrorOutput().error(ex);
         }
-        
         return "null";
     }
     
@@ -92,13 +90,12 @@ public class BookConfig extends javax.swing.JFrame {
             }
             
         }
-        
-        
-        
+
     }
     
     public BookConfig() {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/me/max/tester/gui/library/resources/bookicon.png")).getImage());
         displayBooksInList();
     }
 
@@ -125,7 +122,7 @@ public class BookConfig extends javax.swing.JFrame {
         goToMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Library - Book Configuration");
+        setTitle("Library • Book Configuration");
         setResizable(false);
 
         back.setBackground(new java.awt.Color(204, 255, 204));

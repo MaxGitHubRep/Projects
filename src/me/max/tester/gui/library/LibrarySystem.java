@@ -18,8 +18,7 @@ public class LibrarySystem extends javax.swing.JFrame {
      */
     public LibrarySystem() {
         initComponents();
-        //this.setIconImage(new ImageIcon(getClass().getResource("/me/max/tester/gui/library/resources/bookicon.png")).getImage());
-        this.setIconImage(new ImageIcon(getClass().getResource("/me/max/tester/gui/cardgame/resources/cards/BACK.fw.png")).getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("/me/max/tester/gui/library/resources/bookicon.png")).getImage());
     }
 
     /**
@@ -39,7 +38,7 @@ public class LibrarySystem extends javax.swing.JFrame {
         editBooks = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Library - Admin Settings");
+        setTitle("Library • Admin Settings");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));

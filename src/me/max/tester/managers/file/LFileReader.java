@@ -34,9 +34,15 @@ public class LFileReader {
     }
     
     public void printFile(String filename) {
-        getFileContent(filename).forEach((item) -> {
-            System.out.println(item);
-        });
+        try {
+            getFileContent(filename).forEach((item) -> {
+                System.out.println(item);
+            });
+        
+        } catch (Exception ex) {
+            output.error(ex);
+            
+        }
     }
     
 }
