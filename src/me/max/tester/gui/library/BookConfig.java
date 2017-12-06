@@ -12,6 +12,7 @@ import me.max.tester.managers.file.LFileReader;
  */
 public class BookConfig extends javax.swing.JFrame {
 
+    Methods m = new Methods();
     private LFileReader readFile = new LFileReader();
     
     private void resetTextFields() {
@@ -23,29 +24,6 @@ public class BookConfig extends javax.swing.JFrame {
     private void updateBook() {
         new LFileEdit().editFileByLine("books", bookList.getSelectedIndex()+1, (tfTitle.getText() + "!-!" + tfAuthor.getText() + "!-!" + tfISB.getText()));
         resetBooksInList();
-    }
-    
-    public String getValue(String context, String item) {
-        try {
-            String[] items = context.split("!-!");
-            switch (item) {
-                case "title":
-                    return items[0];
-
-                case "author":
-                    return items[1];
-
-                case "isb":
-                    return items[2];
-
-                default:
-                    return "null";
-            }
-            
-        } catch (Exception ex) {
-            new ErrorOutput().error(ex);
-        }
-        return "null";
     }
     
     private void removeBook() {
@@ -61,31 +39,25 @@ public class BookConfig extends javax.swing.JFrame {
         displayBooksInList();
     }
     
-    private ArrayList getBookList() {
-        ArrayList books = readFile.getFileContent("books");
-        //Collections.sort(books);
-        
-        return books;
-    }
     
     private void displayBooksInList() {
-        ArrayList books = getBookList();
+        ArrayList books = m.getBookList();
         for (Object book : books) {
-            bookList.addItem(getValue(book+"", "title"));
+            bookList.addItem(m.getValue(book+"", "title"));
         }
         formatTextFields();
         
     }
     
     private void formatTextFields() {
-        ArrayList books = getBookList();
+        ArrayList books = m.getBookList();
         String book = bookList.getSelectedItem() + "";
         
         for (Object bookItem : books) {
-            if (getValue(bookItem+"", "title").equalsIgnoreCase(book)){
-                tfTitle.setText(getValue(bookItem+"", "title"));
-                tfAuthor.setText(getValue(bookItem+"", "author"));
-                tfISB.setText(getValue(bookItem+"", "isb"));
+            if (m.getValue(bookItem+"", "title").equalsIgnoreCase(book)){
+                tfTitle.setText(m.getValue(bookItem+"", "title"));
+                tfAuthor.setText(m.getValue(bookItem+"", "author"));
+                tfISB.setText(m.getValue(bookItem+"", "isb"));
                 break;
             }
             

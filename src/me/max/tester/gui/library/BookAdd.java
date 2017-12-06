@@ -5,6 +5,7 @@
  */
 package me.max.tester.gui.library;
 
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import me.max.tester.managers.file.LFileWriter;
 import me.max.tester.managers.random.RandomInt;
@@ -15,15 +16,29 @@ import me.max.tester.managers.random.RandomInt;
  */
 public class BookAdd extends javax.swing.JFrame {
 
+    Methods m = new Methods();
+    
     public void addBook(String title, String author, String isb) {
-        String format = title + "!-!" + author + "!-!" + isb;
-        new LFileWriter().writeToFile(format, "books", true);
-        tfTitle.setText("");
-        tfAuthor.setText("");
-        tfISB.setText("");
         
-        tfTitle.requestFocusInWindow();
-        
+        if (m.getBookList().contains(tfTitle.getText())) {
+            error.setText("Book title in use.");
+        } else {
+            
+            if (!tfTitle.getText().equals("") && !tfAuthor.getText().equals("") && !tfISB.getText().equals("")) {
+                error.setText("");
+                String format = title + "!-!" + author + "!-!" + isb;
+                new LFileWriter().writeToFile(format, "books", true);
+
+                tfTitle.setText("");
+                tfAuthor.setText("");
+                tfISB.setText("");
+
+                tfTitle.requestFocusInWindow();
+            } else {
+                error.setText("Invalid input!");
+            }
+        }
+
     }
     
     private void generateISB() {
@@ -36,8 +51,29 @@ public class BookAdd extends javax.swing.JFrame {
         tfISB.setText(items);
     }
     
+    private void updateAuthorTextField() {
+        String item = prevAuthors.getSelectedItem() + "";
+        
+        if (item.equals("(Empty)")) {
+            tfAuthor.setText("");
+        } else {
+            tfAuthor.setText(item);
+        }
+        
+    }
+    
+    private void prevAuthorsInList() {
+        //prevAuthors
+        ArrayList bookItems = m.getBookList();
+        
+        for (Object line : bookItems) {
+            prevAuthors.addItem(m.getValue(line + "", "author"));
+        }
+    }
+    
     public BookAdd() {
         initComponents();
+        prevAuthorsInList();
         this.setIconImage(new ImageIcon(getClass().getResource("/me/max/tester/gui/library/resources/bookicon.png")).getImage());
     }
 
@@ -61,7 +97,8 @@ public class BookAdd extends javax.swing.JFrame {
         addBook = new javax.swing.JButton();
         goToMenu = new javax.swing.JButton();
         genISB = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        prevAuthors = new javax.swing.JComboBox<>();
+        error = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Library • Add Book");
@@ -119,10 +156,18 @@ public class BookAdd extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(255, 51, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Empty)" }));
-        jComboBox1.setToolTipText("Select a previous author...");
+        prevAuthors.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        prevAuthors.setForeground(new java.awt.Color(255, 51, 0));
+        prevAuthors.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Empty)" }));
+        prevAuthors.setToolTipText("Select a previous author...");
+        prevAuthors.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                prevAuthorsItemStateChanged(evt);
+            }
+        });
+
+        error.setFont(new java.awt.Font("Agency FB", 3, 24)); // NOI18N
+        error.setForeground(new java.awt.Color(255, 51, 51));
 
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
@@ -137,7 +182,10 @@ public class BookAdd extends javax.swing.JFrame {
                         .addComponent(goToMenu))
                     .addGroup(backLayout.createSequentialGroup()
                         .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addBook, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(backLayout.createSequentialGroup()
+                                .addComponent(addBook, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(error, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(backLayout.createSequentialGroup()
                                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(addISB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -153,7 +201,7 @@ public class BookAdd extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(genISB, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                            .addComponent(prevAuthors, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -176,7 +224,7 @@ public class BookAdd extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(addAuthor)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(prevAuthors, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(tfAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -184,7 +232,9 @@ public class BookAdd extends javax.swing.JFrame {
                     .addComponent(addISB, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tfISB))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addBook, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(addBook, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -216,6 +266,10 @@ public class BookAdd extends javax.swing.JFrame {
     private void genISBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genISBActionPerformed
         generateISB();
     }//GEN-LAST:event_genISBActionPerformed
+
+    private void prevAuthorsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_prevAuthorsItemStateChanged
+        updateAuthorTextField();
+    }//GEN-LAST:event_prevAuthorsItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -258,9 +312,10 @@ public class BookAdd extends javax.swing.JFrame {
     private javax.swing.JLabel addISB;
     private javax.swing.JLabel addTitle;
     private javax.swing.JPanel back;
+    private javax.swing.JLabel error;
     private javax.swing.JButton genISB;
     private javax.swing.JButton goToMenu;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> prevAuthors;
     private javax.swing.JTextField tfAuthor;
     private javax.swing.JTextField tfISB;
     private javax.swing.JTextField tfTitle;
