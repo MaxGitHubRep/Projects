@@ -7,6 +7,7 @@ package me.max.tester.gui.library;
 
 import javax.swing.ImageIcon;
 import me.max.tester.managers.file.LFileWriter;
+import me.max.tester.managers.random.RandomInt;
 
 /**
  *
@@ -23,6 +24,16 @@ public class BookAdd extends javax.swing.JFrame {
         
         tfTitle.requestFocusInWindow();
         
+    }
+    
+    private void generateISB() {
+        String items = "";
+        
+        for (int i = 0; i < 10; i++) {
+            items = items + new RandomInt().randomInt(0, 9);
+        }
+        
+        tfISB.setText(items);
     }
     
     public BookAdd() {
@@ -48,8 +59,9 @@ public class BookAdd extends javax.swing.JFrame {
         tfAuthor = new javax.swing.JTextField();
         tfISB = new javax.swing.JTextField();
         addBook = new javax.swing.JButton();
-        errorHandler = new javax.swing.JLabel();
         goToMenu = new javax.swing.JButton();
+        genISB = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Library • Add Book");
@@ -89,8 +101,6 @@ public class BookAdd extends javax.swing.JFrame {
             }
         });
 
-        errorHandler.setFont(new java.awt.Font("Agency FB", 3, 24)); // NOI18N
-
         goToMenu.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         goToMenu.setForeground(new java.awt.Color(255, 51, 0));
         goToMenu.setText("Main Menu");
@@ -99,6 +109,20 @@ public class BookAdd extends javax.swing.JFrame {
                 goToMenuActionPerformed(evt);
             }
         });
+
+        genISB.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
+        genISB.setForeground(new java.awt.Color(255, 51, 51));
+        genISB.setText("Generate ISB");
+        genISB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genISBActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(255, 51, 0));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Empty)" }));
+        jComboBox1.setToolTipText("Select a previous author...");
 
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
@@ -112,11 +136,8 @@ public class BookAdd extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                         .addComponent(goToMenu))
                     .addGroup(backLayout.createSequentialGroup()
-                        .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(backLayout.createSequentialGroup()
-                                .addComponent(addBook, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(errorHandler, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
+                        .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(addBook, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(backLayout.createSequentialGroup()
                                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(addISB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -125,8 +146,14 @@ public class BookAdd extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfTitle)
-                                    .addComponent(tfISB, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
-                                    .addComponent(tfAuthor))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
+                                        .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(tfAuthor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                                            .addComponent(tfISB, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(genISB, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -146,17 +173,18 @@ public class BookAdd extends javax.swing.JFrame {
                         .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(addTitle)
                             .addComponent(tfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(7, 7, 7)
-                        .addComponent(addAuthor))
+                        .addGap(6, 6, 6)
+                        .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(addAuthor)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(tfAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addISB)
-                    .addComponent(tfISB, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(addBook, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(errorHandler, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(genISB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addISB, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tfISB))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addBook, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -170,7 +198,7 @@ public class BookAdd extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -184,6 +212,10 @@ public class BookAdd extends javax.swing.JFrame {
         this.dispose();
         new LibrarySystem().setVisible(true);
     }//GEN-LAST:event_goToMenuActionPerformed
+
+    private void genISBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genISBActionPerformed
+        generateISB();
+    }//GEN-LAST:event_genISBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,8 +258,9 @@ public class BookAdd extends javax.swing.JFrame {
     private javax.swing.JLabel addISB;
     private javax.swing.JLabel addTitle;
     private javax.swing.JPanel back;
-    private javax.swing.JLabel errorHandler;
+    private javax.swing.JButton genISB;
     private javax.swing.JButton goToMenu;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JTextField tfAuthor;
     private javax.swing.JTextField tfISB;
     private javax.swing.JTextField tfTitle;
