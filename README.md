@@ -16,19 +16,6 @@ This repository contains all the files for my java projects.
 ### » [textfiles](https://github.com/MaxGitHubRep/Projects/tree/master/src/me/max/tester/textfiles)
  - All the text files are saved in this folder.
 
+---
 
-## Projects in progress
-
-### » [Timetable](https://github.com/MaxGitHubRep/Projects/tree/master/src/me/max/tester/gui/timetable)
-
- - [x] Password validation
- - [x] Reigate College banner
- - [ ] Create front page
- - [ ] Week tracker with progress bar
- - [ ] Timetable display
- - [ ] Menu Bar at top
- 
-
-###  ---
-
- - Repository made: Tuesday 10th October.
+ - Repository creation: Tuesday 10th October.
