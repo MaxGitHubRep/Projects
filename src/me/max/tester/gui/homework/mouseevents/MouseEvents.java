@@ -3,30 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package me.max.tester.projects.misc;
+package me.max.tester.gui.homework.mouseevents;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.PhongMaterial;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.RectangleBuilder;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
+import javax.swing.filechooser.FileSystemView;
+import me.max.tester.gui.homework.sphere.SphereJavaFX;
 
 /**
  * A sample that demonstrates various mouse and scroll events and their usage.
@@ -38,6 +51,20 @@ import javafx.stage.Stage;
  * @see javafx.event.EventHandler
  */
 public class MouseEvents extends Application {
+    
+    private void setFlag(Circle circle, String flag) {
+        String dir = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\flags\\" + flag + ".png";
+        BufferedImage image = null;
+        try {
+            image  = ImageIO.read(new File(dir));
+        } catch (IOException ex) {
+            Logger.getLogger(SphereJavaFX.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        javafx.scene.image.Image newIm = SwingFXUtils.toFXImage(image, null);
+
+        circle.setFill(new ImagePattern(newIm));
+    }
+    
     //create a console for logging mouse events
     final ListView<String> console = new ListView<String>();
     //create a observableArrayList of logged events that will be listed in console
@@ -66,14 +93,36 @@ public class MouseEvents extends Application {
         Group root = new Group();
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 500,500));
-        // create circle with method listed below: paramethers: name of the circle, color of the circle, radius
-        final Circle circleSmall = createCircle("Blue circle", Color.DODGERBLUE, 25);
-        circleSmall.setTranslateX(200);
-        circleSmall.setTranslateY(80);
-        // and a second, bigger circle
-        final Circle circleBig = createCircle("Orange circle", Color.CORAL, 40);
-        circleBig.setTranslateX(300);
-        circleBig.setTranslateY(150);
+
+        
+        final Circle circleOne = createCircle("North Korea", Color.DODGERBLUE, 40);
+        circleOne.setTranslateX(50);
+        circleOne.setTranslateY(50);
+        setFlag(circleOne, "nk");
+
+        
+        final Circle circleTwo = createCircle("China", Color.INDIANRED, 80);
+        circleTwo.setTranslateX(400);
+        circleTwo.setTranslateY(100);
+        setFlag(circleTwo, "china");
+        
+        
+        final Circle circleThree = createCircle("USA", Color.AQUAMARINE, 70);
+        circleThree.setTranslateX(60);
+        circleThree.setTranslateY(200);
+        setFlag(circleThree, "usa");
+        
+        final Circle circleFour = createCircle("UK", Color.WHITESMOKE, 60);
+        circleFour.setTranslateX(400);
+        circleFour.setTranslateY(230);
+        setFlag(circleFour, "uk");
+        
+        final Circle circleFive = createCircle("ICBM", Color.WHITESMOKE, 60);
+        circleFive.setTranslateX(200);
+        circleFive.setTranslateY(100);
+        setFlag(circleFive, "icbm");
+        
+        
         // we can set mouse event to any node, also on the rectangle
         rectangle.setOnMouseMoved(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent me) {
@@ -88,7 +137,7 @@ public class MouseEvents extends Application {
                 double translateY = event.getDeltaY();
 
                 // reduce the deltas for the circles to stay in the screen
-                for (Circle c : new Circle[] { circleSmall, circleBig }) {
+                for (Circle c : new Circle[] { circleOne, circleTwo, circleThree, circleFour }) {
                     if (c.getTranslateX() + translateX + c.getRadius() > 450) {
                         translateX = 450 - c.getTranslateX() - c.getRadius();
                     }
@@ -104,7 +153,7 @@ public class MouseEvents extends Application {
                 }
 
                 // move the circles
-                for (Circle c : new Circle[] { circleSmall, circleBig }) {
+                for (Circle c : new Circle[] { circleOne, circleTwo, circleThree, circleFour }) {
                     c.setTranslateX(c.getTranslateX() + translateX);
                     c.setTranslateY(c.getTranslateY() + translateY);
                 }
@@ -115,7 +164,7 @@ public class MouseEvents extends Application {
             }
         });
         // show all the circle , rectangle and console
-        root.getChildren().addAll(rectangle, circleBig, circleSmall, console);
+        root.getChildren().addAll(rectangle, circleTwo, circleOne, circleThree, circleFour, circleFive, console);
     }
 
     private Circle createCircle(final String name, final Color color, int radius) {
