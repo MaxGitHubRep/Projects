@@ -7,6 +7,7 @@ package me.max.tester.gui.library;
 
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JTextField;
 import me.max.tester.managers.file.LFileWriter;
 import me.max.tester.managers.random.RandomInt;
 
@@ -18,27 +19,51 @@ public class BookAdd extends javax.swing.JFrame {
 
     Methods m = new Methods();
     
+    private void addBookToFile(String title, String author, String isb) {
+        error.setText("");
+        String format = title + "!-!" + author + "!-!" + isb;
+        new LFileWriter().writeToFile(format, "books", true);
+
+        tfTitle.setText("");
+        tfAuthor.setText("");
+        tfISB.setText("");
+
+        tfTitle.requestFocusInWindow();
+    }
+    
+    private boolean valueIsFreeToUse(String value, JTextField tf) {
+        ArrayList bookItems = m.getBookList();
+        ArrayList hold = new ArrayList();
+        hold.add(tf.getText());
+
+        for (Object line : bookItems) {
+            if (hold.contains(m.getValue(line + "", value))) {
+                error.setText(value + " already in use.");
+                return false;
+
+            } else {
+                hold.add(m.getValue(line + "", value));
+            }
+
+        }
+        return true;
+    }
+    
     public void addBook(String title, String author, String isb) {
         
         if (m.getBookList().contains(tfTitle.getText())) {
             error.setText("Book title in use.");
         } else {
             
-            if (!tfTitle.getText().equals("") && !tfAuthor.getText().equals("") && !tfISB.getText().equals("")) {
-                error.setText("");
-                String format = title + "!-!" + author + "!-!" + isb;
-                new LFileWriter().writeToFile(format, "books", true);
-
-                tfTitle.setText("");
-                tfAuthor.setText("");
-                tfISB.setText("");
-
-                tfTitle.requestFocusInWindow();
+            if (tfTitle.getText().equals("") && tfAuthor.getText().equals("") && tfISB.getText().equals("")){
+                error.setText("Missing fields!");
+                
             } else {
-                error.setText("Invalid input!");
+                if (valueIsFreeToUse("title", tfTitle) == true && valueIsFreeToUse("isb", tfISB) == true) {
+                    addBookToFile(title, author, isb);
+                }
             }
         }
-
     }
     
     private void generateISB() {
@@ -65,9 +90,16 @@ public class BookAdd extends javax.swing.JFrame {
     private void prevAuthorsInList() {
         //prevAuthors
         ArrayList bookItems = m.getBookList();
+        ArrayList hold = new ArrayList();
         
         for (Object line : bookItems) {
-            prevAuthors.addItem(m.getValue(line + "", "author"));
+            if (hold.contains(m.getValue(line + "", "author"))) {
+                continue;
+            } else {
+                hold.add(m.getValue(line + "", "author"));
+                prevAuthors.addItem(m.getValue(line + "", "author"));
+            }
+            
         }
     }
     
