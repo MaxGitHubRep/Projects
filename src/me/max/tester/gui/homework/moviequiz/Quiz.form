@@ -78,7 +78,7 @@
                   <Component id="textField" min="-2" pref="39" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="scoreDisplay" pref="36" max="32767" attributes="0"/>
+                      <Component id="scoreDisplay" max="32767" attributes="0"/>
                       <Component id="submit" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
