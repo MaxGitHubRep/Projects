@@ -39,17 +39,6 @@ public class Main {
         
         System.out.println(" ==== [Start] ==== ");
 
-        new LFileWriter().writeToFile("HELLO THERE LINE 1", "tester", true);
-        new LFileWriter().writeToFile("HELLO THERE LINE 2", "tester", true);
-        new LFileWriter().writeToFile("HELLO THERE LINE 3", "tester", true);
-        System.out.println("---------");
-        new LFileReader().printFile("tester");
-        
-        new LFileEdit().editFileByLine("tester", 2, "I HAVE EDITED LINE 2");
-             
-        System.out.println("---------");
-        new LFileReader().printFile("tester");
-        
         new SystemExit().exitProgram();
         
     }

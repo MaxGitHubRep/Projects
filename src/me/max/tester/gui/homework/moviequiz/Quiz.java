@@ -1,5 +1,6 @@
 package me.max.tester.gui.homework.moviequiz;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -15,7 +16,7 @@ public class Quiz extends javax.swing.JFrame {
         if (!textField.getText().equals("")) {
             String[][] covers = getCover();
 
-            if (textField.getText().equals(covers[index-1][1])) {
+            if (textField.getText().toLowerCase().equals(covers[index-1][1])) {
                 score++;
             }
 
@@ -57,8 +58,7 @@ public class Quiz extends javax.swing.JFrame {
         scoreDisplay.setText(index + "/" + ROUNDS);
         textField.setText("");
         textField.requestFocusInWindow();
-        //imageDisplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/gui/homework/moviequiz/resources/images/M" + index + ".png")));
-        imageDisplay.setText(index + "");
+        imageDisplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/gui/homework/moviequiz/resources/images/M" + index + ".png")));
         
     }
     
@@ -147,6 +147,11 @@ public class Quiz extends javax.swing.JFrame {
         textField.setFont(new java.awt.Font("Lithos Pro Regular", 0, 36)); // NOI18N
         textField.setToolTipText("Enter the missing word here...");
         textField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        textField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textFieldKeyPressed(evt);
+            }
+        });
 
         submit.setBackground(new java.awt.Color(255, 255, 255));
         submit.setFont(new java.awt.Font("Lithos Pro Regular", 1, 18)); // NOI18N
@@ -173,6 +178,7 @@ public class Quiz extends javax.swing.JFrame {
             .addGroup(backLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imageDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(backLayout.createSequentialGroup()
                         .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, backLayout.createSequentialGroup()
@@ -180,10 +186,7 @@ public class Quiz extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(scoreDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(textField, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(10, 10, 10))
-                    .addGroup(backLayout.createSequentialGroup()
-                        .addComponent(imageDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(10, 10, 10))))
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,7 +198,7 @@ public class Quiz extends javax.swing.JFrame {
                 .addComponent(textField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(scoreDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(scoreDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(submit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -217,6 +220,14 @@ public class Quiz extends javax.swing.JFrame {
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         submitAnswer();
     }//GEN-LAST:event_submitActionPerformed
+
+    private void textFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFieldKeyPressed
+        switch(evt.getKeyCode()) { 
+            case KeyEvent.VK_ENTER:
+                submitAnswer();
+                break;
+        }
+    }//GEN-LAST:event_textFieldKeyPressed
 
     /**
      * @param args the command line arguments
