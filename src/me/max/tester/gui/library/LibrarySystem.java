@@ -13,9 +13,6 @@ import javax.swing.ImageIcon;
  */
 public class LibrarySystem extends javax.swing.JFrame {
 
-    /**
-     * Creates new form LibraySystem
-     */
     public LibrarySystem() {
         initComponents();
         this.setIconImage(new ImageIcon(getClass().getResource("/me/max/tester/gui/library/resources/bookicon.png")).getImage());
@@ -31,11 +28,10 @@ public class LibrarySystem extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        title = new javax.swing.JLabel();
         addBook = new javax.swing.JButton();
-        addLoan = new javax.swing.JButton();
-        addBorrower = new javax.swing.JButton();
         editBooks = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        title = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Library • Admin Settings");
@@ -44,63 +40,71 @@ public class LibrarySystem extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        title.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
-        title.setForeground(new java.awt.Color(255, 51, 0));
-        title.setText("Library - Admin Settings");
-
         addBook.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         addBook.setForeground(new java.awt.Color(255, 51, 0));
-        addBook.setText("Add Book");
+        addBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/gui/library/resources/add.png"))); // NOI18N
+        addBook.setText(" Add Book");
         addBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addBookActionPerformed(evt);
             }
         });
 
-        addLoan.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
-        addLoan.setForeground(new java.awt.Color(255, 51, 0));
-        addLoan.setText("Add Loan");
-
-        addBorrower.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
-        addBorrower.setForeground(new java.awt.Color(255, 51, 0));
-        addBorrower.setText("Add Borrower");
-
         editBooks.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         editBooks.setForeground(new java.awt.Color(255, 51, 0));
-        editBooks.setText("Edit Books");
+        editBooks.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/gui/library/resources/edit.png"))); // NOI18N
+        editBooks.setText(" Edit Books");
         editBooks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editBooksActionPerformed(evt);
             }
         });
 
+        jPanel2.setBackground(new java.awt.Color(255, 0, 0));
+
+        title.setFont(new java.awt.Font("Agency FB", 1, 60)); // NOI18N
+        title.setForeground(new java.awt.Color(204, 255, 204));
+        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title.setText("Library - Admin Settings");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addBook, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addLoan, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addBorrower, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(editBooks, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                    .addComponent(addBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(119, 119, 119))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addBook)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editBooks)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addBorrower)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addLoan)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -111,7 +115,7 @@ public class LibrarySystem extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -165,10 +169,9 @@ public class LibrarySystem extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBook;
-    private javax.swing.JButton addBorrower;
-    private javax.swing.JButton addLoan;
     private javax.swing.JButton editBooks;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }
