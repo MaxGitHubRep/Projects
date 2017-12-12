@@ -1,6 +1,7 @@
 package me.max.tester.gui.homework.moviequiz;
 
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -93,6 +94,7 @@ public class Quiz extends javax.swing.JFrame {
     
     public Quiz() {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/me/max/tester/gui/homework/moviequiz/resources/icons/movie.png")).getImage());
         startNewRound();
         updateButtonCheck();
     }
