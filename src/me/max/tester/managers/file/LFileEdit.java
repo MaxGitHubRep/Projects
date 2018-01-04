@@ -37,13 +37,6 @@ public class LFileEdit {
                 } else {
                     printObject.print(item);
                 }
-                /*if (index != list.size()) {
-                    if (noLine == false) {
-                        printObject.println();
-                    } else {
-                        noLine = false;
-                    }
-                }*/
                 printObject.println();
             }
             printObject.close();
