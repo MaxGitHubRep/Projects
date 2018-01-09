@@ -7,6 +7,7 @@ package me.max.tester.managers.file;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import javax.swing.filechooser.FileSystemView;
 import me.max.tester.managers.error.ErrorOutput;
 
 /**
@@ -18,7 +19,7 @@ public class LFileWriter  {
     public void writeToFile(String text, String filename, boolean append) { // false will clear file, true will append
         FileWriter writeObject;
         PrintWriter printObject;
-        String my_dir = System.getProperty("user.dir") + "\\src\\me\\max\\tester\\textfiles\\" + filename + ".txt";
+        String my_dir = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\TextFilesManager\\" + filename + ".txt";
         try {
             writeObject = new FileWriter(my_dir, append);
             printObject = new PrintWriter(writeObject);

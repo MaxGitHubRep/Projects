@@ -28,7 +28,7 @@ public class Methods {
     }
     
     protected void enableButton(JButton button) {
-        button.setForeground(Color.green);
+        button.setForeground(Color.GREEN);
         button.setEnabled(true);
     }
     
@@ -37,8 +37,25 @@ public class Methods {
         button.setEnabled(false);
     }
     
-    public static void main(String[] args) {
-        new Register().setVisible(true);
+    protected void cButton(JTextField[] fields, JButton button) { //checks a condition(s) to toggle button status.
+        boolean tester = false;
+        for (JTextField field : fields) {
+            if (!isSet(field)) {
+                disableButton(button);
+                tester = true;
+                break;
+            }
+        }
+        if (!tester) enableButton(button);
     }
     
+    protected void resetField(JTextField[] fields) {
+        for (JTextField field : fields) {
+            field.setText("");
+        }
+    }
+    
+    public static void main(String[] args) {
+        
+    }
 }

@@ -3,6 +3,7 @@ package me.max.tester.managers.file;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.swing.filechooser.FileSystemView;
 import me.max.tester.managers.error.ErrorOutput;
 
 /**
@@ -17,7 +18,7 @@ public class LFileEdit {
     PrintWriter printObject;
     
     public void editFileByLine(String filename, int lineNumber, String newContent) {
-        String my_dir = System.getProperty("user.dir") + "\\src\\me\\max\\tester\\textfiles\\" + filename + ".txt";
+        String my_dir = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\TextFilesManager\\" + filename + ".txt";
         
         try {
             writeObject = new FileWriter(my_dir, true);

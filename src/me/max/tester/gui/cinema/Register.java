@@ -3,6 +3,7 @@ package me.max.tester.gui.cinema;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import me.max.tester.managers.file.LFileWriter;
 
 public class Register extends javax.swing.JFrame {
 
@@ -24,18 +25,15 @@ public class Register extends javax.swing.JFrame {
 
         public void warn() {
             pwStrength.setValue(enterPassword.getPassword().length);
-            
-            if (m.isSet(enterUsername) && m.isSet(enterPassword)) {
-                m.enableButton(register);
-            } else {
-                m.disableButton(register);
-            }
+            m.cButton(fields, register);
         }
       });
     }
     
     protected void registerAccount() {
+        new LFileWriter().writeToFile(enterUsername.getText() + "!-!-!" + m.getStringFromChar(enterPassword.getPassword()), "C_USERDATA", true);
         this.dispose();
+        new MainMenu().setVisible(true);
     }
     
     public Register() {
@@ -44,6 +42,7 @@ public class Register extends javax.swing.JFrame {
         for (JTextField field : fields) {
             checkTextFields(field);
         }
+        // go to main menu
     }
 
     /**
@@ -66,10 +65,10 @@ public class Register extends javax.swing.JFrame {
         enterPassword = new javax.swing.JPasswordField();
         pwStrength = new javax.swing.JProgressBar();
         register = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        register1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("West End Cinema");
+        setTitle("West End Cinema - Register");
         setResizable(false);
 
         back.setBackground(new java.awt.Color(255, 255, 255));
@@ -158,14 +157,17 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(204, 0, 0));
-        jCheckBox1.setText("Remember me");
-        jCheckBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jCheckBox1.setBorderPainted(true);
-        jCheckBox1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jCheckBox1.setIconTextGap(8);
+        register1.setBackground(new java.awt.Color(255, 255, 255));
+        register1.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        register1.setForeground(new java.awt.Color(204, 0, 0));
+        register1.setText("Alternatively Log In");
+        register1.setToolTipText("Log in...");
+        register1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        register1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                register1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -183,7 +185,7 @@ public class Register extends javax.swing.JFrame {
                         .addComponent(pwStrength, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12))
                     .addComponent(register, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(register1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -202,8 +204,8 @@ public class Register extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(register, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(register1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
@@ -213,7 +215,7 @@ public class Register extends javax.swing.JFrame {
             .addComponent(top, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(bottom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backLayout.createSequentialGroup()
-                .addContainerGap(240, Short.MAX_VALUE)
+                .addContainerGap(250, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(250, 250, 250))
         );
@@ -221,9 +223,9 @@ public class Register extends javax.swing.JFrame {
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
                 .addComponent(top, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGap(15, 15, 15)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(bottom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -244,6 +246,11 @@ public class Register extends javax.swing.JFrame {
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
         registerAccount();
     }//GEN-LAST:event_registerActionPerformed
+
+    private void register1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register1ActionPerformed
+        this.dispose();
+        new LogIn().setVisible(true);
+    }//GEN-LAST:event_register1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,14 +293,13 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JPanel bottom;
     private javax.swing.JPasswordField enterPassword;
     private javax.swing.JTextField enterUsername;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar pwStrength;
     private javax.swing.JButton register;
+    private javax.swing.JButton register1;
     private javax.swing.JLabel title;
     private javax.swing.JPanel top;
-    private javax.swing.JPanel top1;
     // End of variables declaration//GEN-END:variables
 }
