@@ -62,7 +62,7 @@ public class Methods {
         }
     }
     
-    protected void printReceipt() throws IOException {
+    protected void printReceipt(String movie, String time, String seat, String quantity, int price, boolean parking) throws IOException {
         int width = 800;
         int height = 500;
 
@@ -80,13 +80,18 @@ public class Methods {
         gd.drawString("West End Cinema", 200, 80);
         
         gd.setColor(new Color(204, 0, 0));
-        gd.setFont(new Font("Agency FB", Font.BOLD, 30));
-        gd.drawString("Receipt for: Ryan and The CPU Cooler", 80, 154);
+        gd.setFont(new Font("Agency FB", Font.BOLD, 40));
+        
+        int index = 145;
+        for (String item : new String[] { "Receipt for: " + movie, "Time: " + time, "Seat Type: " + seat, "Quantity: x" + quantity, "Pricing: £" + price + ".00 " + (parking ? "(Parking Included + £15.00)" : "")}) {
+            gd.drawString(item, 80, index);
+            index+=60;
+        }
         
         gd.dispose();
         
-        File file = new File("receipt.png");
-        ImageIO.write(bufferedImage, "png", file);
+        File file = new File("receipt.jpg");
+        ImageIO.write(bufferedImage, "jpg", file);
     }
     
     public static void main(String[] args) {

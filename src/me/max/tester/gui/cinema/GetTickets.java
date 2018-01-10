@@ -1,6 +1,8 @@
 package me.max.tester.gui.cinema;
 
-import javax.swing.JButton;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JToggleButton;
 import me.max.tester.managers.file.LFileReader;
 
@@ -8,9 +10,22 @@ import me.max.tester.managers.file.LFileReader;
 public class GetTickets extends javax.swing.JFrame {
     
     protected static String movieName;
+    protected static int price;
     
     private JToggleButton[] buttons;
     LFileReader fr = new LFileReader();
+    
+    protected int getPrice() {
+        int price = 0;
+        
+        price += (seat.getItemCount() - seat.getSelectedIndex())*5;
+        price += time.getSelectedIndex()/4;
+        price = price * (tickets.getSelectedIndex()+1);
+        price += parking.isSelected() ? 15 : 0;
+        this.price = price;
+
+        return price;
+    }
     
     protected void addNumbers() {
         for (int i = 1; i <= 30; i++) {
@@ -38,6 +53,20 @@ public class GetTickets extends javax.swing.JFrame {
         }
     }
     
+    protected void formatPurchaseButton() {
+        purchase.setText("Purchase: £" + getPrice() + ".00");
+    }
+    
+    protected void updateMovieSelect() {
+        for (JToggleButton button : buttons) {
+            button.setIcon(null);
+            if (button.isSelected()) {
+                //button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/gui/cinema/resources/arrow.png")));
+            }
+        }
+        
+    }
+    
     public GetTickets() {
         initComponents();
         buttons = new JToggleButton[] { s1, s2, s3, s4, s5 };
@@ -63,7 +92,7 @@ public class GetTickets extends javax.swing.JFrame {
         s4 = new javax.swing.JToggleButton();
         s5 = new javax.swing.JToggleButton();
         screenBack1 = new javax.swing.JPanel();
-        seatType = new javax.swing.JComboBox<>();
+        seat = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tickets = new javax.swing.JComboBox<>();
@@ -91,7 +120,7 @@ public class GetTickets extends javax.swing.JFrame {
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 885, Short.MAX_VALUE)
+                .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE)
                 .addContainerGap())
         );
         topLayout.setVerticalGroup(
@@ -127,6 +156,11 @@ public class GetTickets extends javax.swing.JFrame {
         s1.setForeground(new java.awt.Color(255, 255, 255));
         s1.setText("N/A");
         s1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        s1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                s1ActionPerformed(evt);
+            }
+        });
 
         s2.setBackground(new java.awt.Color(204, 0, 0));
         bg.add(s2);
@@ -134,6 +168,11 @@ public class GetTickets extends javax.swing.JFrame {
         s2.setForeground(new java.awt.Color(255, 255, 255));
         s2.setText("N/A");
         s2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        s2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                s2ActionPerformed(evt);
+            }
+        });
 
         s3.setBackground(new java.awt.Color(204, 0, 0));
         bg.add(s3);
@@ -141,6 +180,11 @@ public class GetTickets extends javax.swing.JFrame {
         s3.setForeground(new java.awt.Color(255, 255, 255));
         s3.setText("N/A");
         s3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        s3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                s3ActionPerformed(evt);
+            }
+        });
 
         s4.setBackground(new java.awt.Color(204, 0, 0));
         bg.add(s4);
@@ -148,6 +192,11 @@ public class GetTickets extends javax.swing.JFrame {
         s4.setForeground(new java.awt.Color(255, 255, 255));
         s4.setText("N/A");
         s4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        s4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                s4ActionPerformed(evt);
+            }
+        });
 
         s5.setBackground(new java.awt.Color(204, 0, 0));
         bg.add(s5);
@@ -155,6 +204,11 @@ public class GetTickets extends javax.swing.JFrame {
         s5.setForeground(new java.awt.Color(255, 255, 255));
         s5.setText("N/A");
         s5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        s5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                s5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout screenBackLayout = new javax.swing.GroupLayout(screenBack);
         screenBack.setLayout(screenBackLayout);
@@ -189,10 +243,15 @@ public class GetTickets extends javax.swing.JFrame {
         screenBack1.setBackground(new java.awt.Color(255, 255, 255));
         screenBack1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 2));
 
-        seatType.setBackground(new java.awt.Color(204, 0, 0));
-        seatType.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
-        seatType.setForeground(new java.awt.Color(255, 255, 255));
-        seatType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Top", "Middle", "Bottom", "Stand" }));
+        seat.setBackground(new java.awt.Color(204, 0, 0));
+        seat.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        seat.setForeground(new java.awt.Color(255, 255, 255));
+        seat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Royalty", "First Class", "Business Class", "Regular", "Standing" }));
+        seat.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                seatItemStateChanged(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(204, 0, 0));
         jLabel1.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
@@ -211,9 +270,9 @@ public class GetTickets extends javax.swing.JFrame {
         tickets.setBackground(new java.awt.Color(204, 0, 0));
         tickets.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         tickets.setForeground(new java.awt.Color(255, 255, 255));
-        tickets.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ticketsActionPerformed(evt);
+        tickets.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ticketsItemStateChanged(evt);
             }
         });
 
@@ -226,6 +285,11 @@ public class GetTickets extends javax.swing.JFrame {
         parking.setBorderPainted(true);
         parking.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         parking.setIconTextGap(8);
+        parking.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                parkingItemStateChanged(evt);
+            }
+        });
 
         jLabel5.setBackground(new java.awt.Color(204, 0, 0));
         jLabel5.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
@@ -251,18 +315,16 @@ public class GetTickets extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(screenBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, screenBack1Layout.createSequentialGroup()
-                        .addGroup(screenBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(tickets, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
-                        .addGap(11, 11, 11)
                         .addGroup(screenBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(screenBack1Layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2))
+                            .addComponent(tickets, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
+                        .addGap(18, 21, Short.MAX_VALUE)
+                        .addGroup(screenBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                             .addComponent(time, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(seatType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(seat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(parking, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
+                    .addComponent(parking, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
                 .addContainerGap())
         );
         screenBack1Layout.setVerticalGroup(
@@ -271,7 +333,7 @@ public class GetTickets extends javax.swing.JFrame {
                 .addGap(7, 7, 7)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(seatType, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(seat, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(screenBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -355,16 +417,48 @@ public class GetTickets extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void purchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseActionPerformed
-        
+        try {
+            new Methods().printReceipt(movieName, time.getSelectedItem().toString(), seat.getSelectedItem().toString() ,tickets.getSelectedItem().toString(), 15, parking.isSelected());
+        } catch (IOException ex) {
+            Logger.getLogger(GetTickets.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_purchaseActionPerformed
 
-    private void ticketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ticketsActionPerformed
-
     private void timeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeActionPerformed
-        
+        formatPurchaseButton();
     }//GEN-LAST:event_timeActionPerformed
+
+    private void seatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_seatItemStateChanged
+        formatPurchaseButton();
+    }//GEN-LAST:event_seatItemStateChanged
+
+    private void ticketsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ticketsItemStateChanged
+        formatPurchaseButton();
+    }//GEN-LAST:event_ticketsItemStateChanged
+
+    private void parkingItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_parkingItemStateChanged
+        formatPurchaseButton();
+    }//GEN-LAST:event_parkingItemStateChanged
+
+    private void s1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s1ActionPerformed
+        updateMovieSelect();
+    }//GEN-LAST:event_s1ActionPerformed
+
+    private void s2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s2ActionPerformed
+        updateMovieSelect();
+    }//GEN-LAST:event_s2ActionPerformed
+
+    private void s3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s3ActionPerformed
+        updateMovieSelect();
+    }//GEN-LAST:event_s3ActionPerformed
+
+    private void s4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s4ActionPerformed
+        updateMovieSelect();
+    }//GEN-LAST:event_s4ActionPerformed
+
+    private void s5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s5ActionPerformed
+        updateMovieSelect();
+    }//GEN-LAST:event_s5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -419,7 +513,7 @@ public class GetTickets extends javax.swing.JFrame {
     private javax.swing.JToggleButton s5;
     private javax.swing.JPanel screenBack;
     private javax.swing.JPanel screenBack1;
-    private javax.swing.JComboBox<String> seatType;
+    private javax.swing.JComboBox<String> seat;
     private javax.swing.JComboBox<String> tickets;
     private javax.swing.JComboBox<String> time;
     private javax.swing.JLabel title;
