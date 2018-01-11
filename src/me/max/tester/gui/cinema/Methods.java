@@ -7,8 +7,15 @@ package me.max.tester.gui.cinema;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import static java.awt.print.Printable.NO_SUCH_PAGE;
+import static java.awt.print.Printable.PAGE_EXISTS;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -44,16 +51,21 @@ public class Methods {
         button.setEnabled(false);
     }
     
-    protected void cButton(JTextField[] fields, JButton button) { //checks a condition(s) to toggle button status.
-        boolean tester = false;
+    protected void buttonStatus(boolean bool, JButton button) {
+        if (bool) {
+            enableButton(button);
+        } else {
+            disableButton(button);
+        }
+    }
+    
+    protected boolean fieldsSet(JTextField[] fields) { //checks a condition(s) to toggle button status.
         for (JTextField field : fields) {
             if (!isSet(field)) {
-                disableButton(button);
-                tester = true;
-                break;
+                return false;
             }
         }
-        if (!tester) enableButton(button);
+        return true;
     }
     
     protected void resetField(JTextField[] fields) {
@@ -92,6 +104,49 @@ public class Methods {
         
         File file = new File("receipt.jpg");
         ImageIO.write(bufferedImage, "jpg", file);
+        
+        PrinterJob printJob = PrinterJob.getPrinterJob();
+        printJob.setPrintable(new Printable() {
+            public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+                    if (pageIndex != 0) {
+                        return NO_SUCH_PAGE;
+                    }
+                    graphics.drawImage(null, 0, 0, width, height, null);
+                    
+                    
+                    gd.setColor(Color.white);
+                    gd.fillRect(0, 0, width, height);
+                    gd.setColor(Color.BLACK);
+                    gd.fillRect(0, 0, width, 100);
+                    gd.fillRect(0, height-100, width, 100);
+
+                    gd.setColor(Color.white);
+                    gd.setFont(new Font("Agency FB", Font.BOLD, 70));
+                    gd.drawString("West End Cinema", 200, 80);
+
+                    gd.setColor(Color.BLACK);
+                    gd.setFont(new Font("Agency FB", Font.BOLD, 40));
+
+                    int index = 145;
+                    for (String item : new String[] { "Receipt for: " + movie, "Time: " + time, "Seat Type: " + seat, "Quantity: x" + quantity, "Pricing: £" + price + ".00 " + (parking ? "(Parking Included + £15.00)" : "")}) {
+                        gd.drawString(item, 80, index);
+                        index+=60;
+                    }
+
+                    gd.dispose();
+                    
+                    
+                    
+                    return PAGE_EXISTS;
+            }
+        });  
+        
+        try {
+            printJob.print();
+        } catch (PrinterException e1) {             
+            e1.printStackTrace();
+        }
+        
     }
     
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package me.max.tester.gui.cinema;
 
+import com.toedter.calendar.JCalendar;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,28 +10,23 @@ import me.max.tester.managers.file.LFileReader;
 
 public class GetTickets extends javax.swing.JFrame {
     
-    protected static String movieName;
-    protected static int price;
+    protected String movieName;
     
     private JToggleButton[] buttons;
     LFileReader fr = new LFileReader();
     
     protected int getPrice() {
-        int price = 0;
+        int priceGet = 0;
         
-        price += (seat.getItemCount() - seat.getSelectedIndex())*5;
-        price += time.getSelectedIndex()/4;
-        price = price * (tickets.getSelectedIndex()+1);
-        price += parking.isSelected() ? 15 : 0;
-        this.price = price;
+        priceGet += (seat.getItemCount() - seat.getSelectedIndex())*5;
+        priceGet += time.getSelectedIndex()/4;
+        priceGet = priceGet * (Integer.parseInt(tickets.getValue().toString())+1);
+        priceGet += parking.isSelected() ? 15 : 0;
 
-        return price;
+        return priceGet;
     }
     
     protected void addNumbers() {
-        for (int i = 1; i <= 30; i++) {
-            tickets.addItem(i + "");
-        }
         for (int i = 6; i < 25; i++) {
             time.addItem(i + ":00");
         }
@@ -45,14 +41,6 @@ public class GetTickets extends javax.swing.JFrame {
         }
     }
     
-    protected void chosenMovie() {
-        for (JToggleButton button : buttons) {
-            if (button.isSelected()) {
-                movieName = button.getText();
-            }
-        }
-    }
-    
     protected void formatPurchaseButton() {
         purchase.setText("Purchase: £" + getPrice() + ".00");
     }
@@ -61,6 +49,7 @@ public class GetTickets extends javax.swing.JFrame {
         for (JToggleButton button : buttons) {
             button.setIcon(null);
             if (button.isSelected()) {
+                movieName = button.getText();
                 //button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/gui/cinema/resources/arrow.png")));
             }
         }
@@ -91,16 +80,20 @@ public class GetTickets extends javax.swing.JFrame {
         s3 = new javax.swing.JToggleButton();
         s4 = new javax.swing.JToggleButton();
         s5 = new javax.swing.JToggleButton();
+        jLabel4 = new javax.swing.JLabel();
+        purchase = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         screenBack1 = new javax.swing.JPanel();
         seat = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        tickets = new javax.swing.JComboBox<>();
-        parking = new javax.swing.JRadioButton();
+        tickets = new javax.swing.JSpinner();
+        jCalendar2 = new com.toedter.calendar.JCalendar();
+        jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         time = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        purchase = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        parking = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("West End Cinema - Buy Tickets");
@@ -120,7 +113,7 @@ public class GetTickets extends javax.swing.JFrame {
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE)
+                .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
                 .addContainerGap())
         );
         topLayout.setVerticalGroup(
@@ -134,7 +127,7 @@ public class GetTickets extends javax.swing.JFrame {
         bottom.setLayout(bottomLayout);
         bottomLayout.setHorizontalGroup(
             bottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 909, Short.MAX_VALUE)
+            .addGap(0, 951, Short.MAX_VALUE)
         );
         bottomLayout.setVerticalGroup(
             bottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,6 +233,23 @@ public class GetTickets extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel4.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Details");
+        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 2));
+
+        purchase.setBackground(new java.awt.Color(204, 0, 0));
+        purchase.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
+        purchase.setForeground(new java.awt.Color(255, 255, 255));
+        purchase.setText("Purchase: £XX.00");
+        purchase.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        purchase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                purchaseActionPerformed(evt);
+            }
+        });
+
         screenBack1.setBackground(new java.awt.Color(255, 255, 255));
         screenBack1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 2));
 
@@ -267,29 +277,59 @@ public class GetTickets extends javax.swing.JFrame {
         jLabel2.setText("Seat Type");
         jLabel2.setOpaque(true);
 
-        tickets.setBackground(new java.awt.Color(204, 0, 0));
         tickets.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
-        tickets.setForeground(new java.awt.Color(255, 255, 255));
-        tickets.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                ticketsItemStateChanged(evt);
+        tickets.setModel(new javax.swing.SpinnerNumberModel(1, 1, 20, 1));
+        tickets.setToolTipText("Ticket Quantity");
+        tickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 2));
+        tickets.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                ticketsStateChanged(evt);
             }
         });
 
-        parking.setBackground(new java.awt.Color(255, 255, 255));
-        parking.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        parking.setForeground(new java.awt.Color(204, 0, 0));
-        parking.setSelected(true);
-        parking.setText("Parking (+£15.00)");
-        parking.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 2));
-        parking.setBorderPainted(true);
-        parking.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        parking.setIconTextGap(8);
-        parking.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                parkingItemStateChanged(evt);
-            }
-        });
+        javax.swing.GroupLayout screenBack1Layout = new javax.swing.GroupLayout(screenBack1);
+        screenBack1.setLayout(screenBack1Layout);
+        screenBack1Layout.setHorizontalGroup(
+            screenBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(screenBack1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(screenBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tickets)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(seat, 0, 317, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        screenBack1Layout.setVerticalGroup(
+            screenBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(screenBack1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tickets, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(seat, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Seating", screenBack1);
+
+        jCalendar2.setBackground(new java.awt.Color(255, 255, 255));
+        jCalendar2.setForeground(new java.awt.Color(204, 0, 0));
+        jCalendar2.setToolTipText("");
+        jCalendar2.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        jCalendar2.setMaxSelectableDate(new java.util.Date(1546218072000L));
+        jCalendar2.setMinSelectableDate(new java.util.Date(1515718872000L));
+        jCalendar2.setNullDateButtonText("");
+        jCalendar2.setTodayButtonText("Today's Date");
+        jCalendar2.setTodayButtonVisible(true);
+        jCalendar2.setWeekOfYearVisible(false);
+        jTabbedPane1.addTab("Date", jCalendar2);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 2));
 
         jLabel5.setBackground(new java.awt.Color(204, 0, 0));
         jLabel5.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
@@ -307,62 +347,65 @@ public class GetTickets extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout screenBack1Layout = new javax.swing.GroupLayout(screenBack1);
-        screenBack1.setLayout(screenBack1Layout);
-        screenBack1Layout.setHorizontalGroup(
-            screenBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(screenBack1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(screenBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, screenBack1Layout.createSequentialGroup()
-                        .addGroup(screenBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tickets, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
-                        .addGap(18, 21, Short.MAX_VALUE)
-                        .addGroup(screenBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                            .addComponent(time, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(seat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(parking, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(time, 0, 317, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        screenBack1Layout.setVerticalGroup(
-            screenBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(screenBack1Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(seat, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(screenBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(screenBack1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tickets, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(parking, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
-        jLabel4.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Details");
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 2));
+        jTabbedPane1.addTab("Time", jPanel1);
 
-        purchase.setBackground(new java.awt.Color(204, 0, 0));
-        purchase.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
-        purchase.setForeground(new java.awt.Color(255, 255, 255));
-        purchase.setText("Purchase: £XX.00");
-        purchase.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
-        purchase.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchaseActionPerformed(evt);
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 2));
+
+        parking.setBackground(new java.awt.Color(255, 255, 255));
+        parking.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        parking.setForeground(new java.awt.Color(204, 0, 0));
+        parking.setSelected(true);
+        parking.setText("Parking (+£15.00)");
+        parking.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 2));
+        parking.setBorderPainted(true);
+        parking.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        parking.setIconTextGap(8);
+        parking.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                parkingItemStateChanged(evt);
             }
         });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(parking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(13, 13, 13))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(parking, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(147, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Extras", jPanel2);
 
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
@@ -376,11 +419,11 @@ public class GetTickets extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
                     .addComponent(screenBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(screenBack1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1)
                     .addComponent(purchase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,7 +437,7 @@ public class GetTickets extends javax.swing.JFrame {
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(screenBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(backLayout.createSequentialGroup()
-                        .addComponent(screenBack1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(purchase, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -418,7 +461,7 @@ public class GetTickets extends javax.swing.JFrame {
 
     private void purchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseActionPerformed
         try {
-            new Methods().printReceipt(movieName, time.getSelectedItem().toString(), seat.getSelectedItem().toString() ,tickets.getSelectedItem().toString(), 15, parking.isSelected());
+            new Methods().printReceipt(movieName, time.getSelectedItem().toString(), seat.getSelectedItem().toString() ,tickets.getValue().toString(), getPrice(), parking.isSelected());
         } catch (IOException ex) {
             Logger.getLogger(GetTickets.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -427,14 +470,6 @@ public class GetTickets extends javax.swing.JFrame {
     private void timeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeActionPerformed
         formatPurchaseButton();
     }//GEN-LAST:event_timeActionPerformed
-
-    private void seatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_seatItemStateChanged
-        formatPurchaseButton();
-    }//GEN-LAST:event_seatItemStateChanged
-
-    private void ticketsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ticketsItemStateChanged
-        formatPurchaseButton();
-    }//GEN-LAST:event_ticketsItemStateChanged
 
     private void parkingItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_parkingItemStateChanged
         formatPurchaseButton();
@@ -459,6 +494,14 @@ public class GetTickets extends javax.swing.JFrame {
     private void s5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s5ActionPerformed
         updateMovieSelect();
     }//GEN-LAST:event_s5ActionPerformed
+
+    private void seatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_seatItemStateChanged
+        formatPurchaseButton();
+    }//GEN-LAST:event_seatItemStateChanged
+
+    private void ticketsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ticketsStateChanged
+        formatPurchaseButton();
+    }//GEN-LAST:event_ticketsStateChanged
 
     /**
      * @param args the command line arguments
@@ -499,11 +542,15 @@ public class GetTickets extends javax.swing.JFrame {
     private javax.swing.JPanel back;
     private javax.swing.ButtonGroup bg;
     private javax.swing.JPanel bottom;
+    private com.toedter.calendar.JCalendar jCalendar2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JRadioButton parking;
     private javax.swing.JButton purchase;
     private javax.swing.JToggleButton s1;
@@ -514,7 +561,7 @@ public class GetTickets extends javax.swing.JFrame {
     private javax.swing.JPanel screenBack;
     private javax.swing.JPanel screenBack1;
     private javax.swing.JComboBox<String> seat;
-    private javax.swing.JComboBox<String> tickets;
+    private javax.swing.JSpinner tickets;
     private javax.swing.JComboBox<String> time;
     private javax.swing.JLabel title;
     private javax.swing.JPanel top;

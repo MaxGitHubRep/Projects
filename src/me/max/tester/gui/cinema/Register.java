@@ -3,10 +3,13 @@ package me.max.tester.gui.cinema;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import me.max.tester.managers.file.LFileReader;
 import me.max.tester.managers.file.LFileWriter;
 
 public class Register extends javax.swing.JFrame {
 
+    protected static String user;
+    
     Methods m = new Methods();
     
     JTextField[] fields;
@@ -24,14 +27,25 @@ public class Register extends javax.swing.JFrame {
         }
 
         public void warn() {
+            m.buttonStatus(isUnique() && m.fieldsSet(fields), register);
+            
             pwStrength.setValue(enterPassword.getPassword().length);
-            m.cButton(fields, register);
         }
       });
     }
     
+    protected boolean isUnique() {
+        for (Object line : new LFileReader().getFileContent("C_USERDATA")) {
+            if (line.toString().startsWith(enterUsername.getText())) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     protected void registerAccount() {
         new LFileWriter().writeToFile(enterUsername.getText() + "!-!-!" + m.getStringFromChar(enterPassword.getPassword()), "C_USERDATA", true);
+        user = enterUsername.getText();
         this.dispose();
         new MainMenu().setVisible(true);
     }
