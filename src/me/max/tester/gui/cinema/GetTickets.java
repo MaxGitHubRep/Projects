@@ -88,12 +88,12 @@ public class GetTickets extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tickets = new javax.swing.JSpinner();
-        jCalendar2 = new com.toedter.calendar.JCalendar();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         time = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         parking = new javax.swing.JRadioButton();
+        jCalendar2 = new com.toedter.calendar.JCalendar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("West End Cinema - Buy Tickets");
@@ -316,18 +316,6 @@ public class GetTickets extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Seating", screenBack1);
 
-        jCalendar2.setBackground(new java.awt.Color(255, 255, 255));
-        jCalendar2.setForeground(new java.awt.Color(204, 0, 0));
-        jCalendar2.setToolTipText("");
-        jCalendar2.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
-        jCalendar2.setMaxSelectableDate(new java.util.Date(1546218072000L));
-        jCalendar2.setMinSelectableDate(new java.util.Date(1515718872000L));
-        jCalendar2.setNullDateButtonText("");
-        jCalendar2.setTodayButtonText("Today's Date");
-        jCalendar2.setTodayButtonVisible(true);
-        jCalendar2.setWeekOfYearVisible(false);
-        jTabbedPane1.addTab("Date", jCalendar2);
-
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 2));
 
@@ -407,6 +395,13 @@ public class GetTickets extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Extras", jPanel2);
 
+        jCalendar2.setBackground(new java.awt.Color(255, 255, 255));
+        jCalendar2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jCalendar2.setForeground(new java.awt.Color(204, 0, 0));
+        jCalendar2.setTodayButtonText("");
+        jCalendar2.setTodayButtonVisible(true);
+        jTabbedPane1.addTab("Date", jCalendar2);
+
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
         backLayout.setHorizontalGroup(
@@ -465,15 +460,9 @@ public class GetTickets extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(GetTickets.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.dispose();
+        new MainMenu().setVisible(true);
     }//GEN-LAST:event_purchaseActionPerformed
-
-    private void timeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeActionPerformed
-        formatPurchaseButton();
-    }//GEN-LAST:event_timeActionPerformed
-
-    private void parkingItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_parkingItemStateChanged
-        formatPurchaseButton();
-    }//GEN-LAST:event_parkingItemStateChanged
 
     private void s1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s1ActionPerformed
         updateMovieSelect();
@@ -495,13 +484,21 @@ public class GetTickets extends javax.swing.JFrame {
         updateMovieSelect();
     }//GEN-LAST:event_s5ActionPerformed
 
-    private void seatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_seatItemStateChanged
+    private void parkingItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_parkingItemStateChanged
         formatPurchaseButton();
-    }//GEN-LAST:event_seatItemStateChanged
+    }//GEN-LAST:event_parkingItemStateChanged
+
+    private void timeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeActionPerformed
+        formatPurchaseButton();
+    }//GEN-LAST:event_timeActionPerformed
 
     private void ticketsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ticketsStateChanged
         formatPurchaseButton();
     }//GEN-LAST:event_ticketsStateChanged
+
+    private void seatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_seatItemStateChanged
+        formatPurchaseButton();
+    }//GEN-LAST:event_seatItemStateChanged
 
     /**
      * @param args the command line arguments
