@@ -1,26 +1,34 @@
 package me.max.tester.gui.homework.sound;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class Soundboard extends javax.swing.JFrame {
 
-    public static synchronized void playSound(String url) {
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Clip clip = AudioSystem.getClip();
-                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-                    Soundboard.class.getResourceAsStream("/" + url));
-                    clip.open(inputStream);
-                    clip.start(); 
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-            }
-        }).start();
+    public void playSound(String url) throws UnsupportedAudioFileException, IOException, URISyntaxException {
+        File soundFile = new File("C:\\Users\\Max\\Documents\\sound\\" + url + ".wav");
+        
+        AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);              
+        Clip clip = null;
+        try {
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(Soundboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        clip.start();
+        
     } //http://codeidol.com/java/swing/Audio/Build-an-Audio-Waveform-Display/
     
     
@@ -41,13 +49,10 @@ public class Soundboard extends javax.swing.JFrame {
         back = new javax.swing.JPanel();
         top = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
-        visualizer = new javax.swing.JPanel();
         s1 = new javax.swing.JButton();
         s2 = new javax.swing.JButton();
         s3 = new javax.swing.JButton();
         s4 = new javax.swing.JButton();
-        s5 = new javax.swing.JButton();
-        s6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Soundboard");
@@ -77,19 +82,6 @@ public class Soundboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-        );
-
-        visualizer.setBackground(new java.awt.Color(0, 102, 102));
-
-        javax.swing.GroupLayout visualizerLayout = new javax.swing.GroupLayout(visualizer);
-        visualizer.setLayout(visualizerLayout);
-        visualizerLayout.setHorizontalGroup(
-            visualizerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        visualizerLayout.setVerticalGroup(
-            visualizerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
         );
 
         s1.setBackground(new java.awt.Color(0, 102, 102));
@@ -132,26 +124,6 @@ public class Soundboard extends javax.swing.JFrame {
             }
         });
 
-        s5.setBackground(new java.awt.Color(0, 102, 102));
-        s5.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
-        s5.setForeground(new java.awt.Color(153, 255, 255));
-        s5.setText("Sound #5");
-        s5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                s5ActionPerformed(evt);
-            }
-        });
-
-        s6.setBackground(new java.awt.Color(0, 102, 102));
-        s6.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
-        s6.setForeground(new java.awt.Color(153, 255, 255));
-        s6.setText("Sound #6");
-        s6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                s6ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
         backLayout.setHorizontalGroup(
@@ -160,40 +132,29 @@ public class Soundboard extends javax.swing.JFrame {
             .addGroup(backLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(visualizer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(backLayout.createSequentialGroup()
                         .addComponent(s3, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addComponent(s6, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(s4, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(backLayout.createSequentialGroup()
                         .addComponent(s1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(s4, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(backLayout.createSequentialGroup()
-                        .addComponent(s2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(s5, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(s2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
                 .addComponent(top, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(visualizer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(s1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(s4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(s2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(s2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(s5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(s3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(s6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(s4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(s3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,35 +165,59 @@ public class Soundboard extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void s1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s1ActionPerformed
-        playSound("");
+        try {
+            playSound("1");
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(Soundboard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Soundboard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Soundboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_s1ActionPerformed
 
     private void s2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s2ActionPerformed
-        playSound("");
+        try {
+            playSound("2");
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(Soundboard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Soundboard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Soundboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_s2ActionPerformed
 
     private void s3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s3ActionPerformed
-        playSound("");
+        try {
+            playSound("3");
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(Soundboard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Soundboard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Soundboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_s3ActionPerformed
 
     private void s4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s4ActionPerformed
-        playSound("");
+        try {
+            playSound("4");
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(Soundboard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Soundboard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Soundboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_s4ActionPerformed
-
-    private void s5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s5ActionPerformed
-        playSound("");
-    }//GEN-LAST:event_s5ActionPerformed
-
-    private void s6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s6ActionPerformed
-        playSound("");
-    }//GEN-LAST:event_s6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,10 +260,7 @@ public class Soundboard extends javax.swing.JFrame {
     private javax.swing.JButton s2;
     private javax.swing.JButton s3;
     private javax.swing.JButton s4;
-    private javax.swing.JButton s5;
-    private javax.swing.JButton s6;
     private javax.swing.JLabel title;
     private javax.swing.JPanel top;
-    private javax.swing.JPanel visualizer;
     // End of variables declaration//GEN-END:variables
 }
