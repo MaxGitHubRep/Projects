@@ -1,6 +1,5 @@
 package me.max.tester.gui.cinema;
 
-import com.toedter.calendar.JCalendar;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

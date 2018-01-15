@@ -5,6 +5,7 @@
  */
 package me.max.tester.gui.cinema;
 
+import me.max.tester.gui.cinema.LogIn;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;

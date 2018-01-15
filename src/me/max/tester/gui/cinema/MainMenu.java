@@ -5,6 +5,8 @@
  */
 package me.max.tester.gui.cinema;
 
+import me.max.tester.gui.cinema.GetTickets;
+import me.max.tester.gui.cinema.LogIn;
 import javax.swing.JButton;
 
 /**

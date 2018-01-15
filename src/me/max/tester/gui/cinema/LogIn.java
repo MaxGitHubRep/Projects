@@ -3,7 +3,6 @@ package me.max.tester.gui.cinema;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import me.max.tester.managers.file.LFileEdit;
 import me.max.tester.managers.file.LFileReader;
 
 
@@ -302,7 +301,6 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton login;
     private javax.swing.JButton login1;
-    private javax.swing.JButton register1;
     private javax.swing.JLabel title;
     private javax.swing.JPanel top;
     // End of variables declaration//GEN-END:variables

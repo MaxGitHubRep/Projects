@@ -1,5 +1,6 @@
 package me.max.tester.gui.cinema;
 
+import me.max.tester.gui.cinema.LogIn;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
