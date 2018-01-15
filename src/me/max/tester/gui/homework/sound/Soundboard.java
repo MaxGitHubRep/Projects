@@ -12,12 +12,13 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.filechooser.FileSystemView;
 
 
 public class Soundboard extends javax.swing.JFrame {
 
     public void playSound(String url) throws UnsupportedAudioFileException, IOException, URISyntaxException {
-        File soundFile = new File("C:\\Users\\Max\\Documents\\sound\\" + url + ".wav");
+        File soundFile = new File(FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\sound\\" + url + ".wav");
         
         AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);              
         Clip clip = null;
