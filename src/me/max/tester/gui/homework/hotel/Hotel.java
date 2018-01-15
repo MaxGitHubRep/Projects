@@ -97,8 +97,8 @@ public class Hotel extends javax.swing.JFrame {
         for (JRadioButton button : rButtons) {
             update(button);
         }
-        calendar.setDate(new Date());
-        calendar.getJCalendar().setMinSelectableDate(new Date());
+       // calendar.setDate(new Date());
+       // calendar.getJCalendar().setMinSelectableDate(new Date());
         updatePrice();
     }
 
@@ -114,7 +114,7 @@ public class Hotel extends javax.swing.JFrame {
         datePanel = new javax.swing.JPanel();
         daysTotal = new javax.swing.JSpinner();
         daysLabel = new javax.swing.JLabel();
-        calendar = new com.toedter.calendar.JDateChooser();
+        jLabel2 = new javax.swing.JLabel();
         roomPanel = new javax.swing.JPanel();
         bSingle = new javax.swing.JRadioButton();
         bDouble = new javax.swing.JRadioButton();
@@ -180,11 +180,11 @@ public class Hotel extends javax.swing.JFrame {
         daysLabel.setText("Days:");
         daysLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 153), 2, true));
 
-        calendar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 153), 2, true));
-        calendar.setForeground(new java.awt.Color(0, 153, 153));
-        calendar.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        calendar.setMaxSelectableDate(new java.util.Date(253370768519000L));
-        calendar.setMinSelectableDate(new java.util.Date(1515978119000L));
+        jLabel2.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Calendar Removed");
+        jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 3, true));
 
         javax.swing.GroupLayout datePanelLayout = new javax.swing.GroupLayout(datePanel);
         datePanel.setLayout(datePanelLayout);
@@ -193,9 +193,9 @@ public class Hotel extends javax.swing.JFrame {
             .addGroup(datePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(datePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(calendar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(datePanelLayout.createSequentialGroup()
-                        .addComponent(daysLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(daysLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(daysTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -207,8 +207,8 @@ public class Hotel extends javax.swing.JFrame {
                     .addComponent(daysLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(daysTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(calendar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         roomPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -442,8 +442,7 @@ public class Hotel extends javax.swing.JFrame {
     }//GEN-LAST:event_daysTotalStateChanged
 
     private void buyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyActionPerformed
-        Date day = calendar.getDate();
-        System.out.println(day);
+      //  Date day = calendar.getDate();
         int daysCount = Integer.parseInt(daysTotal.getValue().toString());
         String include_s = daysCount == 1 ? "" : "s";
         
@@ -452,7 +451,8 @@ public class Hotel extends javax.swing.JFrame {
         }
         
         makeLabel("Thank you for your purchase!", 80, 80, 56);
-        makeLabel(day.toString().substring(4, 10) + " - " + day.toString().substring(24, 28) + " (" + daysCount + " day" + include_s + ")", 230, 130, 32);
+        //makeLabel(day.toString().substring(4, 10) + " - " + day.toString().substring(24, 28) + " (" + daysCount + " day" + include_s + ")", 230, 130, 32);
+        makeLabel("(" + daysCount + " day" + include_s + ")", 290, 130, 32);
     }//GEN-LAST:event_buyActionPerformed
 
     public static void main(String args[]) {
@@ -507,16 +507,14 @@ public class Hotel extends javax.swing.JFrame {
     private javax.swing.JPanel boardsPanel;
     private javax.swing.JLabel boardtypes;
     private javax.swing.JButton buy;
-    private com.toedter.calendar.JDateChooser calendar;
     private javax.swing.JPanel datePanel;
     private javax.swing.JLabel daysLabel;
     private javax.swing.JSpinner daysTotal;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel price;
     private javax.swing.JPanel pricePanel;
     private javax.swing.JLabel prices;
-    private javax.swing.JLabel prices1;
     private javax.swing.JPanel roomPanel;
     private javax.swing.JPanel roomsPanel;
     private javax.swing.ButtonGroup tickets;
