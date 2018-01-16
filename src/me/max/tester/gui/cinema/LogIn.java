@@ -9,7 +9,6 @@ import me.max.tester.managers.file.LFileReader;
 public class LogIn extends javax.swing.JFrame {
 
     protected static boolean adminPresent = false;
-    protected static String user;
     
     Methods m = new Methods();
     
@@ -37,15 +36,17 @@ public class LogIn extends javax.swing.JFrame {
     protected void enterMenu() {
         LFileReader read = new LFileReader();
         String admin = read.getLineFromFile("C_ADMINDATA", 1);
-        user = enterUsername.getText() + "!-!-!" + m.getStringFromChar(enterPassword.getPassword());
-        if (admin.equals(user)) {
+        m.user = enterUsername.getText() + "!-!-!" + m.getStringFromChar(enterPassword.getPassword());
+        if (admin.equals(m.user)) {
             adminPresent = true;
+            m.user = enterUsername.getText();
             this.dispose();
             new MainMenu().setVisible(true);
         } 
         
         for (Object line : read.getFileContent("C_USERDATA")) {
-            if (line.equals(user)) {
+            if (line.equals(m.user)) {
+                m.user = enterUsername.getText();
                 this.dispose();
                 new MainMenu().setVisible(true);
             }

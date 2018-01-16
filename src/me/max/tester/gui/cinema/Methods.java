@@ -23,12 +23,15 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import me.max.tester.managers.file.LFileReader;
+import me.max.tester.managers.file.LFileWriter;
 
 /**
  *
  * @author mc170171
  */
 public class Methods {
+    
+    protected static String user;
     
     protected String getStringFromChar(char[] pw) {
         String text = "";
@@ -114,7 +117,6 @@ public class Methods {
                     }
                     graphics.drawImage(null, 0, 0, width, height, null);
                     
-                    
                     gd.setColor(Color.white);
                     gd.fillRect(0, 0, width, height);
                     gd.setColor(Color.BLACK);
@@ -136,8 +138,6 @@ public class Methods {
 
                     gd.dispose();
                     
-                    
-                    
                     return PAGE_EXISTS;
             }
         });  
@@ -147,6 +147,8 @@ public class Methods {
         } catch (PrinterException e1) {             
             e1.printStackTrace();
         }
+        
+        new LFileWriter().writeToFile(user + "!-!-!" + movie + "!-!-!" + time + "!-!-!" + seat + "!-!-!" + quantity + "!-!-!" + parking + "!-!-!" + price, "C_BOOKINGS", true);
         
     }
     

@@ -1,6 +1,5 @@
 package me.max.tester.gui.cinema;
 
-import me.max.tester.gui.cinema.LogIn;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -8,8 +7,6 @@ import me.max.tester.managers.file.LFileReader;
 import me.max.tester.managers.file.LFileWriter;
 
 public class Register extends javax.swing.JFrame {
-
-    protected static String user;
     
     Methods m = new Methods();
     
@@ -46,7 +43,7 @@ public class Register extends javax.swing.JFrame {
     
     protected void registerAccount() {
         new LFileWriter().writeToFile(enterUsername.getText() + "!-!-!" + m.getStringFromChar(enterPassword.getPassword()), "C_USERDATA", true);
-        user = enterUsername.getText();
+        m.user = enterUsername.getText();
         this.dispose();
         new MainMenu().setVisible(true);
     }

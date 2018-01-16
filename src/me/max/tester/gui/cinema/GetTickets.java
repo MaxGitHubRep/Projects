@@ -17,7 +17,7 @@ public class GetTickets extends javax.swing.JFrame {
     protected int getPrice() {
         int priceGet = 0;
         
-        priceGet += (seat.getItemCount() - seat.getSelectedIndex())*5;
+        priceGet += (seat.getItemCount() - seat.getSelectedIndex())*20;
         priceGet += time.getSelectedIndex()/4;
         priceGet = priceGet * (Integer.parseInt(tickets.getValue().toString())+1);
         priceGet += parking.isSelected() ? 15 : 0;
@@ -146,6 +146,7 @@ public class GetTickets extends javax.swing.JFrame {
         bg.add(s1);
         s1.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
         s1.setForeground(new java.awt.Color(255, 255, 255));
+        s1.setSelected(true);
         s1.setText("N/A");
         s1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
         s1.addActionListener(new java.awt.event.ActionListener() {

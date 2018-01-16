@@ -47,6 +47,7 @@ public class MainMenu extends javax.swing.JFrame {
         refundTickets = new javax.swing.JButton();
         editTickets = new javax.swing.JButton();
         cancelShow = new javax.swing.JButton();
+        viewAllTickets = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("West End Cinema - Menu");
@@ -115,6 +116,11 @@ public class MainMenu extends javax.swing.JFrame {
         viewTickets.setForeground(new java.awt.Color(255, 255, 255));
         viewTickets.setText("View Tickets");
         viewTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        viewTickets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewTicketsActionPerformed(evt);
+            }
+        });
 
         refundTickets.setBackground(new java.awt.Color(204, 0, 0));
         refundTickets.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
@@ -135,6 +141,13 @@ public class MainMenu extends javax.swing.JFrame {
         cancelShow.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
         cancelShow.setEnabled(false);
 
+        viewAllTickets.setBackground(new java.awt.Color(204, 0, 0));
+        viewAllTickets.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
+        viewAllTickets.setForeground(new java.awt.Color(255, 255, 255));
+        viewAllTickets.setText("View All Tickets");
+        viewAllTickets.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        viewAllTickets.setEnabled(false);
+
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
         backLayout.setHorizontalGroup(
@@ -152,7 +165,8 @@ public class MainMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
-                    .addComponent(cancelShow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cancelShow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(viewAllTickets, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(100, 100, 100))
         );
         backLayout.setVerticalGroup(
@@ -168,7 +182,9 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(buyTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelShow, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(viewTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewAllTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(editTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -195,6 +211,11 @@ public class MainMenu extends javax.swing.JFrame {
         this.dispose();
         new GetTickets().setVisible(true);
     }//GEN-LAST:event_buyTicketsActionPerformed
+
+    private void viewTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTicketsActionPerformed
+        this.dispose();
+        new ViewTickets().setVisible(true);
+    }//GEN-LAST:event_viewTicketsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,6 +263,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton refundTickets;
     private javax.swing.JLabel title;
     private javax.swing.JPanel top;
+    private javax.swing.JButton viewAllTickets;
     private javax.swing.JButton viewTickets;
     // End of variables declaration//GEN-END:variables
 }
