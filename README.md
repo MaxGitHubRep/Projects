@@ -13,9 +13,6 @@ This repository contains all the files for my java projects.
 ### » [projects](https://github.com/MaxGitHubRep/Projects/tree/master/src/me/max/tester/projects/)
  - This folder is split into misc & homework. misc is a package for miscellaneous projects, and homework is a package which has all the homework tasks in.
 
-### » [textfiles](https://github.com/MaxGitHubRep/Projects/tree/master/src/me/max/tester/textfiles)
- - All the text files are saved in this folder.
-
 ---
 
  - Repository creation: Tuesday 10th October.
