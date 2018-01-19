@@ -46,8 +46,9 @@ public class ViewTickets extends javax.swing.JFrame {
     }
     
     protected void searchTickets() {
+        list.removeAllItems();
         for (Object line : fr.getFileContent("C_BOOKINGS")) {
-            if (getValue(line.toString(), "user").equals(Methods.user)) list.addItem("");
+            if (getValue(line.toString(), "user").equals(Methods.user)) list.addItem(getValue(line.toString(), "time") + ": £" + getValue(line.toString(), "price") + ".00");
         }
     }
     
@@ -67,12 +68,13 @@ public class ViewTickets extends javax.swing.JFrame {
                 //button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/gui/cinema/resources/arrow.png")));
             }
         }
-        
+    
     }
     
     public ViewTickets() {
         initComponents();
         buttons = new JToggleButton[] { s1, s2, s3, s4, s5 };
+        formatButtons();
     }
 
     /**
@@ -98,6 +100,7 @@ public class ViewTickets extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         search = new javax.swing.JButton();
         list = new javax.swing.JComboBox<>();
+        deleteTicket = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("West End Cinema");
@@ -253,10 +256,20 @@ public class ViewTickets extends javax.swing.JFrame {
         list.setBackground(new java.awt.Color(204, 0, 0));
         list.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         list.setForeground(new java.awt.Color(255, 255, 255));
-        list.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Royalty", "First Class", "Business Class", "Regular", "Standing" }));
         list.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 listItemStateChanged(evt);
+            }
+        });
+
+        deleteTicket.setBackground(new java.awt.Color(204, 0, 0));
+        deleteTicket.setFont(new java.awt.Font("Agency FB", 1, 30)); // NOI18N
+        deleteTicket.setForeground(new java.awt.Color(255, 255, 255));
+        deleteTicket.setText("Delete Ticket");
+        deleteTicket.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        deleteTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteTicketActionPerformed(evt);
             }
         });
 
@@ -275,7 +288,9 @@ public class ViewTickets extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(list, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(list, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         backLayout.setVerticalGroup(
@@ -291,7 +306,11 @@ public class ViewTickets extends javax.swing.JFrame {
                             .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(screenBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(screenBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(backLayout.createSequentialGroup()
+                        .addComponent(deleteTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bottom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -338,6 +357,10 @@ public class ViewTickets extends javax.swing.JFrame {
         
     }//GEN-LAST:event_listItemStateChanged
 
+    private void deleteTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteTicketActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteTicketActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -377,6 +400,7 @@ public class ViewTickets extends javax.swing.JFrame {
     private javax.swing.JPanel back;
     private javax.swing.ButtonGroup bg;
     private javax.swing.JPanel bottom;
+    private javax.swing.JButton deleteTicket;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JComboBox<String> list;
     private javax.swing.JToggleButton s1;
@@ -386,7 +410,6 @@ public class ViewTickets extends javax.swing.JFrame {
     private javax.swing.JToggleButton s5;
     private javax.swing.JPanel screenBack;
     private javax.swing.JButton search;
-    private javax.swing.JComboBox<String> seat;
     private javax.swing.JLabel title;
     private javax.swing.JPanel top;
     // End of variables declaration//GEN-END:variables
