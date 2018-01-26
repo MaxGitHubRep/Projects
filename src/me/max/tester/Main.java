@@ -22,6 +22,7 @@ import me.max.tester.projects.encryption.Decrypt;
 import me.max.tester.projects.encryption.Encrypt;
 import me.max.tester.projects.homework.Fibonacci;
 import me.max.tester.projects.misc.AnimalOrder;
+import me.max.tester.projects.misc.ArraySortTask;
 import me.max.tester.projects.misc.TwoDArray;
 
 /**
@@ -39,6 +40,8 @@ public class Main {
         
         System.out.println(" ==== [Start] ==== ");
 
+        new ArraySortTask().test();
+        
         new SystemExit().exitProgram();
         
     }
