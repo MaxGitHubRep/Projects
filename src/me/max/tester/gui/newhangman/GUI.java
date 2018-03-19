@@ -1,9 +1,19 @@
 package me.max.tester.gui.newhangman;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import me.max.tester.managers.file.LFileWriter;
+import me.max.tester.managers.random.RandomElement;
 
 /**
  *
@@ -13,6 +23,22 @@ public class GUI extends javax.swing.JFrame {
 
     protected JTextField[] fields;
     protected boolean game = false;
+    protected LFileWriter fw;
+    protected RandomElement re;
+    protected ArrayList words;
+    protected String word;
+    
+    protected void downloadEnglishWords() throws MalformedURLException, IOException {
+        URL url = new URL("https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english.txt");
+        URLConnection con = url.openConnection();
+        InputStream is =con.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            words.add(line);
+        }
+    }
     
     protected void formatChars(JComboBox box) {
         for (int i = 65; i < 91; i++) {
@@ -38,19 +64,26 @@ public class GUI extends javax.swing.JFrame {
       });
     }
     
+    protected String getRandomWord() {
+        return re.randomElement(words);
+    }
+    
     protected void gameStatusUpdate(boolean state) {
         game = state;
         submit.setEnabled(game);
         inChar.setEnabled(game);
+        this.word = (state ? getRandomWord() : "");
     }
     
     protected boolean isSet(JTextField field) {
         return !field.getText().equals("");
     }
     
-    public GUI() {
+    public GUI() throws IOException {
         initComponents();
         formatChars(inChar);
+        words = new ArrayList<String>();
+        downloadEnglishWords();
         fields = new JTextField[]{ inUsername };
         for (JTextField field : fields) {
             checkTextFields(field);
@@ -221,7 +254,11 @@ public class GUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUI().setVisible(true);
+                try {
+                    new GUI().setVisible(true);
+                } catch (IOException ex) {
+                    
+                }
             }
         });
     }
