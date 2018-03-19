@@ -13,9 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import me.max.tester.managers.file.LFileWriter;
 import me.max.tester.managers.random.RandomElement;
-import me.max.tester.managers.random.RandomInt;
 
 /**
  *
@@ -24,18 +22,17 @@ import me.max.tester.managers.random.RandomInt;
 public class GUI extends javax.swing.JFrame {
     
     protected final int TOTAL_LIVES = 7;
-    
+    protected int lives = TOTAL_LIVES;
     protected final String LIVES_FORMAT = "%s/%s";
+    protected final String WRONG = "_";
     
     protected JTextField[] fields;
     protected boolean game = false;
     protected ArrayList words = new ArrayList<>();
     protected ArrayList guessed = new ArrayList<>();
     protected String word;
-    
-    
-    protected int lives = TOTAL_LIVES;
-    
+    protected String username;
+
     protected void downloadEnglishWords() throws MalformedURLException, IOException {
         URL url = new URL("https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english.txt");
         URLConnection con = url.openConnection();
@@ -88,29 +85,38 @@ public class GUI extends javax.swing.JFrame {
         return build;
     }
     
+    protected void resetGame(boolean won) {
+        JOptionPane.showMessageDialog(this, "Correct Word: " + word.toLowerCase() + "\nScore saved, " + username, (won ? "WINNER!" : "LOSER!"), JOptionPane.WARNING_MESSAGE);
+        guessed.clear();
+        words.remove(word);
+        wordHold.setText("______________________________________");
+        lives = TOTAL_LIVES;
+        formatGame(inChar);
+        gameStatusUpdate(false);
+    }
+    
     protected void playChar(String item) {
         if (!word.contains(item)) lives--;
         if (lives == 0) {
-            JOptionPane.showMessageDialog(this, "Correct Word: " + word.toLowerCase(), "Loser!", JOptionPane.ERROR_MESSAGE);
-            gameStatusUpdate(false);
-            guessed.clear();
-            words.remove(word);
-            wordHold.setText("______________________________________");
-            lives = TOTAL_LIVES;
+            resetGame(false);
+        } else {
+            guessed.add(item);
+            formatGame(inChar);
+            updateWordList(item);
         }
-        guessed.add(item);
-        formatGame(inChar);
-        updateWordList(item);
-        
     }
     
     protected void updateWordList(String item) {
         ArrayList temp = new ArrayList<>();
 
         for (int i = 0; i < word.length(); i++) {
-            temp.add(guessed.contains(word.charAt(i) + "") ? word.charAt(i) : "_");
+            temp.add(guessed.contains(word.charAt(i) + "") ? word.charAt(i) : WRONG);
         }
-        wordHold.setText(formatArray(temp));
+        if (!temp.contains(WRONG)) {
+            resetGame(true);
+        } else {
+            wordHold.setText(formatArray(temp));
+        }
     }
     
     protected void gameStatusUpdate(boolean state) {
@@ -307,6 +313,7 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
+        username = inUsername.getText();
         gameStatusUpdate(true);
     }//GEN-LAST:event_playActionPerformed
 
