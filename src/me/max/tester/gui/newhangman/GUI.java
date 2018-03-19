@@ -9,24 +9,32 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import me.max.tester.managers.file.LFileWriter;
 import me.max.tester.managers.random.RandomElement;
+import me.max.tester.managers.random.RandomInt;
 
 /**
  *
  * @author Max Carter
  */
 public class GUI extends javax.swing.JFrame {
-
+    
+    protected final int TOTAL_LIVES = 7;
+    
+    protected final String LIVES_FORMAT = "%s/%s";
+    
     protected JTextField[] fields;
     protected boolean game = false;
-    protected LFileWriter fw;
-    protected RandomElement re;
-    protected ArrayList words;
+    protected ArrayList words = new ArrayList<>();
+    protected ArrayList guessed = new ArrayList<>();
     protected String word;
+    
+    
+    protected int lives = TOTAL_LIVES;
     
     protected void downloadEnglishWords() throws MalformedURLException, IOException {
         URL url = new URL("https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english.txt");
@@ -40,10 +48,14 @@ public class GUI extends javax.swing.JFrame {
         }
     }
     
-    protected void formatChars(JComboBox box) {
+    protected void formatGame(JComboBox box) {
+        box.removeAllItems();
         for (int i = 65; i < 91; i++) {
-            box.addItem((char) i);
+            if (!guessed.contains(((char) i) + "")) {
+                box.addItem((char) i);
+            }
         }
+        livesHold.setText(String.format(LIVES_FORMAT, lives, TOTAL_LIVES));
     }
     
     protected void checkTextFields(JTextField field) {
@@ -65,14 +77,50 @@ public class GUI extends javax.swing.JFrame {
     }
     
     protected String getRandomWord() {
-        return re.randomElement(words);
+        return new RandomElement().randomElement(words).toUpperCase();
+    }
+    
+    protected String formatArray(ArrayList array) {
+        String build = "";
+        for (Object item : array) {
+            build+=item + " ";
+        }
+        return build;
+    }
+    
+    protected void playChar(String item) {
+        if (!word.contains(item)) lives--;
+        if (lives == 0) {
+            JOptionPane.showMessageDialog(this, "Correct Word: " + word.toLowerCase(), "Loser!", JOptionPane.ERROR_MESSAGE);
+            gameStatusUpdate(false);
+            guessed.clear();
+            words.remove(word);
+            wordHold.setText("______________________________________");
+            lives = TOTAL_LIVES;
+        }
+        guessed.add(item);
+        formatGame(inChar);
+        updateWordList(item);
+        
+    }
+    
+    protected void updateWordList(String item) {
+        ArrayList temp = new ArrayList<>();
+
+        for (int i = 0; i < word.length(); i++) {
+            temp.add(guessed.contains(word.charAt(i) + "") ? word.charAt(i) : "_");
+        }
+        wordHold.setText(formatArray(temp));
     }
     
     protected void gameStatusUpdate(boolean state) {
         game = state;
         submit.setEnabled(game);
         inChar.setEnabled(game);
-        this.word = (state ? getRandomWord() : "");
+        inUsername.setEditable(!game);
+        if (state) {
+            word = getRandomWord();
+        }
     }
     
     protected boolean isSet(JTextField field) {
@@ -81,8 +129,7 @@ public class GUI extends javax.swing.JFrame {
     
     public GUI() throws IOException {
         initComponents();
-        formatChars(inChar);
-        words = new ArrayList<String>();
+        formatGame(inChar);
         downloadEnglishWords();
         fields = new JTextField[]{ inUsername };
         for (JTextField field : fields) {
@@ -107,8 +154,12 @@ public class GUI extends javax.swing.JFrame {
         play = new javax.swing.JButton();
         inChar = new javax.swing.JComboBox<>();
         submit = new javax.swing.JButton();
+        wordHold = new javax.swing.JLabel();
+        livesHold = new javax.swing.JLabel();
+        imHold = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Hangman V2");
 
         back.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -123,7 +174,7 @@ public class GUI extends javax.swing.JFrame {
         top.setLayout(topLayout);
         topLayout.setHorizontalGroup(
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         topLayout.setVerticalGroup(
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +187,7 @@ public class GUI extends javax.swing.JFrame {
         inUsername.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         inUsername.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inUsername.setToolTipText("Username...");
-        inUsername.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        inUsername.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 153), 2, true));
 
         play.setBackground(new java.awt.Color(255, 255, 255));
         play.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
@@ -179,6 +230,27 @@ public class GUI extends javax.swing.JFrame {
         submit.setForeground(new java.awt.Color(0, 153, 153));
         submit.setText("Submit");
         submit.setEnabled(false);
+        submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitActionPerformed(evt);
+            }
+        });
+
+        wordHold.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        wordHold.setForeground(new java.awt.Color(0, 153, 153));
+        wordHold.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        wordHold.setText("______________________________________");
+        wordHold.setToolTipText("");
+        wordHold.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "The Word...", 0, 0, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+
+        livesHold.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        livesHold.setForeground(new java.awt.Color(0, 153, 153));
+        livesHold.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        livesHold.setText("<lives>");
+        livesHold.setToolTipText("");
+        livesHold.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lives", 0, 0, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+
+        imHold.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Visual Representation of Death", 0, 0, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
 
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
@@ -187,23 +259,37 @@ public class GUI extends javax.swing.JFrame {
             .addComponent(top, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(backLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(userPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inChar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(submit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(livesHold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(userPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inChar, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(submit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(wordHold, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                    .addComponent(imHold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backLayout.createSequentialGroup()
                 .addComponent(top, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(userPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inChar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 195, Short.MAX_VALUE))
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backLayout.createSequentialGroup()
+                        .addComponent(userPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inChar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(livesHold, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 109, Short.MAX_VALUE))
+                    .addGroup(backLayout.createSequentialGroup()
+                        .addComponent(wordHold, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(imHold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -223,6 +309,10 @@ public class GUI extends javax.swing.JFrame {
     private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
         gameStatusUpdate(true);
     }//GEN-LAST:event_playActionPerformed
+
+    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+        playChar(inChar.getSelectedItem().toString());
+    }//GEN-LAST:event_submitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,12 +355,15 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel back;
+    private javax.swing.JLabel imHold;
     private javax.swing.JComboBox<String> inChar;
     private javax.swing.JTextField inUsername;
+    private javax.swing.JLabel livesHold;
     private javax.swing.JButton play;
     private javax.swing.JButton submit;
     private javax.swing.JLabel title;
     private javax.swing.JPanel top;
     private javax.swing.JPanel userPanel;
+    private javax.swing.JLabel wordHold;
     // End of variables declaration//GEN-END:variables
 }
