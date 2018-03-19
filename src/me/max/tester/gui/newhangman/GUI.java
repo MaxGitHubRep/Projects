@@ -1,5 +1,6 @@
 package me.max.tester.gui.newhangman;
 
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -10,6 +11,14 @@ import javax.swing.event.DocumentListener;
  */
 public class GUI extends javax.swing.JFrame {
 
+    protected JTextField[] fields;
+    protected boolean game = false;
+    
+    protected void formatChars(JComboBox box) {
+        for (int i = 65; i < 91; i++) {
+            box.addItem((char) i);
+        }
+    }
     
     protected void checkTextFields(JTextField field) {
         field.getDocument().addDocumentListener(new DocumentListener() {
@@ -24,14 +33,28 @@ public class GUI extends javax.swing.JFrame {
         }
 
         public void warn() {
-            
+            play.setEnabled(isSet(inUsername));
         }
       });
     }
     
+    protected void gameStatusUpdate(boolean state) {
+        game = state;
+        submit.setEnabled(game);
+        inChar.setEnabled(game);
+    }
+    
+    protected boolean isSet(JTextField field) {
+        return !field.getText().equals("");
+    }
     
     public GUI() {
         initComponents();
+        formatChars(inChar);
+        fields = new JTextField[]{ inUsername };
+        for (JTextField field : fields) {
+            checkTextFields(field);
+        }
     }
 
     /**
@@ -48,7 +71,9 @@ public class GUI extends javax.swing.JFrame {
         title = new javax.swing.JLabel();
         userPanel = new javax.swing.JPanel();
         inUsername = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        play = new javax.swing.JButton();
+        inChar = new javax.swing.JComboBox<>();
+        submit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,7 +90,7 @@ public class GUI extends javax.swing.JFrame {
         top.setLayout(topLayout);
         topLayout.setHorizontalGroup(
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         topLayout.setVerticalGroup(
             topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,10 +105,16 @@ public class GUI extends javax.swing.JFrame {
         inUsername.setToolTipText("Username...");
         inUsername.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 153, 153));
-        jButton1.setText("Play!");
+        play.setBackground(new java.awt.Color(255, 255, 255));
+        play.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        play.setForeground(new java.awt.Color(0, 153, 153));
+        play.setText("Play!");
+        play.setEnabled(false);
+        play.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
         userPanel.setLayout(userPanelLayout);
@@ -93,7 +124,7 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(inUsername)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
+                    .addComponent(play, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
                 .addContainerGap())
         );
         userPanelLayout.setVerticalGroup(
@@ -101,9 +132,20 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(userPanelLayout.createSequentialGroup()
                 .addComponent(inUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addGap(0, 243, Short.MAX_VALUE))
+                .addComponent(play))
         );
+
+        inChar.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        inChar.setForeground(new java.awt.Color(0, 153, 153));
+        inChar.setToolTipText("Select a character...");
+        inChar.setEnabled(false);
+        inChar.setOpaque(false);
+
+        submit.setBackground(new java.awt.Color(255, 255, 255));
+        submit.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        submit.setForeground(new java.awt.Color(0, 153, 153));
+        submit.setText("Submit");
+        submit.setEnabled(false);
 
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
@@ -112,8 +154,11 @@ public class GUI extends javax.swing.JFrame {
             .addComponent(top, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(backLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(userPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(611, Short.MAX_VALUE))
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(userPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inChar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(submit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,7 +166,11 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(top, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(userPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 36, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inChar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 195, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -137,6 +186,10 @@ public class GUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
+        gameStatusUpdate(true);
+    }//GEN-LAST:event_playActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,8 +228,10 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel back;
+    private javax.swing.JComboBox<String> inChar;
     private javax.swing.JTextField inUsername;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton play;
+    private javax.swing.JButton submit;
     private javax.swing.JLabel title;
     private javax.swing.JPanel top;
     private javax.swing.JPanel userPanel;
