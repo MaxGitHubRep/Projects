@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -22,9 +23,14 @@ import me.max.tester.managers.random.RandomElement;
 public class GUI extends javax.swing.JFrame {
     
     protected final int TOTAL_LIVES = 7;
-    protected int lives = TOTAL_LIVES;
+    protected final String WORDS_GUESSED = "Words Guessed: %s";
+    protected final String TOTAL_ACCURACY = "Accuracy: %s";
     protected final String LIVES_FORMAT = "%s/%s";
     protected final String WRONG = "_";
+    protected int lives = TOTAL_LIVES;
+    protected int wordsGuessed = 0;
+    protected int totalGuesses = 0;
+    protected int totalAccuracy = 0;
     
     protected JTextField[] fields;
     protected boolean game = false;
@@ -87,26 +93,33 @@ public class GUI extends javax.swing.JFrame {
     
     protected void resetGame(boolean won) {
         JOptionPane.showMessageDialog(this, "Correct Word: " + word.toLowerCase() + "\nScore saved, " + username, (won ? "WINNER!" : "LOSER!"), JOptionPane.WARNING_MESSAGE);
+        if (won) wordsGuessed++;
+        wordsGuessedHold.setText(String.format(WORDS_GUESSED, wordsGuessed));
         guessed.clear();
         words.remove(word);
-        wordHold.setText("______________________________________");
         lives = TOTAL_LIVES;
         formatGame(inChar);
         gameStatusUpdate(false);
     }
     
     protected void playChar(String item) {
-        if (!word.contains(item)) lives--;
+        totalGuesses++;
+        if (word.contains(item)) {
+            totalAccuracy++;
+        } else {
+            lives--;
+        }
+        accuracyHold.setText(String.format(TOTAL_ACCURACY, new DecimalFormat("#0.0").format((double) totalAccuracy/totalGuesses)) + "%");
         if (lives == 0) {
             resetGame(false);
         } else {
             guessed.add(item);
             formatGame(inChar);
-            updateWordList(item);
+            updateWordList();
         }
     }
     
-    protected void updateWordList(String item) {
+    protected void updateWordList() {
         ArrayList temp = new ArrayList<>();
 
         for (int i = 0; i < word.length(); i++) {
@@ -123,10 +136,12 @@ public class GUI extends javax.swing.JFrame {
         game = state;
         submit.setEnabled(game);
         inChar.setEnabled(game);
-        inUsername.setEditable(!game);
+        inUsername.setEnabled(!game);
+        play.setEnabled(!game);
         if (state) {
             word = getRandomWord();
         }
+        updateWordList();
     }
     
     protected boolean isSet(JTextField field) {
@@ -158,11 +173,15 @@ public class GUI extends javax.swing.JFrame {
         userPanel = new javax.swing.JPanel();
         inUsername = new javax.swing.JTextField();
         play = new javax.swing.JButton();
-        inChar = new javax.swing.JComboBox<>();
-        submit = new javax.swing.JButton();
         wordHold = new javax.swing.JLabel();
-        livesHold = new javax.swing.JLabel();
         imHold = new javax.swing.JLabel();
+        gameInfoPanel = new javax.swing.JPanel();
+        livesHold = new javax.swing.JLabel();
+        submit = new javax.swing.JButton();
+        inChar = new javax.swing.JComboBox<>();
+        statsPanel = new javax.swing.JPanel();
+        wordsGuessedHold = new javax.swing.JLabel();
+        accuracyHold = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hangman V2");
@@ -187,7 +206,7 @@ public class GUI extends javax.swing.JFrame {
             .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
 
-        userPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "User Info", 0, 0, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+        userPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "User Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
         userPanel.setOpaque(false);
 
         inUsername.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
@@ -225,11 +244,24 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(play))
         );
 
-        inChar.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
-        inChar.setForeground(new java.awt.Color(0, 153, 153));
-        inChar.setToolTipText("Select a character...");
-        inChar.setEnabled(false);
-        inChar.setOpaque(false);
+        wordHold.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        wordHold.setForeground(new java.awt.Color(0, 153, 153));
+        wordHold.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        wordHold.setText("______________________________________");
+        wordHold.setToolTipText("");
+        wordHold.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "The Word...", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+
+        imHold.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Visual Representation of Death", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+
+        gameInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Game Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+        gameInfoPanel.setOpaque(false);
+
+        livesHold.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        livesHold.setForeground(new java.awt.Color(0, 153, 153));
+        livesHold.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        livesHold.setText("<lives>");
+        livesHold.setToolTipText("");
+        livesHold.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lives", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
 
         submit.setBackground(new java.awt.Color(255, 255, 255));
         submit.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
@@ -242,21 +274,68 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        wordHold.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
-        wordHold.setForeground(new java.awt.Color(0, 153, 153));
-        wordHold.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        wordHold.setText("______________________________________");
-        wordHold.setToolTipText("");
-        wordHold.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "The Word...", 0, 0, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+        inChar.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        inChar.setForeground(new java.awt.Color(0, 153, 153));
+        inChar.setToolTipText("Select a character...");
+        inChar.setEnabled(false);
+        inChar.setOpaque(false);
 
-        livesHold.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
-        livesHold.setForeground(new java.awt.Color(0, 153, 153));
-        livesHold.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        livesHold.setText("<lives>");
-        livesHold.setToolTipText("");
-        livesHold.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lives", 0, 0, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+        javax.swing.GroupLayout gameInfoPanelLayout = new javax.swing.GroupLayout(gameInfoPanel);
+        gameInfoPanel.setLayout(gameInfoPanelLayout);
+        gameInfoPanelLayout.setHorizontalGroup(
+            gameInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gameInfoPanelLayout.createSequentialGroup()
+                .addGroup(gameInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(gameInfoPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(livesHold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(gameInfoPanelLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(inChar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(submit)))
+                .addContainerGap())
+        );
+        gameInfoPanelLayout.setVerticalGroup(
+            gameInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gameInfoPanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(gameInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inChar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(livesHold))
+        );
 
-        imHold.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Visual Representation of Death", 0, 0, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+        statsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Overall Stats", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+        statsPanel.setOpaque(false);
+
+        wordsGuessedHold.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        wordsGuessedHold.setForeground(new java.awt.Color(0, 153, 153));
+        wordsGuessedHold.setText("Words Guessed:");
+
+        accuracyHold.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        accuracyHold.setForeground(new java.awt.Color(0, 153, 153));
+        accuracyHold.setText("Accuracy: ");
+
+        javax.swing.GroupLayout statsPanelLayout = new javax.swing.GroupLayout(statsPanel);
+        statsPanel.setLayout(statsPanelLayout);
+        statsPanelLayout.setHorizontalGroup(
+            statsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(statsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(statsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(wordsGuessedHold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(accuracyHold, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        statsPanelLayout.setVerticalGroup(
+            statsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(statsPanelLayout.createSequentialGroup()
+                .addComponent(wordsGuessedHold, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(accuracyHold, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
@@ -265,12 +344,12 @@ public class GUI extends javax.swing.JFrame {
             .addComponent(top, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(backLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(livesHold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(userPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inChar, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(submit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(userPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(gameInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(statsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(wordHold, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                     .addComponent(imHold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -285,17 +364,15 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(backLayout.createSequentialGroup()
                         .addComponent(userPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inChar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(gameInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(livesHold, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 109, Short.MAX_VALUE))
+                        .addComponent(statsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 19, Short.MAX_VALUE))
                     .addGroup(backLayout.createSequentialGroup()
                         .addComponent(wordHold, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(imHold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(imHold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -361,16 +438,20 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel accuracyHold;
     private javax.swing.JPanel back;
+    private javax.swing.JPanel gameInfoPanel;
     private javax.swing.JLabel imHold;
     private javax.swing.JComboBox<String> inChar;
     private javax.swing.JTextField inUsername;
     private javax.swing.JLabel livesHold;
     private javax.swing.JButton play;
+    private javax.swing.JPanel statsPanel;
     private javax.swing.JButton submit;
     private javax.swing.JLabel title;
     private javax.swing.JPanel top;
     private javax.swing.JPanel userPanel;
     private javax.swing.JLabel wordHold;
+    private javax.swing.JLabel wordsGuessedHold;
     // End of variables declaration//GEN-END:variables
 }
