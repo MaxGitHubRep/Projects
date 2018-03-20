@@ -23,7 +23,7 @@ public class InputString extends ErrorOutput {
         String input = null;
         
         try {
-            input = in.next();
+            input = in.nextLine();
         } catch (Exception ex) {
             error(ex);
             inputString(question);
