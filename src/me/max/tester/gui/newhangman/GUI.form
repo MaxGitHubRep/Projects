@@ -54,12 +54,12 @@
                       </Group>
                       <Component id="statsPanel" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="wordHold" pref="394" max="32767" attributes="0"/>
-                      <Component id="imHold" max="32767" attributes="0"/>
-                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="imHold" max="32767" attributes="0"/>
+                      <Component id="wordHold" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -75,7 +75,7 @@
                           <Component id="gameInfoPanel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="statsPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="wordHold" min="-2" pref="70" max="-2" attributes="0"/>
@@ -205,7 +205,7 @@
               <Color blue="99" green="99" red="0" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="______________________________________"/>
+            <Property name="text" type="java.lang.String" value="_________________________________"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -219,6 +219,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="imHold">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/me/max/tester/gui/newhangman/resources/1.png"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Visual Representation of Death">

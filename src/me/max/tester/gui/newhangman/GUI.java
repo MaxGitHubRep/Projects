@@ -98,8 +98,13 @@ public class GUI extends javax.swing.JFrame {
         guessed.clear();
         words.remove(word);
         lives = TOTAL_LIVES;
+        imageForceSet(lives);
         formatGame(inChar);
         gameStatusUpdate(false);
+    }
+    
+    protected void imageForceSet(int num) {
+        imHold.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/gui/newhangman/resources/" + (TOTAL_LIVES - num + 1) + ".png")));
     }
     
     protected void playChar(String item) {
@@ -115,6 +120,7 @@ public class GUI extends javax.swing.JFrame {
         } else {
             guessed.add(item);
             formatGame(inChar);
+            imageForceSet(lives);
             updateWordList();
         }
     }
@@ -206,7 +212,7 @@ public class GUI extends javax.swing.JFrame {
             .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
 
-        userPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "User Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+        userPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "User Info", 0, 0, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
         userPanel.setOpaque(false);
 
         inUsername.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
@@ -247,13 +253,14 @@ public class GUI extends javax.swing.JFrame {
         wordHold.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         wordHold.setForeground(new java.awt.Color(0, 153, 153));
         wordHold.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        wordHold.setText("______________________________________");
+        wordHold.setText("_________________________________");
         wordHold.setToolTipText("");
-        wordHold.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "The Word...", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+        wordHold.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "The Word...", 0, 0, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
 
-        imHold.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Visual Representation of Death", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+        imHold.setIcon(new javax.swing.ImageIcon(getClass().getResource("/me/max/tester/gui/newhangman/resources/1.png"))); // NOI18N
+        imHold.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Visual Representation of Death", 0, 0, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
 
-        gameInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Game Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+        gameInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Game Info", 0, 0, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
         gameInfoPanel.setOpaque(false);
 
         livesHold.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
@@ -261,7 +268,7 @@ public class GUI extends javax.swing.JFrame {
         livesHold.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         livesHold.setText("<lives>");
         livesHold.setToolTipText("");
-        livesHold.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lives", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+        livesHold.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lives", 0, 0, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
 
         submit.setBackground(new java.awt.Color(255, 255, 255));
         submit.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
@@ -307,7 +314,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(livesHold))
         );
 
-        statsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Overall Stats", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
+        statsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Overall Stats", 0, 0, new java.awt.Font("Agency FB", 1, 24), new java.awt.Color(0, 153, 153))); // NOI18N
         statsPanel.setOpaque(false);
 
         wordsGuessedHold.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
@@ -349,11 +356,11 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(userPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(gameInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(statsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(wordHold, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
-                    .addComponent(imHold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(imHold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(wordHold, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         backLayout.setVerticalGroup(
             backLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,7 +374,7 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(gameInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(statsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 19, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(backLayout.createSequentialGroup()
                         .addComponent(wordHold, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
