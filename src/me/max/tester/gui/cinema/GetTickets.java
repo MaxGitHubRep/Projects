@@ -92,7 +92,6 @@ public class GetTickets extends javax.swing.JFrame {
         time = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         parking = new javax.swing.JRadioButton();
-        jCalendar2 = new com.toedter.calendar.JCalendar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("West End Cinema - Buy Tickets");
@@ -395,13 +394,6 @@ public class GetTickets extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Extras", jPanel2);
 
-        jCalendar2.setBackground(new java.awt.Color(255, 255, 255));
-        jCalendar2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jCalendar2.setForeground(new java.awt.Color(204, 0, 0));
-        jCalendar2.setTodayButtonText("");
-        jCalendar2.setTodayButtonVisible(true);
-        jTabbedPane1.addTab("Date", jCalendar2);
-
         javax.swing.GroupLayout backLayout = new javax.swing.GroupLayout(back);
         back.setLayout(backLayout);
         backLayout.setHorizontalGroup(
@@ -539,7 +531,6 @@ public class GetTickets extends javax.swing.JFrame {
     private javax.swing.JPanel back;
     private javax.swing.ButtonGroup bg;
     private javax.swing.JPanel bottom;
-    private com.toedter.calendar.JCalendar jCalendar2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
